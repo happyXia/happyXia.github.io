@@ -117,18 +117,18 @@
 
 
 
-<meta name="description" content="机器学习–周志华 第1章：绪论1.1 引言机器学习致力于研究如何通过计算的手段，利用经验来改善系统自身的性能。">
+<meta name="description" content="机器学习—周志华（阅读中） 第1章：绪论1.1 引言机器学习致力于研究如何通过计算的手段，利用经验来改善系统自身的性能。">
 <meta name="keywords" content="机器学习,machine leaning,深度学习">
 <meta property="og:type" content="article">
 <meta property="og:title" content="读书笔记：《机器学习》by周志华">
 <meta property="og:url" content="http://yoursite.com/2018/07/08/MachineLearning-ZZH/index.html">
 <meta property="og:site_name" content="Xia&#39;s Blog">
-<meta property="og:description" content="机器学习–周志华 第1章：绪论1.1 引言机器学习致力于研究如何通过计算的手段，利用经验来改善系统自身的性能。">
+<meta property="og:description" content="机器学习—周志华（阅读中） 第1章：绪论1.1 引言机器学习致力于研究如何通过计算的手段，利用经验来改善系统自身的性能。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-08T01:54:04.274Z">
+<meta property="og:updated_time" content="2018-07-08T02:21:56.139Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="读书笔记：《机器学习》by周志华">
-<meta name="twitter:description" content="机器学习–周志华 第1章：绪论1.1 引言机器学习致力于研究如何通过计算的手段，利用经验来改善系统自身的性能。">
+<meta name="twitter:description" content="机器学习—周志华（阅读中） 第1章：绪论1.1 引言机器学习致力于研究如何通过计算的手段，利用经验来改善系统自身的性能。">
 
 
 
@@ -384,7 +384,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,768
+                  1,771
                 </span>
               
 
@@ -409,7 +409,7 @@
       
 
       
-        <h1 id="机器学习–周志华"><a href="#机器学习–周志华" class="headerlink" title="机器学习–周志华"></a>机器学习–周志华</h1><hr>
+        <h1 id="机器学习—周志华（阅读中）"><a href="#机器学习—周志华（阅读中）" class="headerlink" title="机器学习—周志华（阅读中）"></a>机器学习—周志华（阅读中）</h1><hr>
 <h2 id="第1章：绪论"><a href="#第1章：绪论" class="headerlink" title="第1章：绪论"></a>第1章：绪论</h2><h3 id="1-1-引言"><a href="#1-1-引言" class="headerlink" title="1.1 引言"></a>1.1 引言</h3><p>机器学习致力于研究如何通过计算的手段，利用经验来改善系统自身的性能。</p>
 <a id="more"></a>
 <h3 id="1-2-基本术语"><a href="#1-2-基本术语" class="headerlink" title="1.2 基本术语"></a>1.2 基本术语</h3><ul>
@@ -462,11 +462,7 @@
 <h3 id="1-7-阅读材料"><a href="#1-7-阅读材料" class="headerlink" title="1.7 阅读材料"></a>1.7 阅读材料</h3><p>未读</p>
 <h2 id="第2章：模型评估与选择"><a href="#第2章：模型评估与选择" class="headerlink" title="第2章：模型评估与选择"></a>第2章：模型评估与选择</h2><h3 id="2-1-经验误差与过拟合"><a href="#2-1-经验误差与过拟合" class="headerlink" title="2.1 经验误差与过拟合"></a>2.1 经验误差与过拟合</h3><blockquote>
 <p><strong>经验误差</strong>（empirical error）/<strong>训练误差</strong>（training error）：学习器在训练集上的误差</p>
-</blockquote>
-<blockquote>
 <p><strong>泛化误差</strong>（generalization error）：在新样本上的误差</p>
-</blockquote>
-<blockquote>
 <p><strong>过拟合</strong>（overfitting）：有很好的经验误差但是泛化误差很大，与之相对的是欠拟合（underfitting）</p>
 </blockquote>
 <h3 id="2-2-评估方法"><a href="#2-2-评估方法" class="headerlink" title="2.2 评估方法"></a>2.2 评估方法</h3><h4 id="2-2-1-留出法"><a href="#2-2-1-留出法" class="headerlink" title="2.2.1 留出法"></a>2.2.1 留出法</h4><blockquote>
@@ -480,8 +476,6 @@
 </ul>
 <h4 id="2-2-2-交叉验证"><a href="#2-2-2-交叉验证" class="headerlink" title="2.2.2 交叉验证"></a>2.2.2 交叉验证</h4><blockquote>
 <p><strong>交叉验证</strong>（cross validation)：先将数据集 $D$ 划分为 $k$ 个大小相似的互斥子集，即$D=D_1\cup D_2\cup \cdots \cup D_k , D_i\cap D_j = \emptyset (i \neq j)$. 每个子集 $D_i$ 都尽可能保持数据分布的一致性。然后，每次用 $k-1$ 个子集的并集作为训练集，余下的那个子集作为测试集；从而可进行 $k$ 此训练和测试，最终返回的是这 $k$ 个测试结果的均值。</p>
-</blockquote>
-<blockquote>
 <p><strong>留一法</strong>（Leave-One-Out，LOO）：将定数据集 $D$ 中包含 $m$ 个样本，若子集数 $k = m$ 则称为留一法。留一法是交叉验证的一个特例。</p>
 </blockquote>
 <h4 id="2-2-3-自助法"><a href="#2-2-3-自助法" class="headerlink" title="2.2.3 自助法"></a>2.2.3 自助法</h4><blockquote>
@@ -677,7 +671,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#机器学习–周志华"><span class="nav-number">1.</span> <span class="nav-text">机器学习–周志华</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#第1章：绪论"><span class="nav-number">1.1.</span> <span class="nav-text">第1章：绪论</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-引言"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1 引言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-基本术语"><span class="nav-number">1.1.2.</span> <span class="nav-text">1.2 基本术语</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-假设空间"><span class="nav-number">1.1.3.</span> <span class="nav-text">1.3 假设空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-归纳偏好"><span class="nav-number">1.1.4.</span> <span class="nav-text">1.4 归纳偏好</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-发展历程"><span class="nav-number">1.1.5.</span> <span class="nav-text">1.5 发展历程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-6-应用现状"><span class="nav-number">1.1.6.</span> <span class="nav-text">1.6 应用现状</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-7-阅读材料"><span class="nav-number">1.1.7.</span> <span class="nav-text">1.7 阅读材料</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第2章：模型评估与选择"><span class="nav-number">1.2.</span> <span class="nav-text">第2章：模型评估与选择</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-经验误差与过拟合"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1 经验误差与过拟合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-评估方法"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2 评估方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-1-留出法"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">2.2.1 留出法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-2-交叉验证"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">2.2.2 交叉验证</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-3-自助法"><span class="nav-number">1.2.2.3.</span> <span class="nav-text">2.2.3 自助法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-4-调参与最终模型"><span class="nav-number">1.2.2.4.</span> <span class="nav-text">2.2.4 调参与最终模型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-性能度量"><span class="nav-number">1.2.3.</span> <span class="nav-text">2.3 性能度量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-比较检验"><span class="nav-number">1.2.4.</span> <span class="nav-text">2.4 比较检验</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-偏差与方差"><span class="nav-number">1.2.5.</span> <span class="nav-text">2.5 偏差与方差</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-阅读材料"><span class="nav-number">1.2.6.</span> <span class="nav-text">2.6 阅读材料</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第3章：线性模型"><span class="nav-number">1.3.</span> <span class="nav-text">第3章：线性模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-基本形式"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.1 基本形式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-线性回归"><span class="nav-number">1.3.2.</span> <span class="nav-text">3.2 线性回归</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-对数几率回归"><span class="nav-number">1.3.3.</span> <span class="nav-text">3.3 对数几率回归</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-线性判别分析"><span class="nav-number">1.3.4.</span> <span class="nav-text">3.4 线性判别分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-多分类学习"><span class="nav-number">1.3.5.</span> <span class="nav-text">3.5 多分类学习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-6-类别不平衡问题"><span class="nav-number">1.3.6.</span> <span class="nav-text">3.6 类别不平衡问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-7-阅读材料"><span class="nav-number">1.3.7.</span> <span class="nav-text">3.7 阅读材料</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第4章：决策树"><span class="nav-number">1.4.</span> <span class="nav-text">第4章：决策树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-基本流程"><span class="nav-number">1.4.1.</span> <span class="nav-text">4.1 基本流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-划分选择"><span class="nav-number">1.4.2.</span> <span class="nav-text">4.2 划分选择</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-减枝处理"><span class="nav-number">1.4.3.</span> <span class="nav-text">4.3 减枝处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-连续与缺失值"><span class="nav-number">1.4.4.</span> <span class="nav-text">4.4 连续与缺失值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-多变量决策树"><span class="nav-number">1.4.5.</span> <span class="nav-text">4.5 多变量决策树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-6-阅读材料"><span class="nav-number">1.4.6.</span> <span class="nav-text">4.6 阅读材料</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第5章：神经网络"><span class="nav-number">1.5.</span> <span class="nav-text">第5章：神经网络</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-神经元模型"><span class="nav-number">1.5.1.</span> <span class="nav-text">5.1 神经元模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-感知机与多层网络"><span class="nav-number">1.5.2.</span> <span class="nav-text">5.2 感知机与多层网络</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-误差逆传播算法"><span class="nav-number">1.5.3.</span> <span class="nav-text">5.3 误差逆传播算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4-全局最小与局部极小"><span class="nav-number">1.5.4.</span> <span class="nav-text">5.4 全局最小与局部极小</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-5-其他常见神经网络"><span class="nav-number">1.5.5.</span> <span class="nav-text">5.5 其他常见神经网络</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-6-深度学习"><span class="nav-number">1.5.6.</span> <span class="nav-text">5.6 深度学习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-7-阅读材料"><span class="nav-number">1.5.7.</span> <span class="nav-text">5.7 阅读材料</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第6章：支持向量机"><span class="nav-number">1.6.</span> <span class="nav-text">第6章：支持向量机</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-间隔与支持向量"><span class="nav-number">1.6.1.</span> <span class="nav-text">6.1 间隔与支持向量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-对偶问题"><span class="nav-number">1.6.2.</span> <span class="nav-text">6.2 对偶问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-核函数"><span class="nav-number">1.6.3.</span> <span class="nav-text">6.3 核函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-软间隔与正则化"><span class="nav-number">1.6.4.</span> <span class="nav-text">6.4 软间隔与正则化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-5-支持向量回归"><span class="nav-number">1.6.5.</span> <span class="nav-text">6.5 支持向量回归</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-6-核方法"><span class="nav-number">1.6.6.</span> <span class="nav-text">6.6 核方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-7-阅读材料"><span class="nav-number">1.6.7.</span> <span class="nav-text">6.7 阅读材料</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第7章：贝叶斯分类器"><span class="nav-number">1.7.</span> <span class="nav-text">第7章：贝叶斯分类器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-1-贝叶斯决策论"><span class="nav-number">1.7.1.</span> <span class="nav-text">7.1 贝叶斯决策论</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-2-极大似然估计"><span class="nav-number">1.7.2.</span> <span class="nav-text">7.2 极大似然估计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-3-朴素贝叶斯分类器"><span class="nav-number">1.7.3.</span> <span class="nav-text">7.3 朴素贝叶斯分类器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-4-半朴素贝叶斯分类器"><span class="nav-number">1.7.4.</span> <span class="nav-text">7.4 半朴素贝叶斯分类器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-5-贝叶斯网"><span class="nav-number">1.7.5.</span> <span class="nav-text">7.5 贝叶斯网</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-6-EM算法"><span class="nav-number">1.7.6.</span> <span class="nav-text">7.6 EM算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-7-阅读材料"><span class="nav-number">1.7.7.</span> <span class="nav-text">7.7 阅读材料</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#机器学习—周志华（阅读中）"><span class="nav-number">1.</span> <span class="nav-text">机器学习—周志华（阅读中）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#第1章：绪论"><span class="nav-number">1.1.</span> <span class="nav-text">第1章：绪论</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-引言"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1 引言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-基本术语"><span class="nav-number">1.1.2.</span> <span class="nav-text">1.2 基本术语</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-假设空间"><span class="nav-number">1.1.3.</span> <span class="nav-text">1.3 假设空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-归纳偏好"><span class="nav-number">1.1.4.</span> <span class="nav-text">1.4 归纳偏好</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-发展历程"><span class="nav-number">1.1.5.</span> <span class="nav-text">1.5 发展历程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-6-应用现状"><span class="nav-number">1.1.6.</span> <span class="nav-text">1.6 应用现状</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-7-阅读材料"><span class="nav-number">1.1.7.</span> <span class="nav-text">1.7 阅读材料</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第2章：模型评估与选择"><span class="nav-number">1.2.</span> <span class="nav-text">第2章：模型评估与选择</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-经验误差与过拟合"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1 经验误差与过拟合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-评估方法"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2 评估方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-1-留出法"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">2.2.1 留出法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-2-交叉验证"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">2.2.2 交叉验证</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-3-自助法"><span class="nav-number">1.2.2.3.</span> <span class="nav-text">2.2.3 自助法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-4-调参与最终模型"><span class="nav-number">1.2.2.4.</span> <span class="nav-text">2.2.4 调参与最终模型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-性能度量"><span class="nav-number">1.2.3.</span> <span class="nav-text">2.3 性能度量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-比较检验"><span class="nav-number">1.2.4.</span> <span class="nav-text">2.4 比较检验</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-偏差与方差"><span class="nav-number">1.2.5.</span> <span class="nav-text">2.5 偏差与方差</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-阅读材料"><span class="nav-number">1.2.6.</span> <span class="nav-text">2.6 阅读材料</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第3章：线性模型"><span class="nav-number">1.3.</span> <span class="nav-text">第3章：线性模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-基本形式"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.1 基本形式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-线性回归"><span class="nav-number">1.3.2.</span> <span class="nav-text">3.2 线性回归</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-对数几率回归"><span class="nav-number">1.3.3.</span> <span class="nav-text">3.3 对数几率回归</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-线性判别分析"><span class="nav-number">1.3.4.</span> <span class="nav-text">3.4 线性判别分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-多分类学习"><span class="nav-number">1.3.5.</span> <span class="nav-text">3.5 多分类学习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-6-类别不平衡问题"><span class="nav-number">1.3.6.</span> <span class="nav-text">3.6 类别不平衡问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-7-阅读材料"><span class="nav-number">1.3.7.</span> <span class="nav-text">3.7 阅读材料</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第4章：决策树"><span class="nav-number">1.4.</span> <span class="nav-text">第4章：决策树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-基本流程"><span class="nav-number">1.4.1.</span> <span class="nav-text">4.1 基本流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-划分选择"><span class="nav-number">1.4.2.</span> <span class="nav-text">4.2 划分选择</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-减枝处理"><span class="nav-number">1.4.3.</span> <span class="nav-text">4.3 减枝处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-连续与缺失值"><span class="nav-number">1.4.4.</span> <span class="nav-text">4.4 连续与缺失值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-多变量决策树"><span class="nav-number">1.4.5.</span> <span class="nav-text">4.5 多变量决策树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-6-阅读材料"><span class="nav-number">1.4.6.</span> <span class="nav-text">4.6 阅读材料</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第5章：神经网络"><span class="nav-number">1.5.</span> <span class="nav-text">第5章：神经网络</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-神经元模型"><span class="nav-number">1.5.1.</span> <span class="nav-text">5.1 神经元模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-感知机与多层网络"><span class="nav-number">1.5.2.</span> <span class="nav-text">5.2 感知机与多层网络</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-误差逆传播算法"><span class="nav-number">1.5.3.</span> <span class="nav-text">5.3 误差逆传播算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4-全局最小与局部极小"><span class="nav-number">1.5.4.</span> <span class="nav-text">5.4 全局最小与局部极小</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-5-其他常见神经网络"><span class="nav-number">1.5.5.</span> <span class="nav-text">5.5 其他常见神经网络</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-6-深度学习"><span class="nav-number">1.5.6.</span> <span class="nav-text">5.6 深度学习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-7-阅读材料"><span class="nav-number">1.5.7.</span> <span class="nav-text">5.7 阅读材料</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第6章：支持向量机"><span class="nav-number">1.6.</span> <span class="nav-text">第6章：支持向量机</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-间隔与支持向量"><span class="nav-number">1.6.1.</span> <span class="nav-text">6.1 间隔与支持向量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-对偶问题"><span class="nav-number">1.6.2.</span> <span class="nav-text">6.2 对偶问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-核函数"><span class="nav-number">1.6.3.</span> <span class="nav-text">6.3 核函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-软间隔与正则化"><span class="nav-number">1.6.4.</span> <span class="nav-text">6.4 软间隔与正则化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-5-支持向量回归"><span class="nav-number">1.6.5.</span> <span class="nav-text">6.5 支持向量回归</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-6-核方法"><span class="nav-number">1.6.6.</span> <span class="nav-text">6.6 核方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-7-阅读材料"><span class="nav-number">1.6.7.</span> <span class="nav-text">6.7 阅读材料</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第7章：贝叶斯分类器"><span class="nav-number">1.7.</span> <span class="nav-text">第7章：贝叶斯分类器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-1-贝叶斯决策论"><span class="nav-number">1.7.1.</span> <span class="nav-text">7.1 贝叶斯决策论</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-2-极大似然估计"><span class="nav-number">1.7.2.</span> <span class="nav-text">7.2 极大似然估计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-3-朴素贝叶斯分类器"><span class="nav-number">1.7.3.</span> <span class="nav-text">7.3 朴素贝叶斯分类器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-4-半朴素贝叶斯分类器"><span class="nav-number">1.7.4.</span> <span class="nav-text">7.4 半朴素贝叶斯分类器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-5-贝叶斯网"><span class="nav-number">1.7.5.</span> <span class="nav-text">7.5 贝叶斯网</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-6-EM算法"><span class="nav-number">1.7.6.</span> <span class="nav-text">7.6 EM算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-7-阅读材料"><span class="nav-number">1.7.7.</span> <span class="nav-text">7.7 阅读材料</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -845,24 +839,7 @@
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
 
 
 
@@ -915,6 +892,43 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
   
 
 

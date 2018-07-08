@@ -125,7 +125,7 @@
 <meta property="og:site_name" content="Xia&#39;s Blog">
 <meta property="og:description" content="《算法笔记》（阅读中…）第一章：排序1-1 比较排序 定理1.1 （基于比较的排序） 基于比较的排序需要明确两个对象的大小关系的规则。对于非数值的自定义对象，需要满足两个性质：  传递性： 如果 a $\leqslant$ b，b $\leqslant$ c， 则有 a $\leqslant$ c。 全序性：对于任意 a 和 b，或者 a $\leqslant$ b，或者 b $\leqslant">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-08T01:54:04.283Z">
+<meta property="og:updated_time" content="2018-07-08T02:21:05.798Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="读书笔记:《算法笔记》">
 <meta name="twitter:description" content="《算法笔记》（阅读中…）第一章：排序1-1 比较排序 定理1.1 （基于比较的排序） 基于比较的排序需要明确两个对象的大小关系的规则。对于非数值的自定义对象，需要满足两个性质：  传递性： 如果 a $\leqslant$ b，b $\leqslant$ c， 则有 a $\leqslant$ c。 全序性：对于任意 a 和 b，或者 a $\leqslant$ b，或者 b $\leqslant">
@@ -384,7 +384,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2,478
+                  2,437
                 </span>
               
 
@@ -449,8 +449,6 @@
 </blockquote>
 <h4 id="1-1-4-快速排序（Quicksort）"><a href="#1-1-4-快速排序（Quicksort）" class="headerlink" title="1-1-4 快速排序（Quicksort）"></a>1-1-4 快速排序（Quicksort）</h4><blockquote>
 <p>基本原理：在待排序序列中选择一个对象作为阈值，将小于它和大于它的分别放在两个子序列中，相等的放入任意一个序列，然后分别对两个子序列做相同的操作。</p>
-</blockquote>
-<blockquote>
 <p>最坏时间复杂度为$O(n^2)$,平均时间复杂度为$O(nlogn)$.</p>
 </blockquote>
 <p>递归版快速排序：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">recursive_quicksort</span><span class="params">(ls)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> len(ls) == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> ls</span><br><span class="line">    index = random.randint(<span class="number">0</span>, len(ls)<span class="number">-1</span>)</span><br><span class="line">    threshold = ls[index]</span><br><span class="line">    left = []</span><br><span class="line">    right = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> ls:</span><br><span class="line">        <span class="keyword">if</span> i &lt; threshold:</span><br><span class="line">            left.append(i)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            right.append(i)</span><br><span class="line">    <span class="keyword">if</span> len(left) != <span class="number">0</span>:</span><br><span class="line">        left = recursive_quicksort(left)</span><br><span class="line">    <span class="keyword">if</span> len(right) != <span class="number">0</span>:</span><br><span class="line">        right = recursive_quicksort(right)</span><br><span class="line">    res = left + right</span><br><span class="line">    <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure></p>
@@ -466,17 +464,11 @@
 <h4 id="1-1-6-Timsort"><a href="#1-1-6-Timsort" class="headerlink" title="1-1-6 Timsort"></a>1-1-6 Timsort</h4><p>Timsort是结合了归并排序和插入排序的混合排序算法。虽然插入排序的时间复杂度要高于归并排序，但当待排序序列非常短时，比较时间复杂度的意义不大。</p>
 <blockquote>
 <p>Timsort的大致原理就是先采用插入排序将非常短的小段（阈值为minrun）扩充为较长的小段，再采用归并排序来合并多个较长的小段。</p>
-</blockquote>
-<blockquote>
 <p>minrun的选取： 尽量使得 $[\frac{n}{minrun}]$ 刚好是2的整数次幂或比某个2的整数次幂稍小一点的数使得小段合并的时候刚好是一颗满二叉树。</p>
 </blockquote>
 <h3 id="1-2-非比较排序"><a href="#1-2-非比较排序" class="headerlink" title="1-2 非比较排序"></a>1-2 非比较排序</h3><h4 id="1-2-1-桶排序（Bucket-Sort）"><a href="#1-2-1-桶排序（Bucket-Sort）" class="headerlink" title="1-2-1 桶排序（Bucket Sort）"></a>1-2-1 桶排序（Bucket Sort）</h4><blockquote>
 <p>桶排序是计数排序（Counting Sort）的推广。</p>
-</blockquote>
-<blockquote>
 <p>计数排序：统计每个数字出现的次数，然后按照顺序构造出按顺序的并且数字出现次数相同的序列：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">counting_sort</span><span class="params">(ls)</span>:</span></span><br><span class="line">    mn = min(ls)</span><br><span class="line">    mx = max(ls)</span><br><span class="line">    s = [<span class="number">0</span>]*(mx+<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, len(ls)):</span><br><span class="line">        s[ls[i]] = s[ls[i]] + <span class="number">1</span></span><br><span class="line">    rs = [<span class="number">0</span>]*len(ls)</span><br><span class="line">    pos = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(mn, mx+<span class="number">1</span>):</span><br><span class="line">        rs[pos:(pos+s[i])] = [i]*s[i]</span><br><span class="line">        pos = pos+s[i]</span><br><span class="line">    <span class="keyword">return</span> rs</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
 <p>桶排序原理：首先建立若干个按顺序排好的“桶”，然后将待排序的对象放入各自对应的桶中。一般来说，桶中的对象是相同大小或者接近的。</p>
 </blockquote>
 <h4 id="1-2-2-基数排序"><a href="#1-2-2-基数排序" class="headerlink" title="1-2-2 基数排序"></a>1-2-2 基数排序</h4><p>基数排序可以看作多次使用桶排序，例如对个位数进行一次桶排序后再对10位数进行一次桶排序，或顺序颠倒。<br>有最高位优先（从前往后，Most Significant Digit first）和最低位优先（从后往前，Least Significant Digit first）</p>
@@ -493,11 +485,7 @@
 <li>插入：使用哈希函数计算待插入对象的哈希值$H$，则插入编号为$H mod N$的位置。</li>
 <li>查找：使用哈希函数计算待查找对象的哈希值，如果哈希值是$H$,则检查编号为$HmodN$的位置。</li>
 </ul>
-</blockquote>
-<blockquote>
 <p>可以采用链表将冲突的多个对象存储在同一位置。</p>
-</blockquote>
-<blockquote>
 <p>动态确定哈希表的长度。</p>
 </blockquote>
 <h3 id="2-2-哈希的应用"><a href="#2-2-哈希的应用" class="headerlink" title="2-2 哈希的应用"></a>2-2 哈希的应用</h3><h4 id="2-2-1-相似性搜索"><a href="#2-2-1-相似性搜索" class="headerlink" title="2-2-1 相似性搜索"></a>2-2-1 相似性搜索</h4><blockquote>
@@ -509,12 +497,11 @@
 </ul>
 </blockquote>
 <h4 id="2-2-2-信息安全"><a href="#2-2-2-信息安全" class="headerlink" title="2-2-2 信息安全"></a>2-2-2 信息安全</h4><blockquote>
-<p>身份证号码验证： 最后一位是校验位，身份证号码从右到左记为$a_1,a_2,…,a_{18}$,则校验公式为：<br>$$ a_1 = (12-((\sum_{i=2}^{18}a_i2^{i-1})\ mod\ 11))\ mod\ 11 $$<br>当余数是10时记为$X$</p>
-</blockquote>
-<blockquote>
-<p>信用卡类似：因为信用卡号长度不统一，所以最后（最左）一位记为$a_n$.首先定义：<br>$$ b_i = (2-(i\ mod\ 2))a_i, \forall i=2,3,4…,n$$<br>则<br>$$ a_1 = (10-((\sum_{i=2}^{n}(b_i\ mod\ 10)+[\frac{bi}{10}])\ mod\ 10))\ mod \ 10$$<br>与身份证号码类似，任何一位卡号的变化都会导致校验位的变化。</p>
-</blockquote>
-<blockquote>
+<p>身份证号码验证： 最后一位是校验位，身份证号码从右到左记为$a<em>1,a_2,…,a</em>{18}$,则校验公式为：</p>
+<script type="math/tex; mode=display">a_1 = (12-((\sum_{i=2}^{18}a_i2^{i-1})\ mod\ 11))\ mod\ 11</script><p>当余数是10时记为$X$</p>
+<p>信用卡类似：因为信用卡号长度不统一，所以最后（最左）一位记为$a_n$.首先定义：</p>
+<script type="math/tex; mode=display">b_i = (2-(i\ mod\ 2))a_i, \forall i=2,3,4...,n</script><p>则</p>
+<script type="math/tex; mode=display">a_1 = (10-((\sum_{i=2}^{n}(b_i\ mod\ 10)+[\frac{bi}{10}])\ mod\ 10))\ mod \ 10</script><p>与身份证号码类似，任何一位卡号的变化都会导致校验位的变化。</p>
 <p>哈希值可以用来检查文件的完整性</p>
 <ul>
 <li>文件被篡改</li>
@@ -885,24 +872,7 @@
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
 
 
 
@@ -955,6 +925,43 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
   
 
 
