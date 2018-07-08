@@ -319,7 +319,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/08/MarkdownIntroduction/" itemprop="url">MarkdownIntroduction</a></h1>
+                <a class="post-title-link" href="/2018/07/08/MarkdownIntroduction/" itemprop="url">一份真的很简易的Markdown使用说明</a></h1>
         
 
         <div class="post-meta">
@@ -342,6 +342,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/使用说明/" itemprop="url" rel="index">
+                    <span itemprop="name">使用说明</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -363,7 +385,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  502
+                  494
                 </span>
               
 
@@ -389,8 +411,7 @@
 
       
         
-          
-            <h1 id="Markdown-超简易的使用说明"><a href="#Markdown-超简易的使用说明" class="headerlink" title="Markdown 超简易的使用说明"></a>Markdown 超简易的使用说明</h1><hr>
+          <h1 id="Markdown"><a href="#Markdown" class="headerlink" title="Markdown"></a>Markdown</h1><hr>
 <ul>
 <li><a href="#1标题，段落，区块">1.标题，段落，区块</a></li>
 <li><a href="#2列表">2.列表</a></li>
@@ -400,127 +421,13 @@
 <li><a href="#6数学公式">6.数学公式</a></li>
 </ul>
 <hr>
-<h2 id="1-标题，段落，区块"><a href="#1-标题，段落，区块" class="headerlink" title="1.标题，段落，区块"></a>1.标题，段落，区块</h2><blockquote>
-<p>Markdown 支持 <a href="http://docutils.sourceforge.net/mirror/setext.html" target="_blank" rel="noopener">Setext</a> <code>＝</code> 和 <a href="http://www.aaronsw.com/2022/atx" target="_blank" rel="noopener">atx</a> <code>＃</code>　来标记标题。</p>
-</blockquote>
-<blockquote>
-<p>一个以上的空行会标记空行之间为一个段落。（这里的空行意思是“看上去是空的行”，即使包含空格和tab都叫空行）</p>
-</blockquote>
-<blockquote>
-<p>区块用<code>&gt;</code>来标记</p>
-</blockquote>
-<p>🌰例子:</p>
-<pre><code>这是标题1
-=====================
-这是标题2
----------------------
-
-
-我是一个用空行空出来的段落 (￣▽￣)~*。
-
-
-### 这是标题3
-
-&gt;这是一个区块
-
-&gt;我们是
-&gt;连在一起
-&gt;的区块
-</code></pre><p>👇下面是效果：</p>
-<hr>
-<h1 id="这是标题1"><a href="#这是标题1" class="headerlink" title="这是标题1"></a>这是标题1</h1><h2 id="这是标题2"><a href="#这是标题2" class="headerlink" title="这是标题2"></a>这是标题2</h2><p>我是一个用空行空出来的段落 (￣▽￣)~*。</p>
-<h3 id="这是标题3"><a href="#这是标题3" class="headerlink" title="这是标题3"></a>这是标题3</h3><blockquote>
-<p>这是一个区块</p>
-</blockquote>
-<blockquote>
-<p>我们是<br>连在一起<br>的区块</p>
-</blockquote>
-<hr>
-<h2 id="2-列表"><a href="#2-列表" class="headerlink" title="2.列表"></a>2.列表</h2><ul>
-<li>无序列表：<code>*</code>,<code>+</code>,<code>-</code>;</li>
-<li>有序列表：<code>1.</code>;</li>
-</ul>
-<p>🌰例子：</p>
-<pre><code>* 我
-* 爱
-- 学
-+ 习
-
-
-1. 学
-2. 习
-3. 使
-4. 我
-5. 开
-6. 乐
-</code></pre><hr>
-<p>👇效果：</p>
-<ul>
-<li>我</li>
-<li>爱</li>
-</ul>
-<ul>
-<li>学</li>
-</ul>
-<ul>
-<li>习</li>
-</ul>
-<ol>
-<li>学</li>
-<li>习</li>
-<li>使</li>
-<li>我</li>
-<li>快</li>
-<li>乐</li>
-</ol>
-<hr>
-<h2 id="3-代码"><a href="#3-代码" class="headerlink" title="3.代码"></a>3.代码</h2><blockquote>
-<p>代码块: 连续4个空格。</p>
-</blockquote>
-<p>🌰例子：</p>
-<pre><code>System.out.println(&quot;holle world!&quot;)
-</code></pre><blockquote>
-<p>代码高亮：在代码块的前一行和后一行加上 ``` (三个反引号要独占一行)。 并在第一个```后面加上编程语言的名称</p>
-</blockquote>
-<p>🌰例子：</p>
-<pre><code><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(<span class="string">"holle world"</span>!);</span><br></pre></td></tr></table></figure>
-</code></pre><p>👇效果：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.prinln(<span class="string">"holle world"</span>!);</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>行内代码：   `  (键盘左上角那个键, <code>esc</code> 下方)</p>
-</blockquote>
-<p>🌰例子：</p>
-<pre><code>在python3中你应该用`print()`而不是`print`.
-</code></pre><p>👇效果：</p>
-<hr>
-<p>在python3中你应该用<code>print()</code>而不是<code>print</code>.</p>
-<hr>
-<h2 id="4-链接"><a href="#4-链接" class="headerlink" title="4.链接"></a>4.链接</h2><p>两种形式的链接：<em>行内式</em> 和 <em>参考式</em></p>
-<h3 id="4-1-行内式"><a href="#4-1-行内式" class="headerlink" title="4-1.行内式"></a>4-1.行内式</h3><p>🌰例子：</p>
-<pre><code>这是一个[链接](http://google.com &quot;Goole&quot;).
-</code></pre><p>👇效果（把鼠标放在“链接”上显示title：google）：</p>
-<hr>
-<p>这是一个<a href="http://google.com" title="Goole" target="_blank" rel="noopener">链接</a>.</p>
-<hr>
-<h3 id="4-2-参考式"><a href="#4-2-参考式" class="headerlink" title="4-2.参考式"></a>4-2.参考式</h3><p>🌰例子：</p>
-<pre><code>这是一个[链接][1]
-
-....
-
-[1]: http://google.com &quot;Google&quot;).
-</code></pre><p>👇效果：</p>
-<hr>
-<p>这是个<a href="http://google.com" title="Google" target="_blank" rel="noopener">链接</a></p>
-<hr>
-<h2 id="5-图片"><a href="#5-图片" class="headerlink" title="5.图片"></a>5.图片</h2><p>跟链接一样。</p>
-<h2 id="6-数学公式"><a href="#6-数学公式" class="headerlink" title="6.数学公式"></a>6.数学公式</h2><blockquote>
-<p>行内公式：\$f(x)=y\$ 效果: $f(x)=y$</p>
-</blockquote>
-<blockquote>
-<p>块级公式：\$\$ x = \dfrac{-b \pm \sqrt{b^2 - 4ac}}{2a} \$\$ 效果（需要独占一行）：<br>$$ x = \dfrac{-b \pm \sqrt{b^2 - 4ac}}{2a} $$ </p>
-</blockquote>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/08/MarkdownIntroduction/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -611,7 +518,25 @@
             
 
             
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
 
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
             
 
           </nav>
@@ -668,6 +593,26 @@
 
 
         
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      你是我的第
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      位客人
+    </span>
+  
+
+  
+    <span class="site-pv">
+      博客被
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
 
 
 
