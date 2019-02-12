@@ -117,18 +117,18 @@
 
 
 
-<meta name="description" content="《算法笔记》（阅读中…）第一章：排序1-1 比较排序 定理1.1 （基于比较的排序） 基于比较的排序需要明确两个对象的大小关系的规则。对于非数值的自定义对象，需要满足两个性质：  传递性： 如果 a $\leqslant$ b，b $\leqslant$ c， 则有 a $\leqslant$ c。 全序性：对于任意 a 和 b，或者 a $\leqslant$ b，或者 b $\leqslant">
+<meta name="description" content="第一章：排序1-1 比较排序 定理1.1 （基于比较的排序） 基于比较的排序需要明确两个对象的大小关系的规则。对于非数值的自定义对象，需要满足两个性质：  传递性： 如果 a $\leqslant$ b，b $\leqslant$ c， 则有 a $\leqslant$ c。 全序性：对于任意 a 和 b，或者 a $\leqslant$ b，或者 b $\leqslant$ a。   得到排序算">
 <meta name="keywords" content="算法,排序算法,哈希,动态规划,高斯消除法,图论,线性规划">
 <meta property="og:type" content="article">
 <meta property="og:title" content="读书笔记:《算法笔记》">
 <meta property="og:url" content="http://yoursite.com/2018/07/08/AlgorithmNotes/index.html">
 <meta property="og:site_name" content="Xia&#39;s Blog">
-<meta property="og:description" content="《算法笔记》（阅读中…）第一章：排序1-1 比较排序 定理1.1 （基于比较的排序） 基于比较的排序需要明确两个对象的大小关系的规则。对于非数值的自定义对象，需要满足两个性质：  传递性： 如果 a $\leqslant$ b，b $\leqslant$ c， 则有 a $\leqslant$ c。 全序性：对于任意 a 和 b，或者 a $\leqslant$ b，或者 b $\leqslant">
+<meta property="og:description" content="第一章：排序1-1 比较排序 定理1.1 （基于比较的排序） 基于比较的排序需要明确两个对象的大小关系的规则。对于非数值的自定义对象，需要满足两个性质：  传递性： 如果 a $\leqslant$ b，b $\leqslant$ c， 则有 a $\leqslant$ c。 全序性：对于任意 a 和 b，或者 a $\leqslant$ b，或者 b $\leqslant$ a。   得到排序算">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-08T02:21:05.000Z">
+<meta property="og:updated_time" content="2019-02-12T08:21:46.574Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="读书笔记:《算法笔记》">
-<meta name="twitter:description" content="《算法笔记》（阅读中…）第一章：排序1-1 比较排序 定理1.1 （基于比较的排序） 基于比较的排序需要明确两个对象的大小关系的规则。对于非数值的自定义对象，需要满足两个性质：  传递性： 如果 a $\leqslant$ b，b $\leqslant$ c， 则有 a $\leqslant$ c。 全序性：对于任意 a 和 b，或者 a $\leqslant$ b，或者 b $\leqslant">
+<meta name="twitter:description" content="第一章：排序1-1 比较排序 定理1.1 （基于比较的排序） 基于比较的排序需要明确两个对象的大小关系的规则。对于非数值的自定义对象，需要满足两个性质：  传递性： 如果 a $\leqslant$ b，b $\leqslant$ c， 则有 a $\leqslant$ c。 全序性：对于任意 a 和 b，或者 a $\leqslant$ b，或者 b $\leqslant$ a。   得到排序算">
 
 
 
@@ -384,7 +384,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2,437
+                  2,430
                 </span>
               
 
@@ -409,7 +409,7 @@
       
 
       
-        <h1 id="《算法笔记》（阅读中…）"><a href="#《算法笔记》（阅读中…）" class="headerlink" title="《算法笔记》（阅读中…）"></a>《算法笔记》（阅读中…）</h1><h2 id="第一章：排序"><a href="#第一章：排序" class="headerlink" title="第一章：排序"></a>第一章：排序</h2><h3 id="1-1-比较排序"><a href="#1-1-比较排序" class="headerlink" title="1-1 比较排序"></a>1-1 比较排序</h3><blockquote>
+        <h1 id="第一章：排序"><a href="#第一章：排序" class="headerlink" title="第一章：排序"></a>第一章：排序</h1><h2 id="1-1-比较排序"><a href="#1-1-比较排序" class="headerlink" title="1-1 比较排序"></a>1-1 比较排序</h2><blockquote>
 <p><strong>定理1.1</strong> （基于比较的排序） 基于比较的排序需要明确两个对象的大小关系的规则。对于非数值的自定义对象，需要满足两个性质：</p>
 <ul>
 <li>传递性： 如果 a $\leqslant$ b，b $\leqslant$ c， 则有 a $\leqslant$ c。</li>
@@ -418,7 +418,7 @@
 </blockquote>
 <p>得到排序算法的下界: $n$ 个对象的的排列一共有$n!$种情况。如果某一算法的最多比较次数标记为$f(x)$，那么这个算法最多可以区分$2^{f(x)}$种情况（因为每比较一次只会出现两种情况），所以$2^{f(x)} \leqslant n!$，即$f(x) \geqslant log_2(n!)$. 根据斯特灵公式（Stirling’s formula)，$log_2(n!)$实际上就是$\Omega (nlog_2n)$。许多现有排序算法达到了这个下界。</p>
 <a id="more"></a>
-<h4 id="1-1-1-冒泡排序（bubble-sort）和梳子排序（comb-sort）"><a href="#1-1-1-冒泡排序（bubble-sort）和梳子排序（comb-sort）" class="headerlink" title="1-1-1 冒泡排序（bubble sort）和梳子排序（comb sort）"></a>1-1-1 冒泡排序（bubble sort）和梳子排序（comb sort）</h4><blockquote>
+<h3 id="1-1-1-冒泡排序（bubble-sort）和梳子排序（comb-sort）"><a href="#1-1-1-冒泡排序（bubble-sort）和梳子排序（comb-sort）" class="headerlink" title="1-1-1 冒泡排序（bubble sort）和梳子排序（comb sort）"></a>1-1-1 冒泡排序（bubble sort）和梳子排序（comb sort）</h3><blockquote>
 <p><a href="https://zh.wikipedia.org/wiki/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F" title="Wikipedia" target="_blank" rel="noopener">冒泡排序</a>：两两比较，位置不对的交换位置。简单易实现但不实用，效果不好，时间复杂度为$O(n^2)$：</p>
 </blockquote>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bubbleSort</span><span class="params">(ls)</span>:</span> </span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> range(len(ls)):</span><br><span class="line">      <span class="keyword">for</span> j <span class="keyword">in</span> range(len(ls)-i<span class="number">-1</span>):</span><br><span class="line">          <span class="keyword">if</span> ls[j] &gt; ls[j+<span class="number">1</span>]:</span><br><span class="line">              ls[j], ls[j+<span class="number">1</span>] = ls[j+<span class="number">1</span>], ls[j]</span><br><span class="line"><span class="keyword">return</span> ls</span><br></pre></td></tr></table></figure>
@@ -426,7 +426,7 @@
 <p><a href="https://zh.wikipedia.org/wiki/%E6%A2%B3%E6%8E%92%E5%BA%8F" title="Wikipedia" target="_blank" rel="noopener">梳排序</a>：比冒泡排序更实用,可以理解为分组排序。大概原理为将列表分组，组内用冒泡排序，然后逐渐减小组数最后只有一组的时候即为冒泡排序。最优时间复杂度$O(n)$，最坏时间复杂度$O(n^2)$，平均时间复杂度$O(n^2/2^p)$其中$p$为增量。</p>
 </blockquote>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">comb_sort</span><span class="params">(ls)</span>:</span></span><br><span class="line">    step = <span class="number">1.3</span></span><br><span class="line">    j = len(ls)</span><br><span class="line">    flag = <span class="keyword">False</span></span><br><span class="line">    <span class="keyword">while</span> (flag <span class="keyword">is</span> <span class="keyword">True</span>) <span class="keyword">or</span> j &gt; <span class="number">1</span>:</span><br><span class="line">        i = <span class="number">0</span></span><br><span class="line">        j = max(int(j/step), <span class="number">1</span>)</span><br><span class="line">        flag = <span class="keyword">False</span></span><br><span class="line">        <span class="keyword">while</span> i+j &lt; len(ls):</span><br><span class="line">            <span class="keyword">if</span> ls[i] &gt; ls[i+j]:</span><br><span class="line">                ls[i], ls[i+j] = ls[i+j], ls[i]</span><br><span class="line">            i = i+<span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> ls</span><br></pre></td></tr></table></figure>
-<h4 id="1-1-2-堆排序（Heapsort）"><a href="#1-1-2-堆排序（Heapsort）" class="headerlink" title="1-1-2 堆排序（Heapsort）"></a>1-1-2 堆排序（Heapsort）</h4><blockquote>
+<h3 id="1-1-2-堆排序（Heapsort）"><a href="#1-1-2-堆排序（Heapsort）" class="headerlink" title="1-1-2 堆排序（Heapsort）"></a>1-1-2 堆排序（Heapsort）</h3><blockquote>
 <p>借助堆（Heap）数据结构来排序，最大堆或最小堆。二叉堆的几个操作的复杂度分别如下：</p>
 <ul>
 <li>建堆： $O(n)$</li>
@@ -435,7 +435,7 @@
 <li>插入：$O(logn)$</li>
 </ul>
 </blockquote>
-<h4 id="1-1-3-归并排序（Merge-sort）"><a href="#1-1-3-归并排序（Merge-sort）" class="headerlink" title="1-1-3 归并排序（Merge sort）"></a>1-1-3 归并排序（Merge sort）</h4><blockquote>
+<h3 id="1-1-3-归并排序（Merge-sort）"><a href="#1-1-3-归并排序（Merge-sort）" class="headerlink" title="1-1-3 归并排序（Merge sort）"></a>1-1-3 归并排序（Merge sort）</h3><blockquote>
 <p>分治思想，每次将序列分为两半并分别处理，最终合并成一个序列。</p>
 </blockquote>
 <p>需要用到合并两个有序列的算法：</p>
@@ -447,7 +447,7 @@
 <blockquote>
 <p>归并排序可以用于合并多个有序列（两两合并），时间复杂度为（$O(logn\sum_{i=1}^{n}m_i)$,与使用堆排序合并有序列的时间复杂度相同。<br>有序列的长度$m_i$差异很大时，合并的次序可能会对计算时间有很大的影响。<br>归并排序可以看成是合并长度为1的有序列。令上个公式里的$m_i$都为1，得到归并排序的时间复杂度为$O(nlogn)$.</p>
 </blockquote>
-<h4 id="1-1-4-快速排序（Quicksort）"><a href="#1-1-4-快速排序（Quicksort）" class="headerlink" title="1-1-4 快速排序（Quicksort）"></a>1-1-4 快速排序（Quicksort）</h4><blockquote>
+<h3 id="1-1-4-快速排序（Quicksort）"><a href="#1-1-4-快速排序（Quicksort）" class="headerlink" title="1-1-4 快速排序（Quicksort）"></a>1-1-4 快速排序（Quicksort）</h3><blockquote>
 <p>基本原理：在待排序序列中选择一个对象作为阈值，将小于它和大于它的分别放在两个子序列中，相等的放入任意一个序列，然后分别对两个子序列做相同的操作。</p>
 <p>最坏时间复杂度为$O(n^2)$,平均时间复杂度为$O(nlogn)$.</p>
 </blockquote>
@@ -456,30 +456,30 @@
 <blockquote>
 <p>快速排序也可以用来求解前K小数，每次选定阈值并划分子序列后只需要处理一边的序列即可。大大减小了计算量，时间复杂度为$O(n)$.</p>
 </blockquote>
-<h4 id="1-1-5-内省排序（Introspective-Sort）"><a href="#1-1-5-内省排序（Introspective-Sort）" class="headerlink" title="1-1-5 内省排序（Introspective Sort）"></a>1-1-5 内省排序（Introspective Sort）</h4><p>内省排序是一种<strong>快速排序</strong>、<strong>插入排序</strong>和堆排序的混合排序算法。主要策略如下：</p>
+<h3 id="1-1-5-内省排序（Introspective-Sort）"><a href="#1-1-5-内省排序（Introspective-Sort）" class="headerlink" title="1-1-5 内省排序（Introspective Sort）"></a>1-1-5 内省排序（Introspective Sort）</h3><p>内省排序是一种<strong>快速排序</strong>、<strong>插入排序</strong>和堆排序的混合排序算法。主要策略如下：</p>
 <ul>
 <li>当递归达到一定程度时，改为堆排序，以避免递归层数太深而影响效率。</li>
 <li>当待排序的子序列长度非常小时，采用插入排序。因为此时应用高级的排序算法反而会产生多余的开销。</li>
 </ul>
-<h4 id="1-1-6-Timsort"><a href="#1-1-6-Timsort" class="headerlink" title="1-1-6 Timsort"></a>1-1-6 Timsort</h4><p>Timsort是结合了归并排序和插入排序的混合排序算法。虽然插入排序的时间复杂度要高于归并排序，但当待排序序列非常短时，比较时间复杂度的意义不大。</p>
+<h3 id="1-1-6-Timsort"><a href="#1-1-6-Timsort" class="headerlink" title="1-1-6 Timsort"></a>1-1-6 Timsort</h3><p>Timsort是结合了归并排序和插入排序的混合排序算法。虽然插入排序的时间复杂度要高于归并排序，但当待排序序列非常短时，比较时间复杂度的意义不大。</p>
 <blockquote>
 <p>Timsort的大致原理就是先采用插入排序将非常短的小段（阈值为minrun）扩充为较长的小段，再采用归并排序来合并多个较长的小段。</p>
 <p>minrun的选取： 尽量使得 $[\frac{n}{minrun}]$ 刚好是2的整数次幂或比某个2的整数次幂稍小一点的数使得小段合并的时候刚好是一颗满二叉树。</p>
 </blockquote>
-<h3 id="1-2-非比较排序"><a href="#1-2-非比较排序" class="headerlink" title="1-2 非比较排序"></a>1-2 非比较排序</h3><h4 id="1-2-1-桶排序（Bucket-Sort）"><a href="#1-2-1-桶排序（Bucket-Sort）" class="headerlink" title="1-2-1 桶排序（Bucket Sort）"></a>1-2-1 桶排序（Bucket Sort）</h4><blockquote>
+<h2 id="1-2-非比较排序"><a href="#1-2-非比较排序" class="headerlink" title="1-2 非比较排序"></a>1-2 非比较排序</h2><h3 id="1-2-1-桶排序（Bucket-Sort）"><a href="#1-2-1-桶排序（Bucket-Sort）" class="headerlink" title="1-2-1 桶排序（Bucket Sort）"></a>1-2-1 桶排序（Bucket Sort）</h3><blockquote>
 <p>桶排序是计数排序（Counting Sort）的推广。</p>
 <p>计数排序：统计每个数字出现的次数，然后按照顺序构造出按顺序的并且数字出现次数相同的序列：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">counting_sort</span><span class="params">(ls)</span>:</span></span><br><span class="line">    mn = min(ls)</span><br><span class="line">    mx = max(ls)</span><br><span class="line">    s = [<span class="number">0</span>]*(mx+<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, len(ls)):</span><br><span class="line">        s[ls[i]] = s[ls[i]] + <span class="number">1</span></span><br><span class="line">    rs = [<span class="number">0</span>]*len(ls)</span><br><span class="line">    pos = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(mn, mx+<span class="number">1</span>):</span><br><span class="line">        rs[pos:(pos+s[i])] = [i]*s[i]</span><br><span class="line">        pos = pos+s[i]</span><br><span class="line">    <span class="keyword">return</span> rs</span><br></pre></td></tr></table></figure></p>
 <p>桶排序原理：首先建立若干个按顺序排好的“桶”，然后将待排序的对象放入各自对应的桶中。一般来说，桶中的对象是相同大小或者接近的。</p>
 </blockquote>
-<h4 id="1-2-2-基数排序"><a href="#1-2-2-基数排序" class="headerlink" title="1-2-2 基数排序"></a>1-2-2 基数排序</h4><p>基数排序可以看作多次使用桶排序，例如对个位数进行一次桶排序后再对10位数进行一次桶排序，或顺序颠倒。<br>有最高位优先（从前往后，Most Significant Digit first）和最低位优先（从后往前，Least Significant Digit first）</p>
-<h2 id="第二章：哈希"><a href="#第二章：哈希" class="headerlink" title="第二章：哈希"></a>第二章：哈希</h2><h3 id="2-1-基本概念和实现"><a href="#2-1-基本概念和实现" class="headerlink" title="2-1 基本概念和实现"></a>2-1 基本概念和实现</h3><h4 id="2-1-1-哈希函数"><a href="#2-1-1-哈希函数" class="headerlink" title="2-1-1 哈希函数"></a>2-1-1 哈希函数</h4><blockquote>
+<h3 id="1-2-2-基数排序"><a href="#1-2-2-基数排序" class="headerlink" title="1-2-2 基数排序"></a>1-2-2 基数排序</h3><p>基数排序可以看作多次使用桶排序，例如对个位数进行一次桶排序后再对10位数进行一次桶排序，或顺序颠倒。<br>有最高位优先（从前往后，Most Significant Digit first）和最低位优先（从后往前，Least Significant Digit first）</p>
+<h1 id="第二章：哈希"><a href="#第二章：哈希" class="headerlink" title="第二章：哈希"></a>第二章：哈希</h1><h2 id="2-1-基本概念和实现"><a href="#2-1-基本概念和实现" class="headerlink" title="2-1 基本概念和实现"></a>2-1 基本概念和实现</h2><h3 id="2-1-1-哈希函数"><a href="#2-1-1-哈希函数" class="headerlink" title="2-1-1 哈希函数"></a>2-1-1 哈希函数</h3><blockquote>
 <p>哈希函数是把一类不易处理的对象映射为另一类易处理的函数。一般有2个特点：</p>
 <ul>
 <li>冲突少。即很少出现不同对象对应到相同哈希值的情况。</li>
 <li>计算快。即计算哈希值能够快速完成。</li>
 </ul>
 </blockquote>
-<h4 id="2-1-2-哈希表"><a href="#2-1-2-哈希表" class="headerlink" title="2-1-2 哈希表"></a>2-1-2 哈希表</h4><blockquote>
+<h3 id="2-1-2-哈希表"><a href="#2-1-2-哈希表" class="headerlink" title="2-1-2 哈希表"></a>2-1-2 哈希表</h3><blockquote>
 <p>哈希表是一种数据结构，他需要配合哈希函数使用，用于建立索引，便于快速查找。采用的存储策略如下（$N$为哈希表长度）：</p>
 <ul>
 <li>插入：使用哈希函数计算待插入对象的哈希值$H$，则插入编号为$H mod N$的位置。</li>
@@ -488,7 +488,7 @@
 <p>可以采用链表将冲突的多个对象存储在同一位置。</p>
 <p>动态确定哈希表的长度。</p>
 </blockquote>
-<h3 id="2-2-哈希的应用"><a href="#2-2-哈希的应用" class="headerlink" title="2-2 哈希的应用"></a>2-2 哈希的应用</h3><h4 id="2-2-1-相似性搜索"><a href="#2-2-1-相似性搜索" class="headerlink" title="2-2-1 相似性搜索"></a>2-2-1 相似性搜索</h4><blockquote>
+<h2 id="2-2-哈希的应用"><a href="#2-2-哈希的应用" class="headerlink" title="2-2 哈希的应用"></a>2-2 哈希的应用</h2><h3 id="2-2-1-相似性搜索"><a href="#2-2-1-相似性搜索" class="headerlink" title="2-2-1 相似性搜索"></a>2-2-1 相似性搜索</h3><blockquote>
 <p>局部敏感哈希（Local-Sensitive Hash）： 相似对象的哈希值在某种意义下相似，并且有概率保证。</p>
 <ul>
 <li>集合相似性（根据Jaccard距离 $1-\frac{\mid\mathcal{A}\cap\mathcal{B}\mid}{\mid\mathcal{A}\cup\mathcal{B}\mid}$）：最小哈希（Minhash）</li>
@@ -496,7 +496,7 @@
 <li>图片相似性： 感知哈希（Perceptual Hashing），调整大小，灰度化，二值化。</li>
 </ul>
 </blockquote>
-<h4 id="2-2-2-信息安全"><a href="#2-2-2-信息安全" class="headerlink" title="2-2-2 信息安全"></a>2-2-2 信息安全</h4><blockquote>
+<h3 id="2-2-2-信息安全"><a href="#2-2-2-信息安全" class="headerlink" title="2-2-2 信息安全"></a>2-2-2 信息安全</h3><blockquote>
 <p>身份证号码验证： 最后一位是校验位，身份证号码从右到左记为$a<em>1,a_2,…,a</em>{18}$,则校验公式为：</p>
 <script type="math/tex; mode=display">a_1 = (12-((\sum_{i=2}^{18}a_i2^{i-1})\ mod\ 11))\ mod\ 11</script><p>当余数是10时记为$X$</p>
 <p>信用卡类似：因为信用卡号长度不统一，所以最后（最左）一位记为$a_n$.首先定义：</p>
@@ -508,10 +508,10 @@
 <li>文件下载不完整</li>
 </ul>
 </blockquote>
-<h4 id="2-2-3-比特币"><a href="#2-2-3-比特币" class="headerlink" title="2-2-3 比特币"></a>2-2-3 比特币</h4><blockquote>
+<h3 id="2-2-3-比特币"><a href="#2-2-3-比特币" class="headerlink" title="2-2-3 比特币"></a>2-2-3 比特币</h3><blockquote>
 <p>比特币挖矿问题的简化版： 给定一个字符串$S$，需要找出一个字符串$N$，使得$S+N$即两个字符串连接后得到的新字符串在两轮SHA-256哈希后得到的数小于一个目标值$T$。</p>
 </blockquote>
-<h4 id="2-2-4-负载均衡"><a href="#2-2-4-负载均衡" class="headerlink" title="2-2-4 负载均衡"></a>2-2-4 负载均衡</h4><blockquote>
+<h3 id="2-2-4-负载均衡"><a href="#2-2-4-负载均衡" class="headerlink" title="2-2-4 负载均衡"></a>2-2-4 负载均衡</h3><blockquote>
 <p>一致性哈希（Consistent Hashing）</p>
 </blockquote>
 
@@ -566,8 +566,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/07/08/MachineLearning-ZZH/" rel="prev" title="读书笔记：《机器学习》by周志华">
-                读书笔记：《机器学习》by周志华 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/07/08/MachineLearning-ZZH/" rel="prev" title="读书笔记：《机器学习》by周志华 (阅读钟...)">
+                读书笔记：《机器学习》by周志华 (阅读钟...) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -704,7 +704,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#《算法笔记》（阅读中…）"><span class="nav-number">1.</span> <span class="nav-text">《算法笔记》（阅读中…）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#第一章：排序"><span class="nav-number">1.1.</span> <span class="nav-text">第一章：排序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-比较排序"><span class="nav-number">1.1.1.</span> <span class="nav-text">1-1 比较排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-1-冒泡排序（bubble-sort）和梳子排序（comb-sort）"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">1-1-1 冒泡排序（bubble sort）和梳子排序（comb sort）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-2-堆排序（Heapsort）"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">1-1-2 堆排序（Heapsort）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-3-归并排序（Merge-sort）"><span class="nav-number">1.1.1.3.</span> <span class="nav-text">1-1-3 归并排序（Merge sort）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-4-快速排序（Quicksort）"><span class="nav-number">1.1.1.4.</span> <span class="nav-text">1-1-4 快速排序（Quicksort）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-5-内省排序（Introspective-Sort）"><span class="nav-number">1.1.1.5.</span> <span class="nav-text">1-1-5 内省排序（Introspective Sort）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-6-Timsort"><span class="nav-number">1.1.1.6.</span> <span class="nav-text">1-1-6 Timsort</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-非比较排序"><span class="nav-number">1.1.2.</span> <span class="nav-text">1-2 非比较排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-1-桶排序（Bucket-Sort）"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">1-2-1 桶排序（Bucket Sort）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-2-基数排序"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">1-2-2 基数排序</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二章：哈希"><span class="nav-number">1.2.</span> <span class="nav-text">第二章：哈希</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-基本概念和实现"><span class="nav-number">1.2.1.</span> <span class="nav-text">2-1 基本概念和实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-1-哈希函数"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">2-1-1 哈希函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-2-哈希表"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">2-1-2 哈希表</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-哈希的应用"><span class="nav-number">1.2.2.</span> <span class="nav-text">2-2 哈希的应用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-1-相似性搜索"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">2-2-1 相似性搜索</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-2-信息安全"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">2-2-2 信息安全</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-3-比特币"><span class="nav-number">1.2.2.3.</span> <span class="nav-text">2-2-3 比特币</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-4-负载均衡"><span class="nav-number">1.2.2.4.</span> <span class="nav-text">2-2-4 负载均衡</span></a></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第一章：排序"><span class="nav-number">1.</span> <span class="nav-text">第一章：排序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-比较排序"><span class="nav-number">1.1.</span> <span class="nav-text">1-1 比较排序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-1-冒泡排序（bubble-sort）和梳子排序（comb-sort）"><span class="nav-number">1.1.1.</span> <span class="nav-text">1-1-1 冒泡排序（bubble sort）和梳子排序（comb sort）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-2-堆排序（Heapsort）"><span class="nav-number">1.1.2.</span> <span class="nav-text">1-1-2 堆排序（Heapsort）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-3-归并排序（Merge-sort）"><span class="nav-number">1.1.3.</span> <span class="nav-text">1-1-3 归并排序（Merge sort）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-4-快速排序（Quicksort）"><span class="nav-number">1.1.4.</span> <span class="nav-text">1-1-4 快速排序（Quicksort）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-5-内省排序（Introspective-Sort）"><span class="nav-number">1.1.5.</span> <span class="nav-text">1-1-5 内省排序（Introspective Sort）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-6-Timsort"><span class="nav-number">1.1.6.</span> <span class="nav-text">1-1-6 Timsort</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-非比较排序"><span class="nav-number">1.2.</span> <span class="nav-text">1-2 非比较排序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-1-桶排序（Bucket-Sort）"><span class="nav-number">1.2.1.</span> <span class="nav-text">1-2-1 桶排序（Bucket Sort）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-2-基数排序"><span class="nav-number">1.2.2.</span> <span class="nav-text">1-2-2 基数排序</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第二章：哈希"><span class="nav-number">2.</span> <span class="nav-text">第二章：哈希</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-基本概念和实现"><span class="nav-number">2.1.</span> <span class="nav-text">2-1 基本概念和实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-1-哈希函数"><span class="nav-number">2.1.1.</span> <span class="nav-text">2-1-1 哈希函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-2-哈希表"><span class="nav-number">2.1.2.</span> <span class="nav-text">2-1-2 哈希表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-哈希的应用"><span class="nav-number">2.2.</span> <span class="nav-text">2-2 哈希的应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-1-相似性搜索"><span class="nav-number">2.2.1.</span> <span class="nav-text">2-2-1 相似性搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-2-信息安全"><span class="nav-number">2.2.2.</span> <span class="nav-text">2-2-2 信息安全</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-3-比特币"><span class="nav-number">2.2.3.</span> <span class="nav-text">2-2-3 比特币</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-4-负载均衡"><span class="nav-number">2.2.4.</span> <span class="nav-text">2-2-4 负载均衡</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
