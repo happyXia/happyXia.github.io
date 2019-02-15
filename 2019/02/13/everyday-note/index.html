@@ -117,20 +117,20 @@
 
 
 
-<meta name="description" content="2019-02-14 用 tf.train.Saver() 保存/载入模型：">
+<meta name="description" content="2019-02-14 生词：  spouse tepastry gargantuan 用 tf.train.Saver() 保存/载入模型：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="笔记本">
 <meta property="og:url" content="http://yoursite.com/2019/02/13/everyday-note/index.html">
 <meta property="og:site_name" content="Xia&#39;s Blog">
-<meta property="og:description" content="2019-02-14 用 tf.train.Saver() 保存/载入模型：">
+<meta property="og:description" content="2019-02-14 生词：  spouse tepastry gargantuan 用 tf.train.Saver() 保存/载入模型：">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/02/13/everyday-note/unlinear.JPG">
 <meta property="og:image" content="http://yoursite.com/2019/02/13/everyday-note/unlinear1.JPG">
 <meta property="og:image" content="http://yoursite.com/2019/02/13/everyday-note/Composition.JPG">
-<meta property="og:updated_time" content="2019-02-14T10:23:08.735Z">
+<meta property="og:updated_time" content="2019-02-15T02:08:53.653Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="笔记本">
-<meta name="twitter:description" content="2019-02-14 用 tf.train.Saver() 保存/载入模型：">
+<meta name="twitter:description" content="2019-02-14 生词：  spouse tepastry gargantuan 用 tf.train.Saver() 保存/载入模型：">
 <meta name="twitter:image" content="http://yoursite.com/2019/02/13/everyday-note/unlinear.JPG">
 
 
@@ -387,7 +387,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  976
+                  981
                 </span>
               
 
@@ -412,17 +412,25 @@
       
 
       
-        <h1 id="2019-02-14"><a href="#2019-02-14" class="headerlink" title="2019-02-14"></a>2019-02-14</h1><ul>
-<li><p>用 <code>tf.train.Saver()</code> 保存/载入模型：</p>
-<a id="more"></a>
+        <h1 id="2019-02-14"><a href="#2019-02-14" class="headerlink" title="2019-02-14"></a>2019-02-14</h1><blockquote>
+<p>生词：</p>
 <ul>
-<li><p><strong>.data</strong> 文件保存权重（weights）；<strong>.meta</strong> 文件保存计算图的各种元数据（metadata）比如学习率和优化器； <strong>.index</strong> 文件保存键-值对，用来根据模型中的tensor name在 .data 文件中找到相应的data。</p>
+<li>spouse</li>
+<li>tepastry</li>
+<li>gargantuan</li>
+<li>用 <code>tf.train.Saver()</code> 保存/载入模型：<a id="more"></a>
 <ul>
+<li><strong>.data</strong> 文件保存权重（weights）；<strong>.meta</strong> 文件保存计算图的各种元数据（metadata）比如学习率和优化器； <strong>.index</strong> 文件保存键-值对，用来根据模型中的tensor name在 .data 文件中找到相应的data。<ul>
 <li><strong>载入图结构和元数据</strong> 用 <code>tf.train.import_meta_graph(&#39;models/model.ckpt-1000.meta&#39;)</code>, 该方法自动将 “models/model.ckpt-1000.meta” 文件中保存的图加载到默认图（default_graph）中并返回一个 <code>Saver</code>。</li>
 <li><strong>回复/载入权重（weights）</strong> 的过程跟载入图结构和元数据不同的是它必须在要给 <code>Session</code> 中执行，可以把它理解为权重的初始化类似的过程，如下：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">    <span class="comment">#用载入权重的方式来初始化权重，就不需要tf.global_variables_initializer()过程了</span></span><br><span class="line">    saver.restore(sess, <span class="string">'models/model.ckpt.data-1000-00000-of-00001'</span>)</span><br><span class="line">    print(sess.run(global_step_tensor))</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<ul>
 <li><p>可以声明多个 <code>Saver</code> 来保存所有或特定变量（<code>Variables</code>）并用字典({name:Var})的形式给变量指定名字：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">v1 = tf.Variable(<span class="number">1.</span>, name=<span class="string">"v1"</span>)</span><br><span class="line">all_saver - tf.train.Saver()</span><br><span class="line">v1_saver = tf.train.Saver(&#123;<span class="string">"V1"</span>:v1&#125;)</span><br></pre></td></tr></table></figure>
 </li>
@@ -430,7 +438,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">g = tf.Graph()</span><br><span class="line"><span class="keyword">with</span> g.as_default():</span><br><span class="line">    v1 = tf.Variable(<span class="number">5.</span>, dtype=tf.float32)</span><br><span class="line">print(v1.graph == g) <span class="comment"># 输出True</span></span><br><span class="line">print(v1.graph == tf.get_default_graph()) <span class="comment"># 输出False</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 这个Saver如果在绑定默认default_graph的Session中执行会报错，因为v1是在 g 中的变量而不是default_graph中</span></span><br><span class="line">saver = tf.train.Saver([v1])</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line"></span><br><span class="line">    sess.run(tf.global_variables_initializer())</span><br><span class="line"></span><br><span class="line">    saver.save(sess, <span class="string">'./test'</span>) <span class="comment">#执行这句代码时会报错</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-</li>
+<ul>
 <li><p>用 <code>tf.saved_model.simple_save</code> 保存模型：</p>
   <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">simple_save(session,</span><br><span class="line">            export_dir,</span><br><span class="line">            inputs=&#123;<span class="string">"x"</span>: x, <span class="string">"y"</span>: y&#125;),</span><br><span class="line">            outputs=&#123;<span class="string">"z"</span>: z&#125;)</span><br></pre></td></tr></table></figure>
 <ul>
