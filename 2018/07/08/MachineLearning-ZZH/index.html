@@ -126,7 +126,7 @@
 <meta property="og:description" content="第1章：绪论1.1 引言机器学习致力于研究如何通过计算的手段，利用经验来改善系统自身的性能。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://raw.githubusercontent.com/happyXia/MarkdownPhotos/master/Resource/PRCurve.jpg">
-<meta property="og:updated_time" content="2019-02-13T14:04:52.311Z">
+<meta property="og:updated_time" content="2019-03-01T02:51:23.323Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="读书笔记：《机器学习》by周志华 (阅读中...)">
 <meta name="twitter:description" content="第1章：绪论1.1 引言机器学习致力于研究如何通过计算的手段，利用经验来改善系统自身的性能。">
@@ -467,7 +467,7 @@
 <p><strong>过拟合</strong>（overfitting）：有很好的经验误差但是泛化误差很大，与之相对的是欠拟合（underfitting）</p>
 </blockquote>
 <h2 id="2-2-评估方法"><a href="#2-2-评估方法" class="headerlink" title="2.2 评估方法"></a>2.2 评估方法</h2><h3 id="2-2-1-留出法"><a href="#2-2-1-留出法" class="headerlink" title="2.2.1 留出法"></a>2.2.1 留出法</h3><blockquote>
-<p><strong>留出法</strong>（hold-out）：直接将数据集 $D={(x_1,y_1),(x_2,y_2),\cdots,x_m,y_m)}$划分为两个互斥的集合，其中一个集合作为训练集 $S$，另一个作为测试集 $T$，即$D=S\cup T,S\cap T= \emptyset$.在$S$上训练出模型后，用 $T$ 来评估其测试误差，作为泛化误差的估计。</p>
+<p><strong>留出法</strong>（hold-out）：直接将数据集 $D={(x_1,y_1),(x_2,y_2),\cdots,(x_m,y_m)}$划分为两个互斥的集合，其中一个集合作为训练集 $S$，另一个作为测试集 $T$，即$D=S\cup T,S\cap T= \emptyset$.在$S$上训练出模型后，用 $T$ 来评估其测试误差，作为泛化误差的估计。</p>
 </blockquote>
 <p>注意：</p>
 <ul>
@@ -480,7 +480,7 @@
 <p><strong>留一法</strong>（Leave-One-Out，LOO）：将定数据集 $D$ 中包含 $m$ 个样本，若子集数 $k = m$ 则称为留一法。留一法是交叉验证的一个特例。</p>
 </blockquote>
 <h3 id="2-2-3-自助法"><a href="#2-2-3-自助法" class="headerlink" title="2.2.3 自助法"></a>2.2.3 自助法</h3><blockquote>
-<p><strong>自助法</strong>（bootstrapping）：以自助采样（bootstrap sampling）为基础。给定包含 $m$ 个样本的数据集 $D$ ，我们对它进行采用产生数据集 $D’$：每次随机从 $D$ 中挑出一个样本，将其拷贝放入 $D’$ ， 然后再将该样本放回初始数据集 $D$ 中，使得该样本在下次采用时仍有可能被采到；这个过程重复执行 $m$ 次后，我们就得到了包含 $m$ 个样本的数据集 $D’$，这就是自助采样的结果。</p>
+<p><strong>自助法</strong>（bootstrapping）：以自助采样（bootstrap sampling）为基础。给定包含 $m$ 个样本的数据集 $D$ ，我们对它进行采样产生数据集 $D’$：每次随机从 $D$ 中挑出一个样本，将其拷贝放入 $D’$ ， 然后再将该样本放回初始数据集 $D$ 中，使得该样本在下次采用时仍有可能被采到；这个过程重复执行 $m$ 次后，我们就得到了包含 $m$ 个样本的数据集 $D’$，这就是自助采样的结果。</p>
 </blockquote>
 <p>注意：</p>
 <ul>
@@ -507,7 +507,32 @@
 <script type="math/tex; mode=display">
  acc(f;D) = \frac{1}{m}\sum_{i=1}^{m}\mathbb{I}(f(x_i) = y_i)  
   = 1 - E(f;D).</script><h3 id="2-3-2-查准率、查全率与-F1"><a href="#2-3-2-查准率、查全率与-F1" class="headerlink" title="2.3.2 查准率、查全率与$F1$"></a>2.3.2 查准率、查全率与$F1$</h3><blockquote>
-<p><strong>混淆矩阵</strong>（confusion matrix）：<br>| |预测结果为正|预测结果为反|<br>|————|:————:|———————-|<br>|真实结果为正|真正例（TP）|假反例（FN）|<br>|真实结果为反|假正例（FP）|真反例（TN）|</p>
+<p><strong>混淆矩阵</strong>（confusion matrix）：</p>
+</blockquote>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th style="text-align:center">预测结果为正</th>
+<th>预测结果为反</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>真实结果为正</td>
+<td style="text-align:center">真正例（TP）</td>
+<td>假反例（FN）</td>
+</tr>
+<tr>
+<td>真实结果为反</td>
+<td style="text-align:center">假正例（FP）</td>
+<td>真反例（TN）</td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
 <p><strong>查准率</strong>/<strong>准确率</strong>（precision）：预测结果为正的样本中真实也为正的概率</p>
 <script type="math/tex; mode=display">P = \frac{TP}{TP+FP}</script><p><strong>查全率</strong>/<strong>召回率</strong>（recall）：真实为正的样本中有多少被预测为正</p>
 <script type="math/tex; mode=display">R = \frac{TP}{TP+FN}</script></blockquote>
@@ -556,9 +581,9 @@
 </blockquote>
 <h3 id="2-3-4-代价敏感错误率"><a href="#2-3-4-代价敏感错误率" class="headerlink" title="2.3.4 代价敏感错误率"></a>2.3.4 代价敏感错误率</h3><ul>
 <li>在不同的预测任务中，不同的错误类型（把正例预测为反例 / 把反例预测为正例）的代价可能不同。</li>
-<li>在非均等代价虾，我们希望不只是简单的最小化错误次数，而是希望最小化“总代价”。</li>
+<li>在非均等代价下，我们希望不只是简单的最小化错误次数，而是希望最小化“总代价”。</li>
 </ul>
-<p>例子：<br>有如下“代价矩阵”</p>
+<p>例子：<br>有如下“代价矩阵”：</p>
 <div class="table-container">
 <table>
 <thead>
