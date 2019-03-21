@@ -124,14 +124,15 @@
 <meta property="og:site_name" content="Xia&#39;s Blog">
 <meta property="og:description" content="2019-03-21">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/account@ip:/home/xxx/test.txt%60">
+<meta property="og:image" content="http://yoursite.com/2019/02/13/everyday-note/attention.JPG">
+<meta property="og:image" content="http://yoursite.com/2019/02/13/everyday-note/unlinear.JPG">
 <meta property="og:image" content="http://yoursite.com/2019/02/13/everyday-note/unlinear1.JPG">
 <meta property="og:image" content="http://yoursite.com/2019/02/13/everyday-note/Composition.JPG">
-<meta property="og:updated_time" content="2019-03-21T07:32:04.602Z">
+<meta property="og:updated_time" content="2019-03-21T07:44:10.025Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="笔记本">
 <meta name="twitter:description" content="2019-03-21">
-<meta name="twitter:image" content="http://yoursite.com/account@ip:/home/xxx/test.txt%60">
+<meta name="twitter:image" content="http://yoursite.com/2019/02/13/everyday-note/attention.JPG">
 
 
 
@@ -387,7 +388,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,527
+                  1,883
                 </span>
               
 
@@ -484,9 +485,111 @@ f^\prime (x,y) &= [f(x,y) + \lambda(A-g(x,y))]^\prime\\
 </blockquote>
 <ul>
 <li>Attention mechanism:<ul>
-<li>attention 计算时，每个待加权部分（$y_i$）的权重只跟上下文（context）$C$ 有关，与别的部分（$y_j, j \neq i$）无关。如下图： <img src="/account@ip:/home/xxx/test.txt`" class="attention.JPG% } - Soft Attention vs. Hard Attention - soft attention: 结果为各个待加权部分的加权和 - hard attention：结果为根据相应概率随机选取的一个待加权部分 # 2019-02-19 > 生词： > - tickle > - sibling > - stroke a cat > - discrepancy > - procrastinate > - prone - scp命令：`scp test.txt" title="# 2019-02-17 > 生词： > - anecdote > - instill > - ostracism/banishment > - squeak - 向量叉乘（cross product）， 如果逆时针方向相乘则结果为正，反之结果为负。叉乘的结果（三维空间）为一个向量，这个向量的大小是两个相乘的向量所构成的平行四边形的面积，方向与该平行四边形垂直。求解两个向量的叉乘可以用求解对应行列式的方法（加上一个向量 ($\hat{i},\hat{j}, \hat{k}$)） - 线性的严格定义（Formal definition of linearity）: - 可加性： $L(\vec{v}+\vec{w})=L(\vec{v})+L(\vec{w})$ - 成比性：$L(c\vec{v})=cL(\vec{v})$ - 因此，函数只要满足上面的规定也是线性的。 - The learning your do learning forward can be substantially more efficient if you have all the right intuitions in places. # 2019-02-15 > 生词： > - perusal > - connotation > - fumble > - clumsily > - intercept > - distort > - perception > - clutter > - duality - `GraphDef` 是TensorFlow用来保存/加载`Graph`时的中间对象。保存时，可以通过`Graph.as_graph_def()`或者`Session.graph_def`获取到`GraphDef`对象用于序列化保存到文件；加载时，也需要先用`tf.GraphDef()`获取一个空`GraphDef`对象然后用 **.pb** 文件中的数据来填充（`graph_def.ParseFromString(f.read())`）,最后通过`tf.import_graph_def(graph_def, name=prefix)`的形式加载到指定的Graph中。 - 对偶性： 两种数学事物之间自然而又出乎意料的对应关系 # 2019-02-14 > 生词： > - spouse > - tepastry > - gargantuan - 用 `tf.train.Saver()` 保存/载入模型： - **.data** 文件保存权重（weights）；**.meta** 文件保存计算图的各种元数据（metadata）比如学习率和优化器； **.index** 文件保存键-值对，用来根据模型中的tensor name在 .data 文件中找到相应的data。 - **载入图结构和元数据** 用 `tf.train.import_meta_graph(models/model.ckpt-1000.meta)`, 该方法自动将 “models/model.ckpt-1000.meta” 文件中保存的图加载到默认图（default_graph）中并返回一个 `Saver`。 - **回复/载入权重（weights）** 的过程跟载入图结构和元数据不同的是它必须在要给 `Session` 中执行，可以把它理解为权重的初始化类似的过程，如下： undefined - 可以声明多个 `Saver` 来保存所有或特定变量（`Variables`）并用字典({name:Var})的形式给变量指定名字： undefined - 一个 `Saver` 只能保存当前 `Session` 对应 `Graph` 中的变量,所以程序中有多个 `Graph` 时要注意 `Saver` 的使用，下面这样使用 `Saver` 就会报错： undefined - 用 `tf.saved_model.simple_save` 保存模型： undefined - **.pb** 文件保存图结构和元数据； **variables** 文件夹内保存当前的权重。 - 加载saved_model： undefined - 把模型的所有信息（包括图数据和权重信息）全部保存到一个 .pb 文件中： undefined 加载保存的 .pb 文件： undefined # 2019-02-13 - 线性变换（Linear transformation）就是输入一个向量然后输出另一个向量。这里的transformation(变换)和function（函数）同义，之所以用transformation是因为线性代数里面的线性变换是可以在坐标系中（低维）可视化表现出来的。前面的形容词Linear的意思是：整个坐标系变换之后直线依旧是直线，原点保持固定。下面两个变换都不是线性变换(灰线表示原坐标系)。 {% asset_img /2019/02/13/everyday-note/unlinear.JPG"> <img src="/2019/02/13/everyday-note/unlinear1.JPG"></li>
+<li>attention 计算时，每个待加权部分（$y_i$）的权重只跟上下文（context）$C$ 有关，与别的部分（$y_j, j \neq i$）无关。如下图： <img src="/2019/02/13/everyday-note/attention.JPG"></li>
+<li>Soft Attention vs. Hard Attention<ul>
+<li>soft attention: 结果为各个待加权部分的加权和</li>
+<li>hard attention：结果为根据相应概率随机选取的一个待加权部分</li>
 </ul>
 </li>
+</ul>
+</li>
+</ul>
+<h1 id="2019-02-19"><a href="#2019-02-19" class="headerlink" title="2019-02-19"></a>2019-02-19</h1><blockquote>
+<p>生词：</p>
+<ul>
+<li>tickle</li>
+<li>sibling</li>
+<li>stroke a cat</li>
+<li>discrepancy</li>
+<li>procrastinate</li>
+<li>prone</li>
+</ul>
+</blockquote>
+<ul>
+<li>scp命令：<code>scp test.txt  account@ip:/home/xxx/test.txt</code> </li>
+</ul>
+<h1 id="2019-02-17"><a href="#2019-02-17" class="headerlink" title="2019-02-17"></a>2019-02-17</h1><blockquote>
+<p>生词：</p>
+<ul>
+<li>anecdote</li>
+<li>instill</li>
+<li>ostracism/banishment</li>
+<li>squeak</li>
+</ul>
+</blockquote>
+<ul>
+<li>向量叉乘（cross product）， 如果逆时针方向相乘则结果为正，反之结果为负。叉乘的结果（三维空间）为一个向量，这个向量的大小是两个相乘的向量所构成的平行四边形的面积，方向与该平行四边形垂直。求解两个向量的叉乘可以用求解对应行列式的方法（加上一个向量 ($\hat{i},\hat{j}, \hat{k}$)）</li>
+<li>线性的严格定义（Formal definition of linearity）:<ul>
+<li>可加性： $L(\vec{v}+\vec{w})=L(\vec{v})+L(\vec{w})$</li>
+<li>成比性：$L(c\vec{v})=cL(\vec{v})$</li>
+</ul>
+</li>
+<li>因此，函数只要满足上面的规定也是线性的。</li>
+<li>The learning your do learning forward can be substantially more efficient if you have all the right intuitions in places.</li>
+</ul>
+<h1 id="2019-02-15"><a href="#2019-02-15" class="headerlink" title="2019-02-15"></a>2019-02-15</h1><blockquote>
+<p>生词：</p>
+<ul>
+<li>perusal</li>
+<li>connotation</li>
+<li>fumble</li>
+<li>clumsily</li>
+<li>intercept</li>
+<li>distort</li>
+<li>perception</li>
+<li>clutter</li>
+<li>duality</li>
+</ul>
+</blockquote>
+<ul>
+<li><code>GraphDef</code> 是TensorFlow用来保存/加载<code>Graph</code>时的中间对象。保存时，可以通过<code>Graph.as_graph_def()</code>或者<code>Session.graph_def</code>获取到<code>GraphDef</code>对象用于序列化保存到文件；加载时，也需要先用<code>tf.GraphDef()</code>获取一个空<code>GraphDef</code>对象然后用 <strong>.pb</strong> 文件中的数据来填充（<code>graph_def.ParseFromString(f.read())</code>）,最后通过<code>tf.import_graph_def(graph_def, name=&#39;prefix&#39;)</code>的形式加载到指定的Graph中。</li>
+<li>对偶性： 两种数学事物之间自然而又出乎意料的对应关系</li>
+</ul>
+<h1 id="2019-02-14"><a href="#2019-02-14" class="headerlink" title="2019-02-14"></a>2019-02-14</h1><blockquote>
+<p>生词：</p>
+<ul>
+<li>spouse</li>
+<li>tepastry</li>
+<li>gargantuan</li>
+</ul>
+</blockquote>
+<ul>
+<li><p>用 <code>tf.train.Saver()</code> 保存/载入模型：</p>
+<ul>
+<li><p><strong>.data</strong> 文件保存权重（weights）；<strong>.meta</strong> 文件保存计算图的各种元数据（metadata）比如学习率和优化器； <strong>.index</strong> 文件保存键-值对，用来根据模型中的tensor name在 .data 文件中找到相应的data。</p>
+<ul>
+<li><strong>载入图结构和元数据</strong> 用 <code>tf.train.import_meta_graph(&#39;models/model.ckpt-1000.meta&#39;)</code>, 该方法自动将 “models/model.ckpt-1000.meta” 文件中保存的图加载到默认图（default_graph）中并返回一个 <code>Saver</code>。</li>
+<li><strong>回复/载入权重（weights）</strong> 的过程跟载入图结构和元数据不同的是它必须在要给 <code>Session</code> 中执行，可以把它理解为权重的初始化类似的过程，如下：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">    <span class="comment">#用载入权重的方式来初始化权重，就不需要tf.global_variables_initializer()过程了</span></span><br><span class="line">    saver.restore(sess, <span class="string">'models/model.ckpt.data-1000-00000-of-00001'</span>)</span><br><span class="line">    print(sess.run(global_step_tensor))</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>可以声明多个 <code>Saver</code> 来保存所有或特定变量（<code>Variables</code>）并用字典({name:Var})的形式给变量指定名字：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">v1 = tf.Variable(<span class="number">1.</span>, name=<span class="string">"v1"</span>)</span><br><span class="line">all_saver = tf.train.Saver()</span><br><span class="line">v1_saver = tf.train.Saver(&#123;<span class="string">"V1"</span>:v1&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>一个 <code>Saver</code> 只能保存当前 <code>Session</code> 对应 <code>Graph</code> 中的变量,所以程序中有多个 <code>Graph</code> 时要注意 <code>Saver</code> 的使用，下面这样使用 <code>Saver</code> 就会报错：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">g = tf.Graph()</span><br><span class="line"><span class="keyword">with</span> g.as_default():</span><br><span class="line">    v1 = tf.Variable(<span class="number">5.</span>, dtype=tf.float32)</span><br><span class="line">print(v1.graph == g) <span class="comment"># 输出True</span></span><br><span class="line">print(v1.graph == tf.get_default_graph()) <span class="comment"># 输出False</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 这个Saver如果在绑定默认default_graph的Session中执行会报错，因为v1是在 g 中的变量而不是default_graph中</span></span><br><span class="line">saver = tf.train.Saver([v1])</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line"></span><br><span class="line">    sess.run(tf.global_variables_initializer())</span><br><span class="line"></span><br><span class="line">    saver.save(sess, <span class="string">'./test'</span>) <span class="comment">#执行这句代码时会报错</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>用 <code>tf.saved_model.simple_save</code> 保存模型：</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">simple_save(session,</span><br><span class="line">            export_dir,</span><br><span class="line">            inputs=&#123;<span class="string">"x"</span>: x, <span class="string">"y"</span>: y&#125;),</span><br><span class="line">            outputs=&#123;<span class="string">"z"</span>: z&#125;)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>.pb</strong> 文件保存图结构和元数据； <strong>variables</strong> 文件夹内保存当前的权重。</li>
+<li>加载saved_model：  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">export_dir = ...</span><br><span class="line">...</span><br><span class="line"><span class="keyword">with</span> tf.Session(graph=tf.Graph()) <span class="keyword">as</span> sess:</span><br><span class="line">    tf.saved_model.loader.load(sess, [tag_constants.TRAINING], export_dir)</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>把模型的所有信息（包括图数据和权重信息）全部保存到一个 .pb 文件中：</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> tensorflow.python.framework <span class="keyword">import</span> graph_util</span><br><span class="line">output_graph_def = graph_util.convert_variables_to_constants(session, </span><br><span class="line">                                                             session.graph_def,</span><br><span class="line">                                                             output_node_names=[</span><br><span class="line">                                                                         <span class="string">'model_intent/intent_scores'</span>])</span><br><span class="line"><span class="keyword">with</span> tf.gfile.FastGFile(<span class="string">'models/intent_model.pb'</span>, mode=<span class="string">'wb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(output_graph_def.SerializeToString())</span><br></pre></td></tr></table></figure>
+<p>  加载保存的 .pb 文件：</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_graph</span><span class="params">(frozen_graph_filename)</span>:</span></span><br><span class="line">    <span class="keyword">with</span> tf.gfile.GFile(frozen_graph_filename, <span class="string">"rb"</span>) <span class="keyword">as</span> f:</span><br><span class="line">        graph_def = tf.GraphDef()              <span class="comment"># 创建一个空的graph_def</span></span><br><span class="line">        graph_def.ParseFromString(f.read())    <span class="comment"># 用 .pb 文件中保存的对象填充该graph_def</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">with</span> tf.Graph().as_default() <span class="keyword">as</span> graph:</span><br><span class="line">        <span class="comment"># 下面的name参数的值会作为graph中所有op的前缀</span></span><br><span class="line">        tf.import_graph_def(graph_def, name=<span class="string">"prefix"</span>)</span><br><span class="line">    <span class="keyword">return</span> graph</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="2019-02-13"><a href="#2019-02-13" class="headerlink" title="2019-02-13"></a>2019-02-13</h1><ul>
+<li>线性变换（Linear transformation）就是输入一个向量然后输出另一个向量。这里的transformation(变换)和function（函数）同义，之所以用transformation是因为线性代数里面的线性变换是可以在坐标系中（低维）可视化表现出来的。前面的形容词Linear的意思是：整个坐标系变换之后直线依旧是直线，原点保持固定。下面两个变换都不是线性变换(灰线表示原坐标系)。</li>
+</ul>
+<img src="/2019/02/13/everyday-note/unlinear.JPG"> <img src="/2019/02/13/everyday-note/unlinear1.JPG">
+<ul>
 <li>矩阵乘法相当于两个线性变换的复合。类似： <img src="/2019/02/13/everyday-note/Composition.JPG"></li>
 <li><strong>线性变换的行列式</strong> 可以理解为线性变换后原单位面积被拉伸/压缩的倍数。 用这个概念很好理解： $det(M_1M_2)=det(M_1)det(M_2)$</li>
 <li><strong>矩阵的逆</strong> 在transformation上的变现形式就是逆变换（顺时针旋转90度对应的矩阵的逆就是逆时针旋转90度对应的矩阵），因此矩阵A乘以矩阵A的逆表示变换之后又逆变换，相当于什么都没做，即：<script type="math/tex; mode=display">
@@ -667,7 +770,7 @@ A^{-1}A= \left[
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#2019-03-21"><span class="nav-text">2019-03-21</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2019-03-19"><span class="nav-text">2019-03-19</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2019-03-06"><span class="nav-text">2019-03-06</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2019-03-05"><span class="nav-text">2019-03-05</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2019-03-04"><span class="nav-text">2019-03-04</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2019-02-28"><span class="nav-text">2019-02-28</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#2019-03-21"><span class="nav-text">2019-03-21</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2019-03-19"><span class="nav-text">2019-03-19</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2019-03-06"><span class="nav-text">2019-03-06</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2019-03-05"><span class="nav-text">2019-03-05</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2019-03-04"><span class="nav-text">2019-03-04</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2019-02-28"><span class="nav-text">2019-02-28</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2019-02-19"><span class="nav-text">2019-02-19</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2019-02-17"><span class="nav-text">2019-02-17</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2019-02-15"><span class="nav-text">2019-02-15</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2019-02-14"><span class="nav-text">2019-02-14</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2019-02-13"><span class="nav-text">2019-02-13</span></a></li></ol></div>
             
 
           </div>
