@@ -117,22 +117,23 @@
 
 
 
-<meta name="description" content="2019-03-21">
+<meta name="description" content="20192019-032019-03-28">
 <meta property="og:type" content="article">
 <meta property="og:title" content="笔记本">
 <meta property="og:url" content="http://yoursite.com/2019/02/13/everyday-note/index.html">
 <meta property="og:site_name" content="Xia&#39;s Blog">
-<meta property="og:description" content="2019-03-21">
+<meta property="og:description" content="20192019-032019-03-28">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/02/13/everyday-note/word-word-co-occurrence-matrix.png">
 <meta property="og:image" content="http://yoursite.com/2019/02/13/everyday-note/attention.JPG">
 <meta property="og:image" content="http://yoursite.com/2019/02/13/everyday-note/unlinear.JPG">
 <meta property="og:image" content="http://yoursite.com/2019/02/13/everyday-note/unlinear1.JPG">
 <meta property="og:image" content="http://yoursite.com/2019/02/13/everyday-note/Composition.JPG">
-<meta property="og:updated_time" content="2019-03-21T07:44:10.025Z">
+<meta property="og:updated_time" content="2019-03-28T09:39:18.187Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="笔记本">
-<meta name="twitter:description" content="2019-03-21">
-<meta name="twitter:image" content="http://yoursite.com/2019/02/13/everyday-note/attention.JPG">
+<meta name="twitter:description" content="20192019-032019-03-28">
+<meta name="twitter:image" content="http://yoursite.com/2019/02/13/everyday-note/word-word-co-occurrence-matrix.png">
 
 
 
@@ -388,7 +389,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,883
+                  2,104
                 </span>
               
 
@@ -413,15 +414,70 @@
       
 
       
-        <h1 id="2019-03-21"><a href="#2019-03-21" class="headerlink" title="2019-03-21"></a>2019-03-21</h1><a id="more"></a>
+        <h1 id="2019"><a href="#2019" class="headerlink" title="2019"></a>2019</h1><h2 id="2019-03"><a href="#2019-03" class="headerlink" title="2019-03"></a>2019-03</h2><h3 id="2019-03-28"><a href="#2019-03-28" class="headerlink" title="2019-03-28"></a>2019-03-28</h3><a id="more"></a>
+<blockquote>
+<p>生词：</p>
 <ul>
+<li>grasp</li>
+<li>slang</li>
+</ul>
+</blockquote>
+<ul>
+<li><a href="https://www.tensorflow.org/tutorials/representation/word2vec" target="_blank" rel="noopener">Word2vec</a>：<ul>
+<li>有两种类型<ul>
+<li>连续词袋模型（CBOW）：根据上下文预测目标字词</li>
+<li>Skip-Gram：根据从目标资词中预测上下文字词</li>
+</ul>
+</li>
+<li>噪声对比估算（NCE）损失是基于逻辑回归模型进行定义的</li>
+</ul>
+</li>
+<li><a href="https://nlp.stanford.edu/projects/glove/" target="_blank" rel="noopener">GloVe</a>:<ul>
+<li>先从文本中处理得到一个word-word co-occurrence矩阵 <img src="/2019/02/13/everyday-note/word-word-co-occurrence-matrix.png" title="word-word co-occurrence矩阵的一个小栗子"></li>
+<li>训练过程是让词向量的点乘结果尽可能等于相应两个词一起出现的概率的对数。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2019-03-26"><a href="#2019-03-26" class="headerlink" title="2019-03-26"></a>2019-03-26</h3><blockquote>
+<p>生词：</p>
+<ul>
+<li>meteor</li>
+<li>splash</li>
+<li>bruise</li>
+<li>shatter</li>
+<li>flock </li>
+<li>patio</li>
+<li>bureaucratic</li>
+<li>unlikely</li>
+<li>trickle</li>
+<li>deficiency</li>
+<li>patriotic</li>
+</ul>
+</blockquote>
+<ul>
+<li>vim:<ul>
+<li>v: 可视模式</li>
+<li>w/b：前一个单词/后一个单词</li>
+<li>^：本行第一个不是blank字符的位置</li>
+<li>0：本行第一个位置</li>
+<li>$：本行行尾</li>
+<li>g_：本行最后一个不是blank字符的位置</li>
+<li>p：黏贴</li>
+<li>u：undo</li>
+<li>CTRL-r：redo</li>
+<li>d: 删除并复制</li>
+<li>y：直接复制</li>
+</ul>
+</li>
+</ul>
+<h3 id="2019-03-21"><a href="#2019-03-21" class="headerlink" title="2019-03-21"></a>2019-03-21</h3><ul>
 <li>从远程Git库中下在分支到本地：<ul>
 <li><code>git pull origin branch_name:local_name</code> ：获取远程库中的branch_name分支与本地的local_name分支进行merge，如果要与本地当前分支进行merge可以不写冒号和冒号后面内容，如果本地所在的当前分支（dev）与对应远程分支（origin/dev）已建立联系，只需 <code>git pull origin</code></li>
 <li><code>git checkout -b local_name origin/branch_name</code>: 自动创建一个新的本地分支（local_name），并与指定远程分支关联起来。</li>
 </ul>
 </li>
 </ul>
-<h1 id="2019-03-19"><a href="#2019-03-19" class="headerlink" title="2019-03-19"></a>2019-03-19</h1><ul>
+<h3 id="2019-03-19"><a href="#2019-03-19" class="headerlink" title="2019-03-19"></a>2019-03-19</h3><ul>
 <li>支持向量机 (Support Vector Machine)：<ul>
 <li>支持向量 (support vectors):<ul>
 <li>support vectores are the samples that are most difficult to classify</li>
@@ -445,7 +501,7 @@ f^\prime (x,y) &= [f(x,y) + \lambda(A-g(x,y))]^\prime\\
 </ul>
 </li>
 </ul>
-<h1 id="2019-03-06"><a href="#2019-03-06" class="headerlink" title="2019-03-06"></a>2019-03-06</h1><blockquote>
+<h3 id="2019-03-06"><a href="#2019-03-06" class="headerlink" title="2019-03-06"></a>2019-03-06</h3><blockquote>
 <p>生词：</p>
 <ul>
 <li>treadmill</li>
@@ -455,7 +511,7 @@ f^\prime (x,y) &= [f(x,y) + \lambda(A-g(x,y))]^\prime\\
 <li>obligation</li>
 </ul>
 </blockquote>
-<h1 id="2019-03-05"><a href="#2019-03-05" class="headerlink" title="2019-03-05"></a>2019-03-05</h1><ul>
+<h3 id="2019-03-05"><a href="#2019-03-05" class="headerlink" title="2019-03-05"></a>2019-03-05</h3><ul>
 <li>Conda 操作：<ul>
 <li>信息： <code>conda info</code></li>
 <li>更新自己： <code>conda update conda</code></li>
@@ -467,7 +523,7 @@ f^\prime (x,y) &= [f(x,y) + \lambda(A-g(x,y))]^\prime\\
 </ul>
 </li>
 </ul>
-<h1 id="2019-03-04"><a href="#2019-03-04" class="headerlink" title="2019-03-04"></a>2019-03-04</h1><ul>
+<h3 id="2019-03-04"><a href="#2019-03-04" class="headerlink" title="2019-03-04"></a>2019-03-04</h3><ul>
 <li>Vim 操作：<ul>
 <li>dd -&gt; 删除当前行，并将这行保存到剪切板里</li>
 <li>p -&gt; 粘贴剪切板里的内容</li>
@@ -477,7 +533,7 @@ f^\prime (x,y) &= [f(x,y) + \lambda(A-g(x,y))]^\prime\\
 </ul>
 </li>
 </ul>
-<h1 id="2019-02-28"><a href="#2019-02-28" class="headerlink" title="2019-02-28"></a>2019-02-28</h1><blockquote>
+<h2 id="2019-02"><a href="#2019-02" class="headerlink" title="2019-02"></a>2019-02</h2><h3 id="2019-02-28"><a href="#2019-02-28" class="headerlink" title="2019-02-28"></a>2019-02-28</h3><blockquote>
 <p>生词：</p>
 <ul>
 <li>arithmetic</li>
@@ -494,7 +550,7 @@ f^\prime (x,y) &= [f(x,y) + \lambda(A-g(x,y))]^\prime\\
 </ul>
 </li>
 </ul>
-<h1 id="2019-02-19"><a href="#2019-02-19" class="headerlink" title="2019-02-19"></a>2019-02-19</h1><blockquote>
+<h3 id="2019-02-19"><a href="#2019-02-19" class="headerlink" title="2019-02-19"></a>2019-02-19</h3><blockquote>
 <p>生词：</p>
 <ul>
 <li>tickle</li>
@@ -508,7 +564,7 @@ f^\prime (x,y) &= [f(x,y) + \lambda(A-g(x,y))]^\prime\\
 <ul>
 <li>scp命令：<code>scp test.txt  account@ip:/home/xxx/test.txt</code> </li>
 </ul>
-<h1 id="2019-02-17"><a href="#2019-02-17" class="headerlink" title="2019-02-17"></a>2019-02-17</h1><blockquote>
+<h3 id="2019-02-17"><a href="#2019-02-17" class="headerlink" title="2019-02-17"></a>2019-02-17</h3><blockquote>
 <p>生词：</p>
 <ul>
 <li>anecdote</li>
@@ -527,7 +583,7 @@ f^\prime (x,y) &= [f(x,y) + \lambda(A-g(x,y))]^\prime\\
 <li>因此，函数只要满足上面的规定也是线性的。</li>
 <li>The learning your do learning forward can be substantially more efficient if you have all the right intuitions in places.</li>
 </ul>
-<h1 id="2019-02-15"><a href="#2019-02-15" class="headerlink" title="2019-02-15"></a>2019-02-15</h1><blockquote>
+<h3 id="2019-02-15"><a href="#2019-02-15" class="headerlink" title="2019-02-15"></a>2019-02-15</h3><blockquote>
 <p>生词：</p>
 <ul>
 <li>perusal</li>
@@ -545,7 +601,7 @@ f^\prime (x,y) &= [f(x,y) + \lambda(A-g(x,y))]^\prime\\
 <li><code>GraphDef</code> 是TensorFlow用来保存/加载<code>Graph</code>时的中间对象。保存时，可以通过<code>Graph.as_graph_def()</code>或者<code>Session.graph_def</code>获取到<code>GraphDef</code>对象用于序列化保存到文件；加载时，也需要先用<code>tf.GraphDef()</code>获取一个空<code>GraphDef</code>对象然后用 <strong>.pb</strong> 文件中的数据来填充（<code>graph_def.ParseFromString(f.read())</code>）,最后通过<code>tf.import_graph_def(graph_def, name=&#39;prefix&#39;)</code>的形式加载到指定的Graph中。</li>
 <li>对偶性： 两种数学事物之间自然而又出乎意料的对应关系</li>
 </ul>
-<h1 id="2019-02-14"><a href="#2019-02-14" class="headerlink" title="2019-02-14"></a>2019-02-14</h1><blockquote>
+<h3 id="2019-02-14"><a href="#2019-02-14" class="headerlink" title="2019-02-14"></a>2019-02-14</h3><blockquote>
 <p>生词：</p>
 <ul>
 <li>spouse</li>
@@ -585,7 +641,7 @@ f^\prime (x,y) &= [f(x,y) + \lambda(A-g(x,y))]^\prime\\
   <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_graph</span><span class="params">(frozen_graph_filename)</span>:</span></span><br><span class="line">    <span class="keyword">with</span> tf.gfile.GFile(frozen_graph_filename, <span class="string">"rb"</span>) <span class="keyword">as</span> f:</span><br><span class="line">        graph_def = tf.GraphDef()              <span class="comment"># 创建一个空的graph_def</span></span><br><span class="line">        graph_def.ParseFromString(f.read())    <span class="comment"># 用 .pb 文件中保存的对象填充该graph_def</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">with</span> tf.Graph().as_default() <span class="keyword">as</span> graph:</span><br><span class="line">        <span class="comment"># 下面的name参数的值会作为graph中所有op的前缀</span></span><br><span class="line">        tf.import_graph_def(graph_def, name=<span class="string">"prefix"</span>)</span><br><span class="line">    <span class="keyword">return</span> graph</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h1 id="2019-02-13"><a href="#2019-02-13" class="headerlink" title="2019-02-13"></a>2019-02-13</h1><ul>
+<h3 id="2019-02-13"><a href="#2019-02-13" class="headerlink" title="2019-02-13"></a>2019-02-13</h3><ul>
 <li>线性变换（Linear transformation）就是输入一个向量然后输出另一个向量。这里的transformation(变换)和function（函数）同义，之所以用transformation是因为线性代数里面的线性变换是可以在坐标系中（低维）可视化表现出来的。前面的形容词Linear的意思是：整个坐标系变换之后直线依旧是直线，原点保持固定。下面两个变换都不是线性变换(灰线表示原坐标系)。</li>
 </ul>
 <img src="/2019/02/13/everyday-note/unlinear.JPG"> <img src="/2019/02/13/everyday-note/unlinear1.JPG">
@@ -770,7 +826,7 @@ A^{-1}A= \left[
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#2019-03-21"><span class="nav-text">2019-03-21</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2019-03-19"><span class="nav-text">2019-03-19</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2019-03-06"><span class="nav-text">2019-03-06</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2019-03-05"><span class="nav-text">2019-03-05</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2019-03-04"><span class="nav-text">2019-03-04</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2019-02-28"><span class="nav-text">2019-02-28</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2019-02-19"><span class="nav-text">2019-02-19</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2019-02-17"><span class="nav-text">2019-02-17</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2019-02-15"><span class="nav-text">2019-02-15</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2019-02-14"><span class="nav-text">2019-02-14</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2019-02-13"><span class="nav-text">2019-02-13</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#2019"><span class="nav-text">2019</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2019-03"><span class="nav-text">2019-03</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-03-28"><span class="nav-text">2019-03-28</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-03-26"><span class="nav-text">2019-03-26</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-03-21"><span class="nav-text">2019-03-21</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-03-19"><span class="nav-text">2019-03-19</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-03-06"><span class="nav-text">2019-03-06</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-03-05"><span class="nav-text">2019-03-05</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-03-04"><span class="nav-text">2019-03-04</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2019-02"><span class="nav-text">2019-02</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-02-28"><span class="nav-text">2019-02-28</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-02-19"><span class="nav-text">2019-02-19</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-02-17"><span class="nav-text">2019-02-17</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-02-15"><span class="nav-text">2019-02-15</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-02-14"><span class="nav-text">2019-02-14</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-02-13"><span class="nav-text">2019-02-13</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
