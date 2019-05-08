@@ -124,14 +124,16 @@
 <meta property="og:site_name" content="Xia&#39;s Blog">
 <meta property="og:description" content="20192019-052019-05-05">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/02/13/everyday-note/word-word-co-occurrence-matrix.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/13/everyday-note/attention.JPG">
 <meta property="og:image" content="http://yoursite.com/2019/02/13/everyday-note/unlinear.JPG">
 <meta property="og:image" content="http://yoursite.com/2019/02/13/everyday-note/unlinear1.JPG">
 <meta property="og:image" content="http://yoursite.com/2019/02/13/everyday-note/Composition.JPG">
-<meta property="og:updated_time" content="2019-05-05T11:38:39.435Z">
+<meta property="og:updated_time" content="2019-05-07T03:51:18.196Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="笔记本">
 <meta name="twitter:description" content="20192019-052019-05-05">
-<meta name="twitter:image" content="http://yoursite.com/2019/02/13/everyday-note/unlinear.JPG">
+<meta name="twitter:image" content="http://yoursite.com/2019/02/13/everyday-note/word-word-co-occurrence-matrix.png">
 
 
 
@@ -387,7 +389,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  3,170
+                  2,916
                 </span>
               
 
@@ -416,15 +418,22 @@
 <ul>
 <li>Transformer:<ul>
 <li>encoder 最后一层的输出会在decoder每一层被用到。</li>
-<li>the Dot-Product Attention for head <em>i</em>: <script type="math/tex; mode=display">Attention(Q_i,K_i,V_i) = softmax(\frac{Q_iK_i^{T}}{\sqrt[]{d_k}})V_i</script><ul>
+<li>multi-head attention 层是为了找出tokens之间的关系，之后的add是为了让它不要忘记自己。</li>
+<li>the Dot-Product Attention for head $i$ : <script type="math/tex; mode=display">Attention(Q_i,K_i,V_i) = softmax(\frac{Q_iK_i^{T}}{\sqrt[]{d_k}})V_i</script><ul>
 <li>其中：<ul>
-<li>$Q_i = XW_i^Q$ ，维度为 $input_length \times d_k$</li>
-<li>$K_i = XW_i^K$ ，维度为 $input_length \times d_k$</li>
-<li>$V_i = XW_i^V$ ，维度为 $input_length \times d_V$</li>
+<li>$Q_i = XW_i^Q$ ，维度为 $input\_length \times d_k$</li>
+<li>$K_i = XW_i^K$ ，维度为 $input\_length \times d_k$</li>
+<li>$V_i = XW_i^V$ ，维度为 $input\_length \times d_v$</li>
 </ul>
 </li>
-<li>论文中（<a href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener">Attention is all your need</a>）使用$d_k=d_v=\frac{emb_dim}{h}$</li>
+<li>论文中（<a href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener">Attention is all your need</a>）使用$d_k=d_v=\frac{emb\_dim}{h}$</li>
 <li>不同 <em>head</em> 不共享$W_i^Q$，$W_i^K$和$W_i^V$，且都是随机初始化。</li>
+<li>decoder block 里有两层multi-head attention加一层feed forward，第一层attention用来找出target sequence里的关系（需要用到mask，只允许看对应token的左边的token），第二层attention结合encoder的输出（E）和decoder上一个block的输出（D）,是为了用encoder的input sequence中各个token来表示target sequence中的各个token,相应的：<ul>
+<li>$Q_i = DW_i^Q$ ，维度为 $target\_length \times d_k$</li>
+<li>$K_i = EW_i^K$ ，维度为 $input\_length \times d_k$</li>
+<li>$V_i = EW_i^K$ ，维度为 $input\_length \times d_v$</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -437,7 +446,6 @@
 <li>propose a <strong>taxonomy</strong></li>
 </ul>
 </blockquote>
-<p>·</p>
 <h3 id="2019-04-19"><a href="#2019-04-19" class="headerlink" title="2019-04-19"></a>2019-04-19</h3><blockquote>
 <p>生词：</p>
 <ul>
@@ -461,11 +469,345 @@
 </ul>
 </blockquote>
 <ul>
-<li><p>三星手机添加notification提示音：</p>
-<ul>
+<li>三星手机添加notification提示音：<ul>
 <li>在手机文件个目录里新建一个‘Media’文件夹</li>
 <li>在‘Media’文件夹里新建‘Notifications’文件夹</li>
-<li><p>在‘Notifications’里添加<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 2019-04-15</span><br><span class="line"></span><br><span class="line">- Discriminative Model VS. Generative Model</span><br><span class="line">  - Discriminative: they model the decision boundary between the different classes, such as Logistic Regression which based on Maximum Likelihood.</span><br><span class="line">  - Generative model: they model how the data was generated can be used to make classifications, such as Naive Bayes.</span><br><span class="line">- [Debugging Neural Networks](https://towardsdatascience.com/checklist-for-debugging-neural-networks-d8b2a9434f21?source=email-b01757374e14-1555187113798-digest.reader------1-58------------------811dbe59_37a4_4c19_9db6_ee6b790471a8-1&amp;sectionName=top)</span><br><span class="line">  1. Start simple:</span><br><span class="line">      - Building a simpler model first. Then gradually add model complexity.</span><br><span class="line">      - Train your model on a single data point. Using 1 or 2 training data points to confirm whether model is able to overfit, which means it immediately overfit with a training accuracy of 100% and random guessing in validation phase.</span><br><span class="line">  2. Confirm your loss:</span><br><span class="line">     - The loss is appropriate for the task(choosing cross-entropy loss or mean squared error?)</span><br><span class="line">     - Your loss functions are being measured on the correct scale. It&apos;s best to first check the data loss alone (so set regularization strength to zero).</span><br><span class="line">  3. Check intermediate outputs and connections</span><br><span class="line">  4. Diagnose parameters</span><br><span class="line">     - Batch size: </span><br><span class="line">       - Small batch sizes will result in a learning process that converges quickly at the cost of noise in the training process and might lead to optimization difficulties.</span><br><span class="line">       - Large-batch methods tend to converge to sharp minimizers of the training and testing functions-and as is well known, sharp minima lead to poorer generalization.</span><br><span class="line">     - Learning rate: Consider incorporating learning rate scheduling to decrease the learning rate as training progresses</span><br><span class="line">     - Gradient clipping: Useful for addressing any exploding gradients.</span><br><span class="line">     - Batch normalization: Fight the internal covariate shift problem.</span><br><span class="line">     - Stochastic Gradient Descent (SGD): A recommended starting point is Adam or plain SGD with Nesterov momentum.</span><br><span class="line">     - Regularization: </span><br><span class="line">     - Dropout</span><br><span class="line">  5.  Track your work</span><br><span class="line"></span><br><span class="line">### 2019-04-11</span><br><span class="line"></span><br><span class="line">&gt; 生词：</span><br><span class="line">&gt; - get accustomed to</span><br><span class="line">&gt; - take on</span><br><span class="line">&gt; - leverage</span><br><span class="line">&gt; - prominent</span><br><span class="line">&gt; - autonomy</span><br><span class="line">&gt; </span><br><span class="line"></span><br><span class="line">### 2019-04-09</span><br><span class="line"></span><br><span class="line">&gt; 生词：</span><br><span class="line">&gt; - unary</span><br><span class="line">&gt; - sophisticated</span><br><span class="line">&gt; - prevalent</span><br><span class="line">&gt; - latent</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- Transfer Learning:</span><br><span class="line">  - transfer learning is the process of trainibg a model on a large-scale dataset and then using that pretrained model to conduct learning for another downstream task.</span><br><span class="line">  - recent work:</span><br><span class="line">    - [ULMFit](https://arxiv.org/abs/1801.06146)</span><br><span class="line">    - [ELMo](https://allennlp.org/elmo): 2 layers of LSTM</span><br><span class="line">    - [GLoMo](https://arxiv.org/abs/1806.05662)</span><br><span class="line">    - [OpenAI transformer](https://blog.openai.com/language-unsupervised/)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### 2019-04-04</span><br><span class="line"></span><br><span class="line">&gt; 生词：</span><br><span class="line">&gt; - cope with</span><br><span class="line">&gt; - be composed of</span><br><span class="line">&gt; - sanitary</span><br><span class="line">&gt; - sock</span><br><span class="line">&gt; - disinfectant</span><br><span class="line">&gt; -  armrest</span><br><span class="line">&gt; - fungal</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### 2019-04-03</span><br><span class="line"></span><br><span class="line">&gt; 生词：</span><br><span class="line">&gt; - have a **self-consciousness**</span><br><span class="line">&gt; - bungling goon</span><br><span class="line">&gt; - play is **innate**</span><br><span class="line">&gt; - for the sake of</span><br><span class="line">&gt; - **befuddled** aunt/uncle/parent</span><br><span class="line">&gt; - **enamored** with face</span><br><span class="line">&gt; - recess</span><br><span class="line">&gt; - paramount</span><br><span class="line">&gt; - wane</span><br><span class="line">&gt; - sophisticate</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- How to interact with children:</span><br><span class="line">  - Ages 0-1:</span><br><span class="line">    - attraction to faces (expressions) only grows from there</span><br><span class="line">    - speak as much as possible using baby talk with infant</span><br><span class="line">  - Ages 1-3:</span><br><span class="line">    - wait for an invitation into the child&apos;s world. Follow their verbal and nonverbal cues.</span><br><span class="line">  - Ages 3-5:</span><br><span class="line">    - don&apos;t push child to learning school readiness and other skills.</span><br><span class="line"></span><br><span class="line">### 2019-04-02</span><br><span class="line"></span><br><span class="line">&gt; 生词：</span><br><span class="line">&gt; - obsessive-compulsive disorder(OCD)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## 2019-03</span><br><span class="line"></span><br><span class="line">### 2019-03-30</span><br><span class="line">&lt;!-- more --&gt;</span><br><span class="line"></span><br><span class="line">&gt; 生词:</span><br><span class="line">&gt; - dodge</span><br><span class="line">&gt; - legitimate</span><br><span class="line">&gt; - folk</span><br><span class="line">&gt; - profitable</span><br><span class="line"></span><br><span class="line">### 2019-03-28</span><br><span class="line"></span><br><span class="line">&gt; 生词：</span><br><span class="line">&gt; - grasp</span><br><span class="line">&gt; - slang</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- [Word2vec](https://www.tensorflow.org/tutorials/representation/word2vec)：</span><br><span class="line">  - 有两种类型</span><br><span class="line">    - 连续词袋模型（CBOW）：根据上下文预测目标字词</span><br><span class="line">    - Skip-Gram：根据从目标字词中预测上下文字词</span><br><span class="line">  - 噪声对比估算（NCE）损失是基于逻辑回归模型进行定义的</span><br><span class="line">- [GloVe](https://nlp.stanford.edu/projects/glove/):</span><br><span class="line">  - 先从文本中处理得到一个word-word co-occurrence矩阵 &#123;% asset_img word-word-co-occurrence-matrix.png word-word co-occurrence矩阵的一个小栗子 %&#125;</span><br><span class="line">  - 训练过程是让词向量的点乘结果尽可能等于相应两个词一起出现的概率的对数。</span><br><span class="line"></span><br><span class="line">### 2019-03-26</span><br><span class="line"></span><br><span class="line">&gt; 生词：</span><br><span class="line">&gt; - meteor</span><br><span class="line">&gt; - splash</span><br><span class="line">&gt; - bruise</span><br><span class="line">&gt; - shatter</span><br><span class="line">&gt; - flock </span><br><span class="line">&gt; - patio</span><br><span class="line">&gt; - bureaucratic</span><br><span class="line">&gt; - unlikely</span><br><span class="line">&gt; - trickle</span><br><span class="line">&gt; - deficiency</span><br><span class="line">&gt; - patriotic</span><br><span class="line"></span><br><span class="line">- vim:</span><br><span class="line">  - v: 可视模式</span><br><span class="line">  - w/b：前一个单词/后一个单词</span><br><span class="line">  - ^：本行第一个不是blank字符的位置</span><br><span class="line">  - 0：本行第一个位置</span><br><span class="line">  - $：本行行尾</span><br><span class="line">  - g_：本行最后一个不是blank字符的位置</span><br><span class="line">  - p：黏贴</span><br><span class="line">  - u：undo</span><br><span class="line">  - CTRL-r：redo</span><br><span class="line">  - d: 删除并复制</span><br><span class="line">  - y：直接复制</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### 2019-03-21</span><br><span class="line"></span><br><span class="line">- 从远程Git库中下在分支到本地：</span><br><span class="line">  - `git pull origin branch_name:local_name` ：获取远程库中的branch_name分支与本地的local_name分支进行merge，如果要与本地当前分支进行merge可以不写冒号和冒号后面内容，如果本地所在的当前分支（dev）与对应远程分支（origin/dev）已建立联系，只需 `git pull origin`</span><br><span class="line">  - `git checkout -b local_name origin/branch_name`: 自动创建一个新的本地分支（local_name），并与指定远程分支关联起来。</span><br><span class="line"></span><br><span class="line">### 2019-03-19</span><br><span class="line"></span><br><span class="line">- 支持向量机 (Support Vector Machine)：</span><br><span class="line">  - 支持向量 (support vectors):</span><br><span class="line">    - support vectores are the samples that are most difficult to classify</span><br><span class="line">    - they directly affect the process to find the optimum location of the decision boundaries.</span><br><span class="line">  - constrained optimization - Lagrange Multipliers</span><br><span class="line">    - obtaining extrema of function $f(x,y)$ under the constraint $g(x,y) = A$ -&gt; $f^\prime(x,y) = \lambda g^\prime(x,y)$:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$$\begin&#123;split&#125;</span><br><span class="line">f^\prime (x,y) &amp;= [f(x,y) + \lambda(A-g(x,y))]^\prime\\</span><br><span class="line"> &amp;=f^\prime(x,y) - \lambda g^\prime(x,y) = 0</span><br><span class="line">\end&#123;split&#125; \tag&#123;19.03.19.1&#125;$$</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- Math in Markdown</span><br><span class="line">  - one expression in multi-lines : \begin&#123;split&#125; align by &apos;&amp;&apos; before &apos;=&apos;</span><br><span class="line">  - multi-expressions in multi-lines : \begin&#123;eqnarray*&#125; align by &apos;&amp;...&amp;&apos; wrap &apos;=&apos;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### 2019-03-06</span><br><span class="line"></span><br><span class="line">&gt; 生词：</span><br><span class="line">&gt; - treadmill</span><br><span class="line">&gt; - stationary</span><br><span class="line">&gt; - rack up</span><br><span class="line">&gt; - bold</span><br><span class="line">&gt; - obligation</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### 2019-03-05</span><br><span class="line"></span><br><span class="line">- Conda 操作：</span><br><span class="line">  - 信息： `conda info`</span><br><span class="line">  - 更新自己： `conda update conda`</span><br><span class="line">  - 安装/更新 包：`conda install/update [package]`</span><br><span class="line">  - 创建一个新python环境：`conda create --name mingzi python=3.6`</span><br><span class="line">  - 激活一个python环境：`activate mingzi` (Win)/`source activate mingzi` (Linux/mac)</span><br><span class="line">  - 取消激活当前环境：`deactivate` (Win)/ `source deactivate` (Linux/mac)</span><br><span class="line">  - 环境列表：`conda env list`</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### 2019-03-04</span><br><span class="line"></span><br><span class="line">- Vim 操作：</span><br><span class="line">  - dd -&gt; 删除当前行，并将这行保存到剪切板里</span><br><span class="line">  - p -&gt; 粘贴剪切板里的内容</span><br><span class="line">  - h，j，k，l -&gt; 移动光标（方向键也可以）</span><br><span class="line">  - ：help \&lt;command&gt; -&gt;  显示相关命令的帮助</span><br><span class="line">  - u -&gt; 撤销（undo）</span><br><span class="line"></span><br><span class="line">## 2019-02</span><br><span class="line"></span><br><span class="line">### 2019-02-28</span><br><span class="line"></span><br><span class="line">&gt; 生词：</span><br><span class="line">&gt; - arithmetic</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- Attention mechanism:</span><br><span class="line">  - attention 计算时，每个待加权部分（$y_i$）的权重只跟上下文（context）$C$ 有关，与别的部分（$y_j, j \neq i$）无关。如下图： &#123;% asset_img attention.JPG %&#125;</span><br><span class="line">  - Soft Attention vs. Hard Attention</span><br><span class="line">    - soft attention: 结果为各个待加权部分的加权和</span><br><span class="line">    - hard attention：结果为根据相应概率随机选取的一个待加权部分</span><br><span class="line"></span><br><span class="line">### 2019-02-19</span><br><span class="line"></span><br><span class="line">&gt; 生词：</span><br><span class="line">&gt; - tickle</span><br><span class="line">&gt; - sibling</span><br><span class="line">&gt; - stroke a cat</span><br><span class="line">&gt; - discrepancy</span><br><span class="line">&gt; - procrastinate</span><br><span class="line">&gt; - prone</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- scp命令：`scp test.txt  account@ip:/home/xxx/test.txt` </span><br><span class="line"></span><br><span class="line">### 2019-02-17</span><br><span class="line"></span><br><span class="line">&gt; 生词：</span><br><span class="line">&gt; - anecdote</span><br><span class="line">&gt; - instill</span><br><span class="line">&gt; - ostracism/banishment</span><br><span class="line">&gt; - squeak</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">- 向量叉乘（cross product）， 如果逆时针方向相乘则结果为正，反之结果为负。叉乘的结果（三维空间）为一个向量，这个向量的大小是两个相乘的向量所构成的平行四边形的面积，方向与该平行四边形垂直。求解两个向量的叉乘可以用求解对应行列式的方法（加上一个向量 ($\hat&#123;i&#125;,\hat&#123;j&#125;, \hat&#123;k&#125;$)）</span><br><span class="line">- 线性的严格定义（Formal definition of linearity）:</span><br><span class="line">  - 可加性： $L(\vec&#123;v&#125;+\vec&#123;w&#125;)=L(\vec&#123;v&#125;)+L(\vec&#123;w&#125;)$</span><br><span class="line">  - 成比性：$L(c\vec&#123;v&#125;)=cL(\vec&#123;v&#125;)$</span><br><span class="line">- 因此，函数只要满足上面的规定也是线性的。</span><br><span class="line">- The learning your do learning forward can be substantially more efficient if you have all the right intuitions in places.</span><br><span class="line"></span><br><span class="line">### 2019-02-15</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&gt; 生词：</span><br><span class="line">&gt; - perusal</span><br><span class="line">&gt; - connotation</span><br><span class="line">&gt; - fumble</span><br><span class="line">&gt; - clumsily</span><br><span class="line">&gt; - intercept</span><br><span class="line">&gt; - distort</span><br><span class="line">&gt; - perception</span><br><span class="line">&gt; - clutter</span><br><span class="line">&gt; - duality</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- `GraphDef` 是TensorFlow用来保存/加载`Graph`时的中间对象。保存时，可以通过`Graph.as_graph_def()`或者`Session.graph_def`获取到`GraphDef`对象用于序列化保存到文件；加载时，也需要先用`tf.GraphDef()`获取一个空`GraphDef`对象然后用 **.pb** 文件中的数据来填充（`graph_def.ParseFromString(f.read())`）,最后通过`tf.import_graph_def(graph_def, name=&apos;prefix&apos;)`的形式加载到指定的Graph中。</span><br><span class="line">- 对偶性： 两种数学事物之间自然而又出乎意料的对应关系</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### 2019-02-14</span><br><span class="line"></span><br><span class="line">&gt; 生词：</span><br><span class="line">&gt; - spouse</span><br><span class="line">&gt; - tepastry</span><br><span class="line">&gt; - gargantuan</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- 用 `tf.train.Saver()` 保存/载入模型：</span><br><span class="line"></span><br><span class="line">  - **.data** 文件保存权重（weights）；**.meta** 文件保存计算图的各种元数据（metadata）比如学习率和优化器； **.index** 文件保存键-值对，用来根据模型中的tensor name在 .data 文件中找到相应的data。</span><br><span class="line">    - **载入图结构和元数据** 用 `tf.train.import_meta_graph(&apos;models/model.ckpt-1000.meta&apos;)`, 该方法自动将 “models/model.ckpt-1000.meta” 文件中保存的图加载到默认图（default_graph）中并返回一个 `Saver`。</span><br><span class="line">    - **回复/载入权重（weights）** 的过程跟载入图结构和元数据不同的是它必须在要给 `Session` 中执行，可以把它理解为权重的初始化类似的过程，如下：</span><br><span class="line">    ```python</span><br><span class="line">    with tf.Session() as sess:</span><br><span class="line">        #用载入权重的方式来初始化权重，就不需要tf.global_variables_initializer()过程了</span><br><span class="line">        saver.restore(sess, &apos;models/model.ckpt.data-1000-00000-of-00001&apos;)</span><br><span class="line">        print(sess.run(global_step_tensor))</span><br></pre></td></tr></table></figure></p>
+<li>在‘Notifications’里添加<code>.MP3</code>文件</li>
+</ul>
+</li>
+</ul>
+<h3 id="2019-04-15"><a href="#2019-04-15" class="headerlink" title="2019-04-15"></a>2019-04-15</h3><ul>
+<li>Discriminative Model VS. Generative Model<ul>
+<li>Discriminative: they model the decision boundary between the different classes, such as Logistic Regression which based on Maximum Likelihood.</li>
+<li>Generative model: they model how the data was generated can be used to make classifications, such as Naive Bayes.</li>
+</ul>
+</li>
+<li><a href="https://towardsdatascience.com/checklist-for-debugging-neural-networks-d8b2a9434f21?source=email-b01757374e14-1555187113798-digest.reader------1-58------------------811dbe59_37a4_4c19_9db6_ee6b790471a8-1&amp;sectionName=top" target="_blank" rel="noopener">Debugging Neural Networks</a><ol>
+<li>Start simple:<ul>
+<li>Building a simpler model first. Then gradually add model complexity.</li>
+<li>Train your model on a single data point. Using 1 or 2 training data points to confirm whether model is able to overfit, which means it immediately overfit with a training accuracy of 100% and random guessing in validation phase.</li>
+</ul>
+</li>
+<li>Confirm your loss:<ul>
+<li>The loss is appropriate for the task(choosing cross-entropy loss or mean squared error?)</li>
+<li>Your loss functions are being measured on the correct scale. It’s best to first check the data loss alone (so set regularization strength to zero).</li>
+</ul>
+</li>
+<li>Check intermediate outputs and connections</li>
+<li>Diagnose parameters<ul>
+<li>Batch size: <ul>
+<li>Small batch sizes will result in a learning process that converges quickly at the cost of noise in the training process and might lead to optimization difficulties.</li>
+<li>Large-batch methods tend to converge to sharp minimizers of the training and testing functions-and as is well known, sharp minima lead to poorer generalization.</li>
+</ul>
+</li>
+<li>Learning rate: Consider incorporating learning rate scheduling to decrease the learning rate as training progresses</li>
+<li>Gradient clipping: Useful for addressing any exploding gradients.</li>
+<li>Batch normalization: Fight the internal covariate shift problem.</li>
+<li>Stochastic Gradient Descent (SGD): A recommended starting point is Adam or plain SGD with Nesterov momentum.</li>
+<li>Regularization: </li>
+<li>Dropout</li>
+</ul>
+</li>
+<li>Track your work</li>
+</ol>
+</li>
+</ul>
+<h3 id="2019-04-11"><a href="#2019-04-11" class="headerlink" title="2019-04-11"></a>2019-04-11</h3><blockquote>
+<p>生词：</p>
+<ul>
+<li>get accustomed to</li>
+<li>take on</li>
+<li>leverage</li>
+<li>prominent</li>
+<li>autonomy</li>
+</ul>
+</blockquote>
+<h3 id="2019-04-09"><a href="#2019-04-09" class="headerlink" title="2019-04-09"></a>2019-04-09</h3><blockquote>
+<p>生词：</p>
+<ul>
+<li>unary</li>
+<li>sophisticated</li>
+<li>prevalent</li>
+<li>latent</li>
+</ul>
+</blockquote>
+<ul>
+<li>Transfer Learning:<ul>
+<li>transfer learning is the process of trainibg a model on a large-scale dataset and then using that pretrained model to conduct learning for another downstream task.</li>
+<li>recent work:<ul>
+<li><a href="https://arxiv.org/abs/1801.06146" target="_blank" rel="noopener">ULMFit</a></li>
+<li><a href="https://allennlp.org/elmo" target="_blank" rel="noopener">ELMo</a>: 2 layers of LSTM</li>
+<li><a href="https://arxiv.org/abs/1806.05662" target="_blank" rel="noopener">GLoMo</a></li>
+<li><a href="https://blog.openai.com/language-unsupervised/" target="_blank" rel="noopener">OpenAI transformer</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="2019-04-04"><a href="#2019-04-04" class="headerlink" title="2019-04-04"></a>2019-04-04</h3><blockquote>
+<p>生词：</p>
+<ul>
+<li>cope with</li>
+<li>be composed of</li>
+<li>sanitary</li>
+<li>sock</li>
+<li>disinfectant</li>
+<li>armrest</li>
+<li>fungal</li>
+</ul>
+</blockquote>
+<h3 id="2019-04-03"><a href="#2019-04-03" class="headerlink" title="2019-04-03"></a>2019-04-03</h3><blockquote>
+<p>生词：</p>
+<ul>
+<li>have a <strong>self-consciousness</strong></li>
+<li>bungling goon</li>
+<li>play is <strong>innate</strong></li>
+<li>for the sake of</li>
+<li><strong>befuddled</strong> aunt/uncle/parent</li>
+<li><strong>enamored</strong> with face</li>
+<li>recess</li>
+<li>paramount</li>
+<li>wane</li>
+<li>sophisticate</li>
+</ul>
+</blockquote>
+<ul>
+<li>How to interact with children:<ul>
+<li>Ages 0-1:<ul>
+<li>attraction to faces (expressions) only grows from there</li>
+<li>speak as much as possible using baby talk with infant</li>
+</ul>
+</li>
+<li>Ages 1-3:<ul>
+<li>wait for an invitation into the child’s world. Follow their verbal and nonverbal cues.</li>
+</ul>
+</li>
+<li>Ages 3-5:<ul>
+<li>don’t push child to learning school readiness and other skills.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="2019-04-02"><a href="#2019-04-02" class="headerlink" title="2019-04-02"></a>2019-04-02</h3><blockquote>
+<p>生词：</p>
+<ul>
+<li>obsessive-compulsive disorder(OCD)</li>
+</ul>
+</blockquote>
+<h2 id="2019-03"><a href="#2019-03" class="headerlink" title="2019-03"></a>2019-03</h2><h3 id="2019-03-30"><a href="#2019-03-30" class="headerlink" title="2019-03-30"></a>2019-03-30</h3><!-- more -->
+<blockquote>
+<p>生词:</p>
+<ul>
+<li>dodge</li>
+<li>legitimate</li>
+<li>folk</li>
+<li>profitable</li>
+</ul>
+</blockquote>
+<h3 id="2019-03-28"><a href="#2019-03-28" class="headerlink" title="2019-03-28"></a>2019-03-28</h3><blockquote>
+<p>生词：</p>
+<ul>
+<li>grasp</li>
+<li>slang</li>
+</ul>
+</blockquote>
+<ul>
+<li><a href="https://www.tensorflow.org/tutorials/representation/word2vec" target="_blank" rel="noopener">Word2vec</a>：<ul>
+<li>有两种类型<ul>
+<li>连续词袋模型（CBOW）：根据上下文预测目标字词</li>
+<li>Skip-Gram：根据从目标字词中预测上下文字词</li>
+</ul>
+</li>
+<li>噪声对比估算（NCE）损失是基于逻辑回归模型进行定义的</li>
+</ul>
+</li>
+<li><a href="https://nlp.stanford.edu/projects/glove/" target="_blank" rel="noopener">GloVe</a>:<ul>
+<li>先从文本中处理得到一个word-word co-occurrence矩阵 <img src="/2019/02/13/everyday-note/word-word-co-occurrence-matrix.png" title="word-word co-occurrence矩阵的一个小栗子"></li>
+<li>训练过程是让词向量的点乘结果尽可能等于相应两个词一起出现的概率的对数。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2019-03-26"><a href="#2019-03-26" class="headerlink" title="2019-03-26"></a>2019-03-26</h3><blockquote>
+<p>生词：</p>
+<ul>
+<li>meteor</li>
+<li>splash</li>
+<li>bruise</li>
+<li>shatter</li>
+<li>flock </li>
+<li>patio</li>
+<li>bureaucratic</li>
+<li>unlikely</li>
+<li>trickle</li>
+<li>deficiency</li>
+<li>patriotic</li>
+</ul>
+</blockquote>
+<ul>
+<li>vim:<ul>
+<li>v: 可视模式</li>
+<li>w/b：前一个单词/后一个单词</li>
+<li>^：本行第一个不是blank字符的位置</li>
+<li>0：本行第一个位置</li>
+<li>$：本行行尾</li>
+<li>g_：本行最后一个不是blank字符的位置</li>
+<li>p：黏贴</li>
+<li>u：undo</li>
+<li>CTRL-r：redo</li>
+<li>d: 删除并复制</li>
+<li>y：直接复制</li>
+</ul>
+</li>
+</ul>
+<h3 id="2019-03-21"><a href="#2019-03-21" class="headerlink" title="2019-03-21"></a>2019-03-21</h3><ul>
+<li>从远程Git库中下在分支到本地：<ul>
+<li><code>git pull origin branch_name:local_name</code> ：获取远程库中的branch_name分支与本地的local_name分支进行merge，如果要与本地当前分支进行merge可以不写冒号和冒号后面内容，如果本地所在的当前分支（dev）与对应远程分支（origin/dev）已建立联系，只需 <code>git pull origin</code></li>
+<li><code>git checkout -b local_name origin/branch_name</code>: 自动创建一个新的本地分支（local_name），并与指定远程分支关联起来。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2019-03-19"><a href="#2019-03-19" class="headerlink" title="2019-03-19"></a>2019-03-19</h3><ul>
+<li>支持向量机 (Support Vector Machine)：<ul>
+<li>支持向量 (support vectors):<ul>
+<li>support vectores are the samples that are most difficult to classify</li>
+<li>they directly affect the process to find the optimum location of the decision boundaries.</li>
+</ul>
+</li>
+<li>constrained optimization - Lagrange Multipliers<ul>
+<li>obtaining extrema of function $f(x,y)$ under the constraint $g(x,y) = A$ -&gt; $f^\prime(x,y) = \lambda g^\prime(x,y)$:</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<script type="math/tex; mode=display">\begin{split}
+f^\prime (x,y) &= [f(x,y) + \lambda(A-g(x,y))]^\prime\\
+ &=f^\prime(x,y) - \lambda g^\prime(x,y) = 0
+\end{split} \tag{19.03.19.1}</script><ul>
+<li>Math in Markdown<ul>
+<li>one expression in multi-lines : \begin{split} align by ‘&amp;’ before ‘=’</li>
+<li>multi-expressions in multi-lines : \begin{eqnarray*} align by ‘&amp;…&amp;’ wrap ‘=’</li>
+</ul>
+</li>
+</ul>
+<h3 id="2019-03-06"><a href="#2019-03-06" class="headerlink" title="2019-03-06"></a>2019-03-06</h3><blockquote>
+<p>生词：</p>
+<ul>
+<li>treadmill</li>
+<li>stationary</li>
+<li>rack up</li>
+<li>bold</li>
+<li>obligation</li>
+</ul>
+</blockquote>
+<h3 id="2019-03-05"><a href="#2019-03-05" class="headerlink" title="2019-03-05"></a>2019-03-05</h3><ul>
+<li>Conda 操作：<ul>
+<li>信息： <code>conda info</code></li>
+<li>更新自己： <code>conda update conda</code></li>
+<li>安装/更新 包：<code>conda install/update [package]</code></li>
+<li>创建一个新python环境：<code>conda create --name mingzi python=3.6</code></li>
+<li>激活一个python环境：<code>activate mingzi</code> (Win)/<code>source activate mingzi</code> (Linux/mac)</li>
+<li>取消激活当前环境：<code>deactivate</code> (Win)/ <code>source deactivate</code> (Linux/mac)</li>
+<li>环境列表：<code>conda env list</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="2019-03-04"><a href="#2019-03-04" class="headerlink" title="2019-03-04"></a>2019-03-04</h3><ul>
+<li>Vim 操作：<ul>
+<li>dd -&gt; 删除当前行，并将这行保存到剪切板里</li>
+<li>p -&gt; 粘贴剪切板里的内容</li>
+<li>h，j，k，l -&gt; 移动光标（方向键也可以）</li>
+<li>：help \<command> -&gt;  显示相关命令的帮助</li>
+<li>u -&gt; 撤销（undo）</li>
+</ul>
+</li>
+</ul>
+<h2 id="2019-02"><a href="#2019-02" class="headerlink" title="2019-02"></a>2019-02</h2><h3 id="2019-02-28"><a href="#2019-02-28" class="headerlink" title="2019-02-28"></a>2019-02-28</h3><blockquote>
+<p>生词：</p>
+<ul>
+<li>arithmetic</li>
+</ul>
+</blockquote>
+<ul>
+<li>Attention mechanism:<ul>
+<li>attention 计算时，每个待加权部分（$y_i$）的权重只跟上下文（context）$C$ 有关，与别的部分（$y_j, j \neq i$）无关。如下图： <img src="/2019/02/13/everyday-note/attention.JPG"></li>
+<li>Soft Attention vs. Hard Attention<ul>
+<li>soft attention: 结果为各个待加权部分的加权和</li>
+<li>hard attention：结果为根据相应概率随机选取的一个待加权部分</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="2019-02-19"><a href="#2019-02-19" class="headerlink" title="2019-02-19"></a>2019-02-19</h3><blockquote>
+<p>生词：</p>
+<ul>
+<li>tickle</li>
+<li>sibling</li>
+<li>stroke a cat</li>
+<li>discrepancy</li>
+<li>procrastinate</li>
+<li>prone</li>
+</ul>
+</blockquote>
+<ul>
+<li>scp命令：<code>scp test.txt  account@ip:/home/xxx/test.txt</code> </li>
+</ul>
+<h3 id="2019-02-17"><a href="#2019-02-17" class="headerlink" title="2019-02-17"></a>2019-02-17</h3><blockquote>
+<p>生词：</p>
+<ul>
+<li>anecdote</li>
+<li>instill</li>
+<li>ostracism/banishment</li>
+<li>squeak</li>
+</ul>
+</blockquote>
+<ul>
+<li>向量叉乘（cross product）， 如果逆时针方向相乘则结果为正，反之结果为负。叉乘的结果（三维空间）为一个向量，这个向量的大小是两个相乘的向量所构成的平行四边形的面积，方向与该平行四边形垂直。求解两个向量的叉乘可以用求解对应行列式的方法（加上一个向量 ($\hat{i},\hat{j}, \hat{k}$)）</li>
+<li>线性的严格定义（Formal definition of linearity）:<ul>
+<li>可加性： $L(\vec{v}+\vec{w})=L(\vec{v})+L(\vec{w})$</li>
+<li>成比性：$L(c\vec{v})=cL(\vec{v})$</li>
+</ul>
+</li>
+<li>因此，函数只要满足上面的规定也是线性的。</li>
+<li>The learning your do learning forward can be substantially more efficient if you have all the right intuitions in places.</li>
+</ul>
+<h3 id="2019-02-15"><a href="#2019-02-15" class="headerlink" title="2019-02-15"></a>2019-02-15</h3><blockquote>
+<p>生词：</p>
+<ul>
+<li>perusal</li>
+<li>connotation</li>
+<li>fumble</li>
+<li>clumsily</li>
+<li>intercept</li>
+<li>distort</li>
+<li>perception</li>
+<li>clutter</li>
+<li>duality</li>
+</ul>
+</blockquote>
+<ul>
+<li><code>GraphDef</code> 是TensorFlow用来保存/加载<code>Graph</code>时的中间对象。保存时，可以通过<code>Graph.as_graph_def()</code>或者<code>Session.graph_def</code>获取到<code>GraphDef</code>对象用于序列化保存到文件；加载时，也需要先用<code>tf.GraphDef()</code>获取一个空<code>GraphDef</code>对象然后用 <strong>.pb</strong> 文件中的数据来填充（<code>graph_def.ParseFromString(f.read())</code>）,最后通过<code>tf.import_graph_def(graph_def, name=&#39;prefix&#39;)</code>的形式加载到指定的Graph中。</li>
+<li>对偶性： 两种数学事物之间自然而又出乎意料的对应关系</li>
+</ul>
+<h3 id="2019-02-14"><a href="#2019-02-14" class="headerlink" title="2019-02-14"></a>2019-02-14</h3><blockquote>
+<p>生词：</p>
+<ul>
+<li>spouse</li>
+<li>tepastry</li>
+<li>gargantuan</li>
+</ul>
+</blockquote>
+<ul>
+<li><p>用 <code>tf.train.Saver()</code> 保存/载入模型：</p>
+<ul>
+<li><p><strong>.data</strong> 文件保存权重（weights）；<strong>.meta</strong> 文件保存计算图的各种元数据（metadata）比如学习率和优化器； <strong>.index</strong> 文件保存键-值对，用来根据模型中的tensor name在 .data 文件中找到相应的data。</p>
+<ul>
+<li><strong>载入图结构和元数据</strong> 用 <code>tf.train.import_meta_graph(&#39;models/model.ckpt-1000.meta&#39;)</code>, 该方法自动将 “models/model.ckpt-1000.meta” 文件中保存的图加载到默认图（default_graph）中并返回一个 <code>Saver</code>。</li>
+<li><strong>回复/载入权重（weights）</strong> 的过程跟载入图结构和元数据不同的是它必须在要给 <code>Session</code> 中执行，可以把它理解为权重的初始化类似的过程，如下：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">    <span class="comment">#用载入权重的方式来初始化权重，就不需要tf.global_variables_initializer()过程了</span></span><br><span class="line">    saver.restore(sess, <span class="string">'models/model.ckpt.data-1000-00000-of-00001'</span>)</span><br><span class="line">    print(sess.run(global_step_tensor))</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
 </li>
 <li><p>可以声明多个 <code>Saver</code> 来保存所有或特定变量（<code>Variables</code>）并用字典({name:Var})的形式给变量指定名字：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">v1 = tf.Variable(<span class="number">1.</span>, name=<span class="string">"v1"</span>)</span><br><span class="line">all_saver = tf.train.Saver()</span><br><span class="line">v1_saver = tf.train.Saver(&#123;<span class="string">"V1"</span>:v1&#125;)</span><br></pre></td></tr></table></figure>
@@ -674,7 +1016,7 @@ A^{-1}A= \left[
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#2019"><span class="nav-text">2019</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2019-05"><span class="nav-text">2019-05</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-05-05"><span class="nav-text">2019-05-05</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2019-04"><span class="nav-text">2019-04</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-04-25"><span class="nav-text">2019-04-25</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-04-19"><span class="nav-text">2019-04-19</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-04-17"><span class="nav-text">2019-04-17</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-02-13"><span class="nav-text">2019-02-13</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#2019"><span class="nav-text">2019</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2019-05"><span class="nav-text">2019-05</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-05-05"><span class="nav-text">2019-05-05</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2019-04"><span class="nav-text">2019-04</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-04-25"><span class="nav-text">2019-04-25</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-04-19"><span class="nav-text">2019-04-19</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-04-17"><span class="nav-text">2019-04-17</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-04-15"><span class="nav-text">2019-04-15</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-04-11"><span class="nav-text">2019-04-11</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-04-09"><span class="nav-text">2019-04-09</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-04-04"><span class="nav-text">2019-04-04</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-04-03"><span class="nav-text">2019-04-03</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-04-02"><span class="nav-text">2019-04-02</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2019-03"><span class="nav-text">2019-03</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-03-30"><span class="nav-text">2019-03-30</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-03-28"><span class="nav-text">2019-03-28</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-03-26"><span class="nav-text">2019-03-26</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-03-21"><span class="nav-text">2019-03-21</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-03-19"><span class="nav-text">2019-03-19</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-03-06"><span class="nav-text">2019-03-06</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-03-05"><span class="nav-text">2019-03-05</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-03-04"><span class="nav-text">2019-03-04</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2019-02"><span class="nav-text">2019-02</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-02-28"><span class="nav-text">2019-02-28</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-02-19"><span class="nav-text">2019-02-19</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-02-17"><span class="nav-text">2019-02-17</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-02-15"><span class="nav-text">2019-02-15</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-02-14"><span class="nav-text">2019-02-14</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-02-13"><span class="nav-text">2019-02-13</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
