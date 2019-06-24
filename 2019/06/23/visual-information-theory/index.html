@@ -106,7 +106,7 @@
 
 
 
-  <meta name="keywords" content="MarkDown," />
+  <meta name="keywords" content="信息理论,翻译," />
 
 
 
@@ -117,18 +117,25 @@
 
 
 
-<meta name="description" content="1.标题，段落，区块 Markdown 支持 Setext ＝ 和 atx ＃　来标记标题。 一个以上的空行会标记空行之间为一个段落。（这里的空行意思是“看上去是空的行”，即使包含空格和tab都叫空行） 区块用&amp;gt;来标记">
-<meta name="keywords" content="MarkDown">
+<meta name="description" content="英语原文博客地址：https://colah.github.io/posts/2015-09-Visual-Information/ 不是逐句直译，根据个人理解意译，删去了一些不必要内容（例如国外博主很喜欢在文章中加一些玩笑话来增加文章的趣味性）。理解可能有误，如果发现错误希望读者能通过邮件或者微信告知，谢谢。">
+<meta name="keywords" content="信息理论,翻译">
 <meta property="og:type" content="article">
-<meta property="og:title" content="简易Markdown使用说明">
-<meta property="og:url" content="http://yoursite.com/2018/07/08/MarkdownIntroduction/index.html">
+<meta property="og:title" content="看图理解信息理论中的“熵”、“交叉熵”等概念">
+<meta property="og:url" content="http://yoursite.com/2019/06/23/visual-information-theory/index.html">
 <meta property="og:site_name" content="Xia&#39;s Blog">
-<meta property="og:description" content="1.标题，段落，区块 Markdown 支持 Setext ＝ 和 atx ＃　来标记标题。 一个以上的空行会标记空行之间为一个段落。（这里的空行意思是“看上去是空的行”，即使包含空格和tab都叫空行） 区块用&amp;gt;来标记">
+<meta property="og:description" content="英语原文博客地址：https://colah.github.io/posts/2015-09-Visual-Information/ 不是逐句直译，根据个人理解意译，删去了一些不必要内容（例如国外博主很喜欢在文章中加一些玩笑话来增加文章的趣味性）。理解可能有误，如果发现错误希望读者能通过邮件或者微信告知，谢谢。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-06-23T09:22:58.516Z">
+<meta property="og:image" content="http://yoursite.com/2019/06/23/visual-information-theory/prob-1D-rain.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/23/visual-information-theory/prob-1D-coat.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/23/visual-information-theory/prob-2D-independent-rain.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/23/visual-information-theory/prob-2D-dependant-rain-squish.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/23/visual-information-theory/prob-2D-factored-rain-arrow.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/23/visual-information-theory/prob-2D-factored1-clothing-B.png">
+<meta property="og:updated_time" content="2019-06-24T08:00:57.481Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="简易Markdown使用说明">
-<meta name="twitter:description" content="1.标题，段落，区块 Markdown 支持 Setext ＝ 和 atx ＃　来标记标题。 一个以上的空行会标记空行之间为一个段落。（这里的空行意思是“看上去是空的行”，即使包含空格和tab都叫空行） 区块用&amp;gt;来标记">
+<meta name="twitter:title" content="看图理解信息理论中的“熵”、“交叉熵”等概念">
+<meta name="twitter:description" content="英语原文博客地址：https://colah.github.io/posts/2015-09-Visual-Information/ 不是逐句直译，根据个人理解意译，删去了一些不必要内容（例如国外博主很喜欢在文章中加一些玩笑话来增加文章的趣味性）。理解可能有误，如果发现错误希望读者能通过邮件或者微信告知，谢谢。">
+<meta name="twitter:image" content="http://yoursite.com/2019/06/23/visual-information-theory/prob-1D-rain.png">
 
 
 
@@ -158,13 +165,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/07/08/MarkdownIntroduction/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/06/23/visual-information-theory/"/>
 
 
 
 
 
-  <title>简易Markdown使用说明 | Xia's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>看图理解信息理论中的“熵”、“交叉熵”等概念 | Xia's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -301,7 +308,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/08/MarkdownIntroduction/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/23/visual-information-theory/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="欢乐一只虾">
@@ -318,7 +325,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">简易Markdown使用说明</h1>
+          <h1 class="post-title" itemprop="name headline">看图理解信息理论中的“熵”、“交叉熵”等概念</h1>
         
 
         <div class="post-meta">
@@ -330,8 +337,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-08T01:21:17+08:00">
-                2018-07-08
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-23T17:20:17+08:00">
+                2019-06-23
               </time>
             
 
@@ -353,8 +360,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/使用说明/" itemprop="url" rel="index">
-                    <span itemprop="name">使用说明</span>
+                  <a href="/categories/博客翻译/" itemprop="url" rel="index">
+                    <span itemprop="name">博客翻译</span>
                   </a>
                 </span>
 
@@ -384,7 +391,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  466
+                  1,453
                 </span>
               
 
@@ -409,114 +416,20 @@
       
 
       
-        <h1 id="1-标题，段落，区块"><a href="#1-标题，段落，区块" class="headerlink" title="1.标题，段落，区块"></a>1.标题，段落，区块</h1><blockquote>
-<p>Markdown 支持 <a href="http://docutils.sourceforge.net/mirror/setext.html" target="_blank" rel="noopener">Setext</a> <code>＝</code> 和 <a href="http://www.aaronsw.com/2022/atx" target="_blank" rel="noopener">atx</a> <code>＃</code>　来标记标题。</p>
-<p>一个以上的空行会标记空行之间为一个段落。（这里的空行意思是“看上去是空的行”，即使包含空格和tab都叫空行）</p>
-<p>区块用<code>&gt;</code>来标记</p>
-</blockquote>
+        <hr>
+<ul>
+<li>英语原文博客地址：<a href="https://colah.github.io/posts/2015-09-Visual-Information/" target="_blank" rel="noopener">https://colah.github.io/posts/2015-09-Visual-Information/</a></li>
+<li>不是逐句直译，根据个人理解意译，删去了一些不必要内容（例如国外博主很喜欢在文章中加一些玩笑话来增加文章的趣味性）。理解可能有误，如果发现错误希望读者能通过邮件或者微信告知，谢谢。</li>
+</ul>
+<hr>
 <a id="more"></a>
-<p>🌰例子:</p>
-<pre><code>这是标题1
-=====================
-这是标题2
----------------------
-
-
-我是一个用空行空出来的段落 (￣▽￣)~*。
-
-
-### 这是标题3
-
-&gt;这是一个区块
-
-&gt;我们是
-&gt;连在一起
-&gt;的区块
-</code></pre><p>👇下面是效果：</p>
-<h1 id="这是标题1"><a href="#这是标题1" class="headerlink" title="这是标题1"></a>这是标题1</h1><h2 id="这是标题2"><a href="#这是标题2" class="headerlink" title="这是标题2"></a>这是标题2</h2><p>我是一个用空行空出来的段落 (￣▽￣)~*。</p>
-<h3 id="这是标题3"><a href="#这是标题3" class="headerlink" title="这是标题3"></a>这是标题3</h3><blockquote>
-<p>这是一个区块</p>
-<p>我们是<br>连在一起</p>
-<h2 id="的区块"><a href="#的区块" class="headerlink" title="的区块"></a>的区块</h2></blockquote>
-<h1 id="2-列表"><a href="#2-列表" class="headerlink" title="2.列表"></a>2.列表</h1><ul>
-<li>无序列表：<code>*</code>,<code>+</code>,<code>-</code>;</li>
-<li>有序列表：<code>1.</code>;</li>
-</ul>
-<p>🌰例子：</p>
-<pre><code>* 我
-* 爱
-- 学
-+ 习
-
-
-1. 学
-2. 习
-3. 使
-4. 我
-5. 开
-6. 乐
-</code></pre><hr>
-<p>👇效果：</p>
-<ul>
-<li>我</li>
-<li>爱</li>
-</ul>
-<ul>
-<li>学</li>
-</ul>
-<ul>
-<li>习</li>
-</ul>
-<ol>
-<li>学</li>
-<li>习</li>
-<li>使</li>
-<li>我</li>
-<li>快</li>
-<li>乐</li>
-</ol>
-<hr>
-<h1 id="3-代码"><a href="#3-代码" class="headerlink" title="3.代码"></a>3.代码</h1><blockquote>
-<p>代码块: 连续4个空格。</p>
-</blockquote>
-<p>🌰例子：</p>
-<pre><code>System.out.println(&quot;holle world!&quot;)
-</code></pre><blockquote>
-<p>代码高亮：在代码块的前一行和后一行加上 ``` (三个反引号要独占一行)。 并在第一个```后面加上编程语言的名称</p>
-</blockquote>
-<p>🌰例子：</p>
-<pre><code><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(前面四个空格)System.out.println(<span class="string">"holle world"</span>!);</span><br></pre></td></tr></table></figure>
-</code></pre><p>👇效果：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.prinln(<span class="string">"holle world"</span>!);</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>行内代码：   `  (键盘左上角那个键, <code>esc</code> 下方)</p>
-</blockquote>
-<p>🌰例子：</p>
-<pre><code>在python3中你应该用`print()`而不是`print`.
-</code></pre><p>👇效果：</p>
-<p>在python3中你应该用<code>print()</code>而不是<code>print</code>.</p>
-<hr>
-<h1 id="4-链接"><a href="#4-链接" class="headerlink" title="4.链接"></a>4.链接</h1><p>两种形式的链接：<em>行内式</em> 和 <em>参考式</em></p>
-<h2 id="4-1-行内式"><a href="#4-1-行内式" class="headerlink" title="4-1.行内式"></a>4-1.行内式</h2><p>🌰例子：</p>
-<pre><code>这是一个[链接](http://google.com &quot;Goole&quot;).
-</code></pre><p>👇效果（把鼠标放在“链接”上显示title：google）：</p>
-<p>这是一个<a href="http://google.com" title="Goole" target="_blank" rel="noopener">链接</a>.</p>
-<hr>
-<h2 id="4-2-参考式"><a href="#4-2-参考式" class="headerlink" title="4-2.参考式"></a>4-2.参考式</h2><p>🌰例子：</p>
-<pre><code>这是一个[链接][1]
-
-....
-
-[1]: http://google.com &quot;Google&quot;).
-</code></pre><p>👇效果：</p>
-<p>这是个<a href="http://google.com" title="Google" target="_blank" rel="noopener">链接</a></p>
-<hr>
-<h1 id="5-图片"><a href="#5-图片" class="headerlink" title="5.图片"></a>5.图片</h1><p>跟链接一样。</p>
-<h1 id="6-数学公式"><a href="#6-数学公式" class="headerlink" title="6.数学公式"></a>6.数学公式</h1><blockquote>
-<p>行内公式：\$ f(x)=y \$ 效果: $f(x)=y$</p>
-<p>块级公式：\$\$ x = \dfrac{-b \pm \sqrt{b^2 - 4ac}}{2a} \$\$ 效果（需要独占一行）：</p>
-<script type="math/tex; mode=display">x = \dfrac{-b \pm \sqrt{b^2 - 4ac}}{2a}</script></blockquote>
-
+<p>正文：</p>
+<p>作者在首段简要描述了一下信息理论（Information Theory）：他认为信息理论给人一种全新的思路去理解这个世界。它给一些含糊不清的想法塑造了具体的概念。借助信息理论，我们可以用精缺的语言描述很多事物，比如对于一件事情我们有多少的不确定性。 信息理论的很多基础概念有非常广泛的应用，从数据压缩，量子物理，到机器学习等众多领域都有涉及到信息理论的知识。遗憾的是，信息理论的很多生硬的概念读起来都有点“吓人”，因此作者将在下文中提供几个信息理论中的核心概念可视化解释。</p>
+<h1 id="可视化概率分布"><a href="#可视化概率分布" class="headerlink" title="可视化概率分布"></a>可视化概率分布</h1><p>以作者所在的加利福尼亚州是否下雨为例子。它晴天的概率是75%，如下图表示：<div style="width: 100px; margin:auto"><img src="/2019/06/23/visual-information-theory/prob-1D-rain.png"></div><br>另一方面，作者是否穿外套构成了另一个概率分布，假设他大部分时候（62%）都穿T恤，如下图：<div style="width: 80px; margin:auto"><img src="/2019/06/23/visual-information-theory/prob-1D-coat.png"></div><br>现在假设这两个事件是相互独立的（作者举的例子是“今天穿什么”和“下周什么天气”是相互独立的）。换句话说就是，下周不管是什么天气都不会影响到作者今天是否穿外套，反之亦然。我们可以用一个二维的图表示这两件事：<div style="width: 300px; margin-left:25%"> <img src="/2019/06/23/visual-information-theory/prob-2D-independent-rain.png"> </div><br>上图中的水平和竖直的线都是笔直的，这就意味这两个事件相互独立。作者今天穿外套的概率不会因为下周是否下雨而改变。也就是说，作者今天穿外套并且下周下雨的概率是作者穿外套的概率乘以下周下雨的概率。这两件事互不相干。<br>另一方面，当两个事件会相互影响的情况下，某几对情况出现的概率会增加，有一些则会减小。比如“今天下雨”和“作者今天外套”这两件事不是相互独立的，因为下雨天更倾向于穿外套，所以这两个事件同时发生的概率并不是今天下雨的概率和作者穿外套的概率相乘这么简单。在这种情况下这两个事件的概率发布可粗略的用下图表示：<div style="width:300px; margin-left:25%"> <img src="/2019/06/23/visual-information-theory/prob-2D-dependant-rain-squish.png"> </div><br>虽然上图看起来比较酷，但是它并不能帮助我们理解这个例子。所以让我们先专注于一个随机变量（事件），今天的天气。对于这一件事情，我们能通过天气预报知道作者所在地今天下雨和不下雨的概率，而在这两种情况下他的穿衣概率是不一样的。在这种情况下作者的穿衣概率我们称之为条件概率：<div style="width:450px; margin:auto"> <img src="/2019/06/23/visual-information-theory/prob-2D-factored-rain-arrow.png"> </div><br>这里作者假设他那里下雨的概率是25%。在下雨的情况下，他穿外套的概率是75%。所以他在下雨天穿外套的概率是$25\% \times 75\% \approx 19 \%$. 用抽象的公式表示这种情况就是： </p>
+<script type="math/tex; mode=display">p(rain,coat)=p(rain)\centerdot p(coat|rain)</script><p>再抽象出来就是概率论中至关重要的概念之一：</p>
+<script type="math/tex; mode=display">p(x,y)=p(x)\centerdot p(y|x)</script><p>上面描述的过程就是拆解这个联合分布，把它拆解成两部分的乘机。首先只关注一个事件的概率发布，比如天气，然后对于该事件的每一种可能情况分别考虑另一个事件的概率分布，比如在下雨天和晴天分别考虑穿衣服的概率发布。<br>从哪个事件开始考虑是无关紧要的（上面我们是从天气开始推），我们也可以从穿衣概率开始推，尽管人们的穿衣情况并不能左右天气，但是它依旧能反映出当下的天气情况，比如街上大部分人都穿着雨衣外套那么今天外面很可能是在下雨。<br>接下来我们就从作者的穿衣情况开始思考，得出不同穿衣情况下的天气概率，然后像上面一样得出联合概率。作者提出他自己在不知道天气如何的情况下有38%的概率会选择穿外套出门。那么如果我们已知作者今天穿了外套出门，那今天外面下雨的可能性有多大呢？虽然作者在雨天更倾向于穿外套，但是考虑到加利福尼亚地区很少下雨，所以即使作者今天穿了外套出门，根据以往的经验，外面下雨的概率只有50%。得到了上述信息之后我们就可以算出作者穿外套出门并且外面在下雨的概率，就是他不知道天气如何的情况下随机选择穿外套的概率（38%）乘以他以前的日子里穿外套的情况下外面在下雨的概率（50%），大约是19%。</p>
+<script type="math/tex; mode=display">p(rain,coat) = p(coat)\centerdot p(rain|coat)</script><p>这就是从另一个角度思考同一个概率分布： <div style="width:350px; margin:auto"><img src="/2019/06/23/visual-information-theory/prob-2D-factored1-clothing-B.png"></div><br>作者这里也提到了贝叶斯定理。如果读者熟悉贝叶斯定理的话不难发现，前文两种描述同一个联合概率分布的不同方法可以用贝叶斯定理相互转换。</p>
+<h1 id="相关：辛普森悖论"><a href="#相关：辛普森悖论" class="headerlink" title="相关：辛普森悖论"></a>相关：辛普森悖论</h1>
       
     </div>
     
@@ -533,7 +446,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/MarkDown/" rel="tag"># MarkDown</a>
+            <a href="/tags/信息理论/" rel="tag"># 信息理论</a>
+          
+            <a href="/tags/翻译/" rel="tag"># 翻译</a>
           
         </div>
       
@@ -546,15 +461,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2019/02/13/everyday-note/" rel="next" title="笔记本">
+                <i class="fa fa-chevron-left"></i> 笔记本
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/07/08/AlgorithmNotes/" rel="prev" title="读书笔记:《算法笔记》（阅读中...）">
-                读书笔记:《算法笔记》（阅读中...） <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -690,7 +605,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-标题，段落，区块"><span class="nav-text">1.标题，段落，区块</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#这是标题1"><span class="nav-text">这是标题1</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#这是标题2"><span class="nav-text">这是标题2</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#这是标题3"><span class="nav-text">这是标题3</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#的区块"><span class="nav-text">的区块</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-列表"><span class="nav-text">2.列表</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-代码"><span class="nav-text">3.代码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-链接"><span class="nav-text">4.链接</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-行内式"><span class="nav-text">4-1.行内式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-参考式"><span class="nav-text">4-2.参考式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-图片"><span class="nav-text">5.图片</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-数学公式"><span class="nav-text">6.数学公式</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#可视化概率分布"><span class="nav-text">可视化概率分布</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#相关：辛普森悖论"><span class="nav-text">相关：辛普森悖论</span></a></li></ol></div>
             
 
           </div>
