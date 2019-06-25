@@ -131,7 +131,18 @@
 <meta property="og:image" content="http://yoursite.com/2019/06/23/visual-information-theory/prob-2D-dependant-rain-squish.png">
 <meta property="og:image" content="http://yoursite.com/2019/06/23/visual-information-theory/prob-2D-factored-rain-arrow.png">
 <meta property="og:image" content="http://yoursite.com/2019/06/23/visual-information-theory/prob-2D-factored1-clothing-B.png">
-<meta property="og:updated_time" content="2019-06-24T08:00:57.481Z">
+<meta property="og:image" content="http://yoursite.com/2019/06/23/visual-information-theory/simpson-margin.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/23/visual-information-theory/simpson-participants.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/23/visual-information-theory/simpson-separated-note.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/23/visual-information-theory/message.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/23/visual-information-theory/code-2bit.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/23/visual-information-theory/encode-2bit.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/23/visual-information-theory/DogWordFreq.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/23/visual-information-theory/OldCode.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/23/visual-information-theory/code.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/23/visual-information-theory/NewCode.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/23/visual-information-theory/EntropOptimalLengthExample.png">
+<meta property="og:updated_time" content="2019-06-25T08:07:42.412Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="看图理解信息理论中的“熵”、“交叉熵”等概念">
 <meta name="twitter:description" content="英语原文博客地址：https://colah.github.io/posts/2015-09-Visual-Information/ 不是逐句直译，根据个人理解意译，删去了一些不必要内容（例如国外博主很喜欢在文章中加一些玩笑话来增加文章的趣味性）。理解可能有误，如果发现错误希望读者能通过邮件或者微信告知，谢谢。">
@@ -391,7 +402,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,453
+                  3,182
                 </span>
               
 
@@ -429,7 +440,20 @@
 <script type="math/tex; mode=display">p(rain,coat)=p(rain)\centerdot p(coat|rain)</script><p>再抽象出来就是概率论中至关重要的概念之一：</p>
 <script type="math/tex; mode=display">p(x,y)=p(x)\centerdot p(y|x)</script><p>上面描述的过程就是拆解这个联合分布，把它拆解成两部分的乘机。首先只关注一个事件的概率发布，比如天气，然后对于该事件的每一种可能情况分别考虑另一个事件的概率分布，比如在下雨天和晴天分别考虑穿衣服的概率发布。<br>从哪个事件开始考虑是无关紧要的（上面我们是从天气开始推），我们也可以从穿衣概率开始推，尽管人们的穿衣情况并不能左右天气，但是它依旧能反映出当下的天气情况，比如街上大部分人都穿着雨衣外套那么今天外面很可能是在下雨。<br>接下来我们就从作者的穿衣情况开始思考，得出不同穿衣情况下的天气概率，然后像上面一样得出联合概率。作者提出他自己在不知道天气如何的情况下有38%的概率会选择穿外套出门。那么如果我们已知作者今天穿了外套出门，那今天外面下雨的可能性有多大呢？虽然作者在雨天更倾向于穿外套，但是考虑到加利福尼亚地区很少下雨，所以即使作者今天穿了外套出门，根据以往的经验，外面下雨的概率只有50%。得到了上述信息之后我们就可以算出作者穿外套出门并且外面在下雨的概率，就是他不知道天气如何的情况下随机选择穿外套的概率（38%）乘以他以前的日子里穿外套的情况下外面在下雨的概率（50%），大约是19%。</p>
 <script type="math/tex; mode=display">p(rain,coat) = p(coat)\centerdot p(rain|coat)</script><p>这就是从另一个角度思考同一个概率分布： <div style="width:350px; margin:auto"><img src="/2019/06/23/visual-information-theory/prob-2D-factored1-clothing-B.png"></div><br>作者这里也提到了贝叶斯定理。如果读者熟悉贝叶斯定理的话不难发现，前文两种描述同一个联合概率分布的不同方法可以用贝叶斯定理相互转换。</p>
-<h1 id="相关：辛普森悖论"><a href="#相关：辛普森悖论" class="headerlink" title="相关：辛普森悖论"></a>相关：辛普森悖论</h1>
+<h1 id="相关：辛普森悖论"><a href="#相关：辛普森悖论" class="headerlink" title="相关：辛普森悖论"></a>相关：辛普森悖论</h1><p>为了让读者对这种概率分布的可视化方法更加熟悉，作者想用这种可视化方法来解释辛普森悖论。辛普森悖论是个有点违反直觉的统计现象。作者提到了Michael Nielsen写过<a href="http://michaelnielsen.org/reinventing_explanation/" target="_blank" rel="noopener">一篇不错的论文</a>用各种不同方法来解释这一现象。而他想用上文提出的概率分布可视化方法来解释这种现象。<br>现在有两种肾结石的治疗方法待测试。让一半的患者接受疗法A，另一半患者接受疗法B。结果显示，接受B疗法的患者治愈率比接受A疗法的患者高：<div style="width:400px; margin:auto"> <img src="/2019/06/23/visual-information-theory/simpson-margin.png"> </div><br>然而，患有小型结石的病人中接受疗法A的病人治愈率比接受疗法B的病人高，患有大型结石的病人中也是接受疗法A的病人治愈率比较高。<br>所以实时上疗法A的效果要比疗法B的效果好，但是为什么总体上接受疗法A的病人比接受疗法B的病人治愈率低呢？这个问题的核心就在于一开始选择测试患者的时候出现了偏差。接受疗法A的那一半病人中，患有大结石的病人占绝大多数，而接受疗法B的那一半病人中患有小结石的人比较多。大结石本就比小结石难治愈，所以纵使疗法A对于大小结石的疗效都比疗法B要好一点，也抵销不掉大结石病人太多对它造成的不良影响。用上面作者提出的可视化方法表示如下：<div style="width:400px; margin:auto"> <img src="/2019/06/23/visual-information-theory/simpson-participants.png"> </div><br>为了更好的理解上述情况，我们可以在上图上再添加治愈率使之成为一个三维柱状图：<div style="width:550px; margin:auto"> <img src="/2019/06/23/visual-information-theory/simpson-separated-note.png"> </div><br>从上图我们能清楚的看到疗法A不管在小结石和大结石的患者中的治愈率都比疗法B要高，但是因为接受疗法A的患者大部分是大结石患者，本身治愈难度就比小结石患者大，因此看上去总体的治愈率比不上疗法B。</p>
+<h1 id="编码"><a href="#编码" class="headerlink" title="编码"></a>编码</h1><p>熟悉这种概率表现方法之后，我们就可以开始深入了解信息理论了。<br>作者这里提出了一个简易的模拟情景：他想要用二进制编码和他的一个朋友（Bob）交流暗号（每个位置不是0就是1）。二进制编码后的消息如下图所示：<div style="width:200px; margin:auto"> <img src="/2019/06/23/visual-information-theory/message.png"> </div><br>暗号内容简化为4个单词：dog、cat、fish、bird。为了能够使他们用二进制正常交流，他们俩必须约定一套编码规则，就是让这四个暗号分别和不同的二进制编码对应。</p>
+<div style="width:300px; margin:auto"> <img src="/2019/06/23/visual-information-theory/code-2bit.png"> </div>
+为了发送消息，他们需要先把文字暗号转化为对应的号码然后将各个号码拼成一串二进制编码发送出去。接受消息的一方接受到二进制编码的消息后需要有一个解码过程来得到对方想表达的暗号。
+<div style="width:300px; margin:auto"> <img src="/2019/06/23/visual-information-theory/encode-2bit.png"> </div>
+
+<h1 id="可变长度编码"><a href="#可变长度编码" class="headerlink" title="可变长度编码"></a>可变长度编码</h1><p>现在作者他们俩遇到了一个问题，Bob所在的地区信息的传输非常昂贵，二进制编码中每传输一位（bit）的单价都很高。所以他们想换一种编码方式，使他们的暗号的平均编码长度最低。<br>在直观感觉上他们只需要将平时用的最多的暗号的编码长度变短就能降低他们的平均编码长度，于是Bob专门跑到了加利福尼亚找作者讨论他们平时用哪个暗号最多。我们先只讨论单方向的信息传输，后面再讨论两个人信息的互相传输的情况。先只考虑Bob发送暗号给作者的情况。于是Bob说他平时用“dog”这暗号最多，然后是“cat”，其它两个暗号用的相对较少，具体的概率分布想这样：</p>
+<p><div style="width:300px; margin:auto"> <img src="/2019/06/23/visual-information-theory/DogWordFreq.png"> </div><br>上面提到的那种编码方法（所有暗号都用两位二进制编码），不管这四个暗号的使用概率如何分布，平均编码长度都是2。如下图这种表示方法可以很好的表示出平均编码长度。我们用垂直方向的高度表示该单词的使用概率，$p(x)$ ，用水平方向的长度表示该单词的编码长度，$L(x)$。在这种定义下，它们组成的面积就表示这种编码方式的平均长度。</p>
+<p><div style="width:500px; margin:auto"> <img src="/2019/06/23/visual-information-theory/OldCode.png"> </div><br>当我们去尝试缩短一个单词的编码长度的时候，我们会发现我们不得不使另一些单词的编码长度增大（在接下来的章节中会解释原因）。这使得我们必须有所取舍，就像前面提到的，我们直观上会感觉应该先把最常用到的单词的编码长度变短，这样即使我们不常用的单词的编码长度边长了，但是因为这些单词的使用频率很低，所以对平均长度的影响也没有常用单词那么大。下面我们来看一下下面这种编码方式：</p>
+<p><div style="width:300px; margin:auto"> <img src="/2019/06/23/visual-information-theory/code.png"> </div><br>让我们用上面那种表示方法来表示这种编码方式。我们可以看到缩短“dog”的编码长度之后，即使“fish”和“bird”的编码长度都变长了，我们的平均编码长度（下图的总面积）还是减小了，缩小到了1.75.</p>
+<p><div style="width:450px; margin:auto"> <img src="/2019/06/23/visual-information-theory/NewCode.png"> </div><br>(你可能注意到了，上诉的编码方式有个特点就是除了编码最长的单词，别的单词都只能以0结尾，这是为了防止解码时不产生歧义，这会在后面详细解释。)<br>上述这种新的编码方式其实是在Bob使用单词的概率分布下最优的编码方式了。也就是说已经找不到更好的编码的方式可以使各个暗号的平均编码长度小于1.75的。不管找一个多聪明的人，他都不可能想出一个平均编码长度更短的编码方式。这种在编码中无法超越的下限就是我们常提到的“熵”，entropy。更确切的说是对应于这种概率分布的熵。</p>
+<p><div style="width:450px; margin:auto"> <img src="/2019/06/23/visual-information-theory/EntropOptimalLengthExample.png"> </div><br>理解这种限制（熵）的关键就是要能理解这种权衡关系，让一些词的编码变短的代价是让另一些词的编码变长。</p>
+<h1 id="编码空间"><a href="#编码空间" class="headerlink" title="编码空间"></a>编码空间</h1><p>长度为1的编码可以最多表示2个单词：0，1。长度为2的编码可以最多表示4个单词，00，01，10，11。每增加一位，我们可编码的单词数就增加一倍。</p>
+
       
     </div>
     
@@ -605,7 +629,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#可视化概率分布"><span class="nav-text">可视化概率分布</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#相关：辛普森悖论"><span class="nav-text">相关：辛普森悖论</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#可视化概率分布"><span class="nav-text">可视化概率分布</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#相关：辛普森悖论"><span class="nav-text">相关：辛普森悖论</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#编码"><span class="nav-text">编码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#可变长度编码"><span class="nav-text">可变长度编码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#编码空间"><span class="nav-text">编码空间</span></a></li></ol></div>
             
 
           </div>
