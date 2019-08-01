@@ -176,7 +176,23 @@
 <meta property="og:image" content="http://yoursite.com/2019/06/23/visual-information-theory/code-auction-balanced.png">
 <meta property="og:image" content="http://yoursite.com/2019/06/23/visual-information-theory/code-auction-eps.png">
 <meta property="og:image" content="http://yoursite.com/2019/06/23/visual-information-theory/entropy-def-notitle.png">
-<meta property="og:updated_time" content="2019-07-26T10:17:24.559Z">
+<meta property="og:image" content="http://yoursite.com/2019/06/23/visual-information-theory/DogCatWordFreq.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/23/visual-information-theory/CrossEntropyDef.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/23/visual-information-theory/CrossEntropyCompare.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/23/visual-information-theory/CrossEntropyQP.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/23/visual-information-theory/CrossEntropyPQ.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/23/visual-information-theory/prob-2D-factored1-detail.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/23/visual-information-theory/prob-2D-factored1-flat.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/23/visual-information-theory/Hxy-flat.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/23/visual-information-theory/Hxy-3D.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/23/visual-information-theory/HxCy-sep.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/23/visual-information-theory/HxCy.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/23/visual-information-theory/Hxy-info-1.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/23/visual-information-theory/Hxy-overview.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/23/visual-information-theory/Hxy-info-4.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/23/visual-information-theory/Hxy-overview-sum.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/23/visual-information-theory/Hxy-info.png">
+<meta property="og:updated_time" content="2019-08-01T13:04:31.391Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="看图理解信息理论中的“熵”、“交叉熵”等概念">
 <meta name="twitter:description" content="本篇为外文博客翻译，英语原文博客地址：https://colah.github.io/posts/2015-09-Visual-Information/ 不是逐句直译，根据个人理解意译，删去了一些不必要内容（例如国外博主很喜欢在文章中加一些玩笑话来增加文章的趣味性）。理解可能有误，如果发现错误希望读者能通过邮件或者微信告知，谢谢。">
@@ -482,7 +498,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-26 18:17:24" itemprop="dateModified" datetime="2019-07-26T18:17:24+08:00">2019-07-26</time>
+                <time title="修改时间：2019-08-01 21:04:31" itemprop="dateModified" datetime="2019-08-01T21:04:31+08:00">2019-08-01</time>
               
             
           </span>
@@ -535,7 +551,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">8.4k</span>
+                <span title="本文字数">13k</span>
               
 
               
@@ -648,7 +664,90 @@ H(p) &= \sum_{x}p(x)\log_2(\frac{1}{p(x)}) \\
 \end{split}</script><p>我们已经了解到熵可以用来估计人们交流通信时需要用到的最小平均信息量。但是我们知道这个指标有什么用呢？一个很直观的用途就是作为数据压缩的指标。而作者这里提出了一个想法：熵可以用来描述我们的不确定性，用来量化信息。</p>
 <p>解释一下。如果作者完全知道并确定Bob每天哪个时刻会给他发什么暗号，那Bob就不需要发任何message给作者了。如果Bob只可能给作者发两个暗号，每个暗号被使用的概率都是50%，他们就只需要用到1位编码，“0”或者“1”。如果Bob会给作者发送64个暗号中的一个，每个暗号被选到的概率相等，则他们至少需要平均长度6位的编码方案。总之，概率分布越集中，就越容易制定出平均编码长度短的编码方案；反之概率越发散，需要用到的编码长度就越长。</p>
 <p>反应在我们的日常生活中的现象就是：事件结果的不确定性越高，则我们理清事件发生的起因经过结果所需要学习的东西就越多。</p>
+<h1 id="交叉熵"><a href="#交叉熵" class="headerlink" title="交叉熵"></a>交叉熵</h1><p>前面提到作者和Bob的例子里面我们只需要考虑了单向发送信息，只考虑在一种概率分布下的信息熵。就是说，这个例子中用到的都只是Bob使用各个暗号的概率分布，然后以这个概率分布来算信息熵。但作者使用各个暗号的偏好大概率与Bob的使用偏好不完全一致，Bob比较喜欢用“dog”这个暗号而作者可能更容易用到”cat“，因此作者应该也有一套对应于自己使用偏好概率分布的最短编码策略。他们俩各自使用各自的最优编码方式能达到对应于他们各自概率分布的熵值（最短）编码，但如果他们使用对方的最优编码方式会发生什么？这其实就是交叉熵的概念。</p>
+<div style="width:40%; margin:auto"> <img src="/2019/06/23/visual-information-theory/DogCatWordFreq.png"> </div>
 
+<p>以上述图中的概率分布为例，左边为Bob的单词使用概率分布，右边为作者的。上文中我们已经计算出Bob使用最优编码方式可以达到1.75位的平均编码长度，但是作者使用Bob的编码方式算出的平均编码长度为2.25，高于作者的单词概率分布的信息熵1.75。若两者的概率分布差异更大，作者使用Bob的比编码方式对应的平均编码长度会更长。我们用一种事件的概率分布所得出的最优编码方式给另一种事件进行编码所得到的平均编码长度称为<strong>交叉熵</strong>。</p>
+<script type="math/tex; mode=display">
+H_p(q)=\sum_xq(x)\log_2\left(\frac{1}{p(x)}\right)</script><p>上述公式表示的是作者($p$)对于 Bob ($q$)的交叉熵。</p>
+<div style="width:40%; margin:auto"> <img src="/2019/06/23/visual-information-theory/CrossEntropyDef.png"> </div>
+
+<p>所以现在，有两个概率分布（作者和Bob）分别对应了两种最优编码。一共4种组合：</p>
+<ul>
+<li>Bob用自己的最优编码方式：$H(p)=1.75\ bit$</li>
+<li>作者用Bob的最优编码方式：$H_p(q)=2.25\ bit$</li>
+<li>作者使用自己的最优编码方式：$H(q)=1.75\ bit$</li>
+<li>Bob使用作者的最优编码方式：$H_q(p)=2.375\ bit$</li>
+</ul>
+<p>上述结果表明 $H_p(q) \lt H_q(p)$, 这意味着两个人的最优编码方式混用导致的结果并不一致。在下图中作者用可视化的方式解释了这种差异。这四幅图就是将上述四种情况用<a href="#可变长度编码">“可变长度编码”</a>一节中的可视化方法表示出来。</p>
+<div style="width:80%; margin:auto"> <img src="/2019/06/23/visual-information-theory/CrossEntropyCompare.png"> </div>
+
+<p>通过上图就能很直观的感受到为什么 $H_p(q) \ne H_Q(p)$：有一个在 $p$ (Bob)概率很高的事件（单词）在 $q$ 中概率很低，因此概率分布 $q$ 对应的最优编码对于这个单词的编码很长，因此将 $q$ 对应的最佳编码应用于 $p$就意味着用最长的代码来编码最常用的单词，可想而知结果会非常糟糕。反过来，以为 $q$ 中最常见的时间并不是 $p$ 中最不常见的时间，因此用 $p$ 对应的最优编码来编码 $q$ 的单词虽然不能得到最短编码长度，也比前者的平均编码长度短。</p>
+<p>交叉熵是非对称的！</p>
+<p>因此，我们可以用交叉熵来定量的表达这种概率分布之间的差别。概率分布 $p$ 和 $q$ 之间的差别越大，则 $p$ 对应于 $q$ 的交叉熵高出 $p$ 自身的信息熵的部分也越多。</p>
+<div style="width:30%; margin:auto"> <img src="/2019/06/23/visual-information-theory/CrossEntropyQP.png"> </div>
+
+<p>类似的，概率分布 $p$ 偏离 $q$ 越大， 则 $q$ 相对于 $p$ 的交叉熵高出 $q$ 自身的信息熵的部分也越多。</p>
+<div style="width:30%; margin:auto"> <img src="/2019/06/23/visual-information-theory/CrossEntropyPQ.png"> </div>
+
+<p>值得关注的地方是信息熵和交叉熵之间的差值。这个差值的大小对应于我们需要为使用其它概率分布的最优编码方式增加多少的平均编码长度。如果两种概率分布一致或差别不大，则混用最优编码方式对平均编码长度的影响就很小。反之如果概率分布差异越大，则影响也越大。<br>这种信息熵和交叉熵之间的差值称之为 the Kullback-Leibler divergence (KL 散度)。就像上面两幅图所示， $p$ 相对于 $q$ 的 KL 散度记为 $D_q(p)$:</p>
+<script type="math/tex; mode=display">
+D_q(p)=H_q(p)-H(p)</script><p>我们可以把 KL 散度理解为两个概率分布之间的距离。它衡量了两个分布的差异有多大。</p>
+<p>交叉熵和 KL 散度在机器学习里面非常常用。因为我们经常希望我们预测的概率分布越来越接近真实分布。</p>
+<h1 id="熵和多个变量"><a href="#熵和多个变量" class="headerlink" title="熵和多个变量"></a>熵和多个变量</h1><p>回到本文最早的天气和穿衣的例子：</p>
+<div style="width:40%; margin:auto"> <img src="/2019/06/23/visual-information-theory/prob-2D-factored1-detail.png"> </div>
+
+<p>现在的场景是，作者想要告诉 Bob 他所在地当天的天气和他穿什么衣服。那么作者需要多少位来编码这4个事件？</p>
+<p>这时最容易想到的方法便是像上文中编码单词类似，将这4种事件看作是独立的事件：</p>
+<div style="width:80%; margin:auto"> <img src="/2019/06/23/visual-information-theory/prob-2D-factored1-flat.png"> </div>
+
+<p>然后我们可以得到这个概率分布对应的最优编码方式并计算出平均编码长度 ($L=-\log_2 p(x)$)：</p>
+<div style="width:80%; margin:auto"> <img src="/2019/06/23/visual-information-theory/Hxy-flat.png"> </div>
+
+<p>我们称这为 $X$ 和 $Y$ 的联合熵：</p>
+<script type="math/tex; mode=display">
+H(X,Y)=\sum_{x,y}p(x,y)\log_2\left( \frac{1}{p(x,y)} \right)</script><p>目前为止看上去好像和我们上面对普通熵的定义类似，只是这里是连个变量。</p>
+<p>可能有人会觉得把上面正方形表示的概率分布强行躺平来分析有点变扭，这是为了把熵值表示成二维图标上是柱状图。但其实有一个更好的可视化方法，就是保持方形的概率分布不变，然后用三维图标中的高度来表示编码长度，如下图。用这种方式表示的熵值就变成了柱体的体积，对应于原来二维图标中矩形的面积。</p>
+<div style="width:30%; margin:auto"> <img src="/2019/06/23/visual-information-theory/Hxy-3D.png"> </div>
+
+<p>现在假设 Bob 能在天气预报上得知作者所在地的天气情况。在这种情况下，作者又需要发送多少的长度的信息？</p>
+<p>假设某一天确定是晴天，则作者需要发送的信息就只包含两个变量（穿T恤还是外套），而且这两个变量在下雨天和晴天的概率分布是不同的。所以作者可以根据不同的天气制定不同的最优编码来达到最短的编码长度。</p>
+<div style="width:40%; margin:auto"> <img src="/2019/06/23/visual-information-theory/HxCy-sep.png"> </div>
+
+<p>要获得这种编码方式的平均编码长度，就只要将这两种情况按比例混合。</p>
+<div style="width:40%; margin:auto"> <img src="/2019/06/23/visual-information-theory/HxCy.png"> </div>
+
+<p>我们称这位条件熵。如果用公式表示就是：</p>
+<script type="math/tex; mode=display">\begin{split}
+H(X|Y) &= \sum_{y}p(y)\sum_{x}p(x|y)\log_2\left( \frac{1}{p(x|y)} \right) \\
+&=\sum_{x,y}p(x,y)\log_2\left( \frac{1}{p(x|y)} \right)
+\end{split}</script><h1 id="互信息"><a href="#互信息" class="headerlink" title="互信息"></a>互信息</h1><p>上节中的例子可以看出，当两类变量相互有关联，当我们能确定其中某一个变量后，编码另一个变量的信息量也随之减小了。</p>
+<p>一种比较好的理解方法是，如下图，将我们需要编码的信息想象成一个纸条。如果两个变量相互有关联就是两个变量对应的纸条有重叠。举个例子，两个随机变量 $X$ 和 $Y$ 是相互关联，互相影响的，类似天气和穿衣，则他们的关系就像下图。</p>
+<div style="width:40%; margin:auto"> <img src="/2019/06/23/visual-information-theory/Hxy-info-1.png"> </div>
+
+<p>有这种思想就很好理解为什么我们同时编码两个随机变量需要的编码长度（联合熵）比编码单个变量的平均编码长度（普通熵）要大。而且其中一个变量确定的情况下编码另一个变量需要的平均长度（条件熵）比普通熵要小，如下图。</p>
+<div style="width:70%; margin:auto"> <img src="/2019/06/23/visual-information-theory/Hxy-overview.png"> </div>
+
+<p>上述关系乍看一眼好像有点复杂，但是结合上面“纸条”的思想就很好理解了。联合熵要比普通熵大应该和好理解，因为普通熵是单个变量的信息量而联合熵是结合了两个变量的信息量，虽然两个变量的信息有重叠，但是两个的总和还是比单个变量的信息量要大，体现在“纸条”表示方法上就是 $H(X,Y)$ 的纸条比单个的 $H(X)$ 或 $H(Y)$ 都要长。如果其中一个变量已经确定，假设 $Y$ 确定（可以理解为天气能确定），则意味这 $X$ 和 $Y$ 变量重叠的那部分信息也已经确定，因此我们只需要编码变量 $X$ 中非重叠部分，即 $H(X|Y)$。</p>
+<div style="width:40%; margin:auto"> <img src="/2019/06/23/visual-information-theory/Hxy-info-4.png"> </div>
+
+<p>另外一个从上图中可以看出来的隐藏关系是 $H(X,Y)=H(Y)+H(X|Y)$。 这个公式的含义是，$X$ 和 $Y$ 的联合信息量等于 $Y$ 的信息量加上 $X$ 的信息量中不与 $Y$ 重叠的那部分。</p>
+<div style="width:70%; margin:auto"> <img src="/2019/06/23/visual-information-theory/Hxy-overview-sum.png"> </div>
+
+<p>这些性质如果单纯用数学公式证明的话相当复杂而且不能给人直观的信息量感受，但是本文的作者用简单的几个例子辅以几幅可视化的图标就把这些知识讲的明明白白。</p>
+<p>所谓的互信息（Mutual Information）就是那部分重叠，或者说共享的信息，记作 $I(X,Y)$，定义为：</p>
+<script type="math/tex; mode=display">
+I(X,Y)=H(X)+H(Y)-H(X,Y)</script><p>这个式子结合上面的“纸条”图应该很好理解。</p>
+<p>另外一个和互信息相关的概念是 the variation of information （找不到合适的翻译，自己意会一下吧…)，它指的是两个变量不重叠的部分，即：</p>
+<script type="math/tex; mode=display">
+V(X,Y)=H(X,Y)-I(X,Y)</script><p>细心的读者可能已经发现了，这个 variatin of information 反应了两个变量的关联程度，如果两个随机变量是完全相互关联的，即如果下雨天就一定要穿外套晴天只会穿T恤，则 $V(X,Y)$ 的信息量为 $0$。反之，如果两个变量毫无关联，读者朋友可以尝试自己推理 $V(X,Y)$ 有哪些性质。</p>
+<p>细心的读者可能又发现了，这个 variation of information 好像和 KL 散度有点类似，都是用来描述不同概率分布之间的关系/距离。其中 KL 散度是对于同一个随机变量来说，两个不同概率分布之间的差异，而 variation of information 则是用来描述两个不同变量之间的相关度，即信息的不重叠程度。如果通用一个随机变量可以完全推断出另一个变量，则可以理解为这两个变量完全相关，他们的信息不重叠程度为 $0$。</p>
+<div style="width:40%; margin:auto"> <img src="/2019/06/23/visual-information-theory/Hxy-info.png"> </div>
+
+<h1 id="非整数位"><a href="#非整数位" class="headerlink" title="非整数位"></a>非整数位</h1><p>最后一节作者提到了算出来的最优编码长度是小数的情况。因为我们用公式：$L=-\log_2p(x)$ 来计算各个事件/单词的最优编码长度，因此大部分情况下我们得到的是小数结果，不如0.5,1.7这种长度，然而有计算机理论基础的同学应该知道，计算机中的bit是最小单位，每一位非0即1，没有小数位一说。</p>
+<p>作者对于信息理论计算出的小数bit的解释是，只要我们一起编码的事件/单词/字母很多，我们对这些小数取整之后产生的偏差就会微乎其微，所以算出来的小数是合理的，无伤大雅。我本人感觉理解起来有点困难（所以我这里就不详细翻译了，感兴趣的读者可以开最上方原文链接查看原文最后一节 “fractional bits”），所以我自己的理解是信息理论为我们提供了一个下届，而我们由于技术原因无法达到这个下届所以我们用取整的方式力所能及的来达到这种下届，即理想情况。</p>
+<p>作者还提到在实际应用中人们会常用一些实用的编码算法，例如哈夫曼编码，算术编码等，能很好的解决小数bit问题，能够得到我们当前计算机技术下能得到的最优编码。</p>
+<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1>
       
     </div>
 
@@ -874,7 +973,7 @@ H(p) &= \sum_{x}p(x)\log_2(\frac{1}{p(x)}) \\
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#可视化概率分布"><span class="nav-text">可视化概率分布</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#相关：辛普森悖论"><span class="nav-text">相关：辛普森悖论</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#编码"><span class="nav-text">编码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#可变长度编码"><span class="nav-text">可变长度编码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#编码空间"><span class="nav-text">编码空间</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#最优编码"><span class="nav-text">最优编码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#熵"><span class="nav-text">熵</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#可视化概率分布"><span class="nav-text">可视化概率分布</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#相关：辛普森悖论"><span class="nav-text">相关：辛普森悖论</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#编码"><span class="nav-text">编码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#可变长度编码"><span class="nav-text">可变长度编码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#编码空间"><span class="nav-text">编码空间</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#最优编码"><span class="nav-text">最优编码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#熵"><span class="nav-text">熵</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#交叉熵"><span class="nav-text">交叉熵</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#熵和多个变量"><span class="nav-text">熵和多个变量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#互信息"><span class="nav-text">互信息</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#非整数位"><span class="nav-text">非整数位</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#结论"><span class="nav-text">结论</span></a></li></ol></div>
             
 
           </div>
@@ -914,7 +1013,7 @@ H(p) &= \sum_{x}p(x)\log_2(\frac{1}{p(x)}) \\
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">37k</span>
+    <span title="站点总字数">42k</span>
   
 
   
