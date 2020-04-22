@@ -160,7 +160,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/02/13/everyday-note/unlinear.JPG">
 <meta property="og:image" content="http://yoursite.com/2019/02/13/everyday-note/unlinear1.JPG">
 <meta property="og:image" content="http://yoursite.com/2019/02/13/everyday-note/Composition.JPG">
-<meta property="og:updated_time" content="2020-02-26T15:01:37.808Z">
+<meta property="og:updated_time" content="2020-04-22T03:57:57.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="笔记本">
 <meta name="twitter:description" content="每天记点小笔记我也可以拿第一">
@@ -466,7 +466,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-02-26 23:01:37" itemprop="dateModified" datetime="2020-02-26T23:01:37+08:00">2020-02-26</time>
+                <time title="修改时间：2020-04-22 11:57:57" itemprop="dateModified" datetime="2020-04-22T11:57:57+08:00">2020-04-22</time>
               
             
           </span>
@@ -519,7 +519,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">34k</span>
+                <span title="本文字数">37k</span>
               
 
               
@@ -547,7 +547,253 @@
 <p>每天记点小笔记<br>我也可以拿第一</p>
 <hr>
 <a id="more"></a>
-<h1 id="2020"><a href="#2020" class="headerlink" title="2020"></a>2020</h1><h2 id="2020-02"><a href="#2020-02" class="headerlink" title="2020-02"></a>2020-02</h2><h3 id="2020-02-26"><a href="#2020-02-26" class="headerlink" title="2020-02-26"></a>2020-02-26</h3><ul>
+<h1 id="2020"><a href="#2020" class="headerlink" title="2020"></a>2020</h1><h2 id="2020-04"><a href="#2020-04" class="headerlink" title="2020-04"></a>2020-04</h2><h3 id="2020-04-22"><a href="#2020-04-22" class="headerlink" title="2020-04-22"></a>2020-04-22</h3><ul>
+<li>c/c++ 目标文件里有什么 （自我修养）：<ol>
+<li>目标文件的格式: PE / ELF, 他们都是 COFF 格式的变种</li>
+<li>目标文件是什么样的：各种段（segment）或叫做节（section）<ol>
+<li>代码段</li>
+<li>（只读）数据段</li>
+<li>BSS段</li>
+<li>其他段</li>
+</ol>
+</li>
+<li>ELF 文件结构<ol>
+<li>文件头</li>
+<li>段表</li>
+<li>重定位表</li>
+<li>字符串表</li>
+</ol>
+</li>
+<li>链接的接口——符号<ol>
+<li>符号表的结。包括符号名，符号值，符号大小，符号类型和绑定信息，所在的段。</li>
+<li>特殊符号：当使用 ld 作为连接器来链接出可执行文件时，它自己会定义很多特殊符号，这些符号虽然没有在程序里面定义，但是我们可以直接在代码中声明并使用他们。都是一些程序起始或者结束的地址信息，一般用不到。</li>
+</ol>
+</li>
+<li>符号修饰和函数签名<ol>
+<li>函数签名和修饰后符号之间的对应关系</li>
+<li>extern “C”<ol>
+<li>代码中可以直接用 extern “C” 声明一个变量的修时候名称，并用这个变量名来直接操作。</li>
+<li>extern “C” 还用于 C 和 C++ 的混编。</li>
+</ol>
+</li>
+<li>强符号与弱符号，强引用与弱引用<ol>
+<li>未初始化的全局变量为弱符号，也可以用 <strong>attribute</strong>((week)) 来定义任何一个强符号为弱符号</li>
+<li>对于被多次定义的全局符号，链接器在工作时有一套覆盖规则（P92）</li>
+<li>对于没有定义的强引用，链接器会认为是一个错误，但是对于弱引用，编译器不认为是一个错误。</li>
+<li>弱引用跟链接器的 COMMON 块概念联系很紧密。</li>
+<li>思考弱引用和弱符号在实际使用中的作用。</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="2020-04-16"><a href="#2020-04-16" class="headerlink" title="2020-04-16"></a>2020-04-16</h3><ul>
+<li>C 语言链接时的接口——符号<ul>
+<li>符号（symbol）即源代码中函数和变量的统称，函数名和变量名就是符号名。</li>
+<li>符号可以看作是链接中的粘合剂。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2020-04-15"><a href="#2020-04-15" class="headerlink" title="2020-04-15"></a>2020-04-15</h3><ul>
+<li>git 丢弃未提交的本地修改： <code>git checkout .</code>; 撤销暂存区的修改：<code>git reset</code></li>
+</ul>
+<h3 id="2020-04-09"><a href="#2020-04-09" class="headerlink" title="2020-04-09"></a>2020-04-09</h3><ul>
+<li><p>C \ C++ 中的 ‘\377’</p>
+</li>
+<li><p><a href="https://mp.weixin.qq.com/s?__biz=MzIxMzkwNjM2NQ==&amp;mid=2247484816&amp;idx=1&amp;sn=fac6a68a4a51d79f4774558e64ffd98e&amp;chksm=97aee342a0d96a546cc0c4b2e6309587a0e95ca6be1d523d4d32aa01dd2e2c9f6234e0a7ba0e&amp;scene=126&amp;sessionid=1586401199&amp;key=dd536dadd64dbc3ec3691d0bd982c39b24880bb00587833737f600d733df5acb99404fc717e2e063aa101a1135d4f3f16964ccab0aef64db4f7409e0caa57e08e63c792a08edb2bb3e6d105d56698a98&amp;ascene=1&amp;uin=MTU3MTgzNjI4Mg%3D%3D&amp;devicetype=Windows+10&amp;version=62080079&amp;lang=zh_CN&amp;exportkey=AZ9sy%2BUusfYkFd%2BESWSNW8Q%3D&amp;pass_ticket=EqxqBU%2FUdl%2BxvkTDBFBfmrXaN1enHx2D89BVnuKHWOgOKH6rlMBJwzs%2B9PjsbCtp" target="_blank" rel="noopener">LDA (Latent Dirichlet Allocation)</a>:</p>
+<ul>
+<li>二项分布就是对伯努利分布重复n次</li>
+<li>Beta 分布、二项分布、Dirichlet 分布、多项式分布：<ul>
+<li>Beta 分布是二项式分布的共轭先验分布</li>
+<li>Dirichlet 分布是多项式分布的共轭分布</li>
+</ul>
+</li>
+<li>两种近似推断方法<ul>
+<li>采样、sampling</li>
+<li>变分推断、variational inference</li>
+</ul>
+</li>
+<li>LDA 是 pLSA 的贝叶斯化版本</li>
+</ul>
+</li>
+</ul>
+<h3 id="2020-04-08"><a href="#2020-04-08" class="headerlink" title="2020-04-08"></a>2020-04-08</h3><ul>
+<li>x86 -&gt; ARMv8 （linux）交叉编译器默认的 char 是 unsigned char。以后用 char 类型传递数值时要先判断编译器的默认 char 类型。</li>
+</ul>
+<h3 id="2020-04-07"><a href="#2020-04-07" class="headerlink" title="2020-04-07"></a>2020-04-07</h3><ul>
+<li><p>kaldi::ReadBasicType<t>() 报错 …file position is -1…</t></p>
+</li>
+<li><p>gdb 调式命令</p>
+</li>
+</ul>
+<h3 id="2020-04-03"><a href="#2020-04-03" class="headerlink" title="2020-04-03"></a>2020-04-03</h3><ul>
+<li><a href="https://cmake.org/pipermail/cmake/2016-May/063400.html" target="_blank" rel="noopener">Difference between PRIVATE and PUBLIC with target_link_libraries</a></li>
+<li>linux 下一般程序运行时查找动态库的顺序：<ul>
+<li>环境变量 LD_LIBRARY_PATH 指定的路径</li>
+<li>根据 /etc/ld.so.cache 查找</li>
+<li>/lib 和 /usr/lib 目录查找</li>
+</ul>
+</li>
+</ul>
+<h2 id="2020-04-1"><a href="#2020-04-1" class="headerlink" title="2020-04"></a>2020-04</h2><h3 id="2020-03-25"><a href="#2020-03-25" class="headerlink" title="2020-03-25"></a>2020-03-25</h3><ul>
+<li>linux 交叉编译 openfst（1.6.7）:<ul>
+<li><code>./configure CXX=aarch64-linux-gnu-g++ --host=armv8 --prefix=</code></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>pc 平台流行的可执行程序：</p>
+<ul>
+<li>Windows 下的 PE (portable executable)</li>
+<li>Linux 下的 ELF (executable linkable format)</li>
+<li>他们都是 COFF (common file format) 的变种</li>
+</ul>
+</li>
+<li><p>可执行文件内部结构：</p>
+<ul>
+<li>代码段（Code Section）和数据段（Data Section）</li>
+</ul>
+</li>
+</ul>
+<h3 id="2020-03-24"><a href="#2020-03-24" class="headerlink" title="2020-03-24"></a>2020-03-24</h3><blockquote>
+<div title="有关的; 中肯的; 恰当的"> pertinent </div>
+
+
+</blockquote>
+<ul>
+<li>linux 命令：<ul>
+<li>vim 中搜索：<ul>
+<li>normal 模式下输入<code>/</code></li>
+<li><code>n</code> 查找下一个；<code>N</code> 查找上一个</li>
+<li>支持正则查找</li>
+<li>后加 <code>\C</code>，大小写敏感；<code>\c</code> 不敏感</li>
+<li>normal 模式下按 <code>*</code> 即可查找光标所在单词</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="2020-03-23"><a href="#2020-03-23" class="headerlink" title="2020-03-23"></a>2020-03-23</h3><ul>
+<li>linux 交叉编译 openBLAS（0.3.9）: <code>make TARGET=ARMV8 BINARY=64 HOSTCC=gcc CC=aarch64-linux-gnu-gcc NOFORTRAN=1</code><ul>
+<li>如果要用 gfortran 的话记得版本要和gcc对应，不然动态库编译不过</li>
+<li>可能的报错： <code>*** No rule to make target &#39;../kernel/arm/amax.S&#39;, needed by &#39;samax_k.o&#39;.  Stop.</code> ，可能原因是用了32位的编译工具</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>linux 命令：</p>
+<ul>
+<li>tar:<ul>
+<li><code>tar -czvf</code> 压缩</li>
+<li><code>tar -xzvf</code> 解压</li>
+</ul>
+</li>
+<li>shell 快捷键：<ul>
+<li><code>ctrl - r</code> 查找历史命令 </li>
+<li><code>ctrl - b/f</code> 前/后移动一个字符</li>
+<li><code>alt - b/f</code> 前/后移动一个单词</li>
+<li><code>ctrl - a/e</code> 移动到首/尾</li>
+<li><code>ctrl - u/k</code> 删除光标左/右边所有</li>
+<li><code>ctrl - l</code> 清屏</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>git 如何创建一个新分支:</p>
+<ul>
+<li><code>git checkout --orphan branch_name</code></li>
+<li>然后吧原分支的文件都输出掉就可以了。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>世界上最远的距离是知道和做到。</li>
+</ul>
+<h3 id="2020-03-18"><a href="#2020-03-18" class="headerlink" title="2020-03-18"></a>2020-03-18</h3><ul>
+<li>C++:<ul>
+<li>构造函数后面用冒号初始化和在构造函数里面对成员进行赋值的区别</li>
+<li>const 类型和引用不可以被赋值</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>链接过程(p 51)：<ul>
+<li>Address and Storage Allocation</li>
+<li>Symbol Resolution</li>
+<li>Relocation</li>
+</ul>
+</li>
+</ul>
+<h3 id="2020-03-17"><a href="#2020-03-17" class="headerlink" title="2020-03-17"></a>2020-03-17</h3><ul>
+<li>ASR 数据集：<ul>
+<li>TIMIT(4h)</li>
+<li>WSJ (8h)</li>
+<li>Switchboard (300h)</li>
+<li>Librispeech (960h)</li>
+<li>Fisher (2000h)</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>编译过程（6步，p42）：<ul>
+<li>扫描（词法分析）-lex</li>
+<li>语法分析 - yacc(Yet Another Compiler Compiler)</li>
+<li>语义分析 - 静态语义，声明和类型得匹配、类型得转换</li>
+<li>源代码优化 - intermediate code (Three-address Code / P-Code)</li>
+<li>代码生成</li>
+<li>目标代码优化</li>
+</ul>
+</li>
+</ul>
+<h3 id="2020-03-11"><a href="#2020-03-11" class="headerlink" title="2020-03-11"></a>2020-03-11</h3><ul>
+<li>C 程序编译<ul>
+<li>当无法判断宏定义是否正确或头文件包含是否正确时，可以查看预编译后的文件来确定问题。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2020-03-10"><a href="#2020-03-10" class="headerlink" title="2020-03-10"></a>2020-03-10</h3><ul>
+<li><p>vim 查看16进制的为解码内容：</p>
+<ul>
+<li>vim -b filename</li>
+<li>:%!xxd</li>
+</ul>
+</li>
+<li><p>从源代码到可执行文件的4个步骤：</p>
+<ul>
+<li>Prepressing</li>
+<li>Compilation</li>
+<li>Assembly</li>
+<li>Linking</li>
+</ul>
+</li>
+</ul>
+<h3 id="2020-03-04"><a href="#2020-03-04" class="headerlink" title="2020-03-04"></a>2020-03-04</h3><ul>
+<li>C++:<ul>
+<li>编译相关的文件后缀<ul>
+<li>Windows：.lib  .dll  .obj</li>
+<li>Linux: .a  .so  .o</li>
+<li>静态库其实就是很多目标文件的打包集合体，因此在一个工程中导入一个项目的静态库和导入该项目的源代码没什么区别（前提是编译环境一致）。</li>
+</ul>
+</li>
+<li>代码风格<ul>
+<li>所有if都要用 {}，便于以后阅读。</li>
+<li>不要在同一行中声明多个变量</li>
+<li>所有临时变量都需要在声明时进行赋值</li>
+<li>二元运算符在哪里都需要两边空格</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>Linux 命令： ar<ul>
+<li>库函数操作命令</li>
+</ul>
+</li>
+</ul>
+<h2 id="2020-02"><a href="#2020-02" class="headerlink" title="2020-02"></a>2020-02</h2><h3 id="2020-02-26"><a href="#2020-02-26" class="headerlink" title="2020-02-26"></a>2020-02-26</h3><ul>
 <li>英语中的介词：<ul>
 <li>on vs. in<ul>
 <li>on.1 一物以另一物为支撑或载体<ul>
@@ -2409,7 +2655,7 @@ f^\prime (x,y) &= [f(x,y) + \lambda(A-g(x,y))]^\prime\\
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#2020"><span class="nav-text">2020</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2020-02"><span class="nav-text">2020-02</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-02-26"><span class="nav-text">2020-02-26</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-02-25"><span class="nav-text">2020-02-25</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-02-23"><span class="nav-text">2020-02-23</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-02-22"><span class="nav-text">2020-02-22</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-02-21"><span class="nav-text">2020-02-21</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-02-20"><span class="nav-text">2020-02-20</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-02-15"><span class="nav-text">2020-02-15</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-02-11"><span class="nav-text">2020-02-11</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-02-10"><span class="nav-text">2020-02-10</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-02-07"><span class="nav-text">2020-02-07</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-02-06"><span class="nav-text">2020-02-06</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-02-04"><span class="nav-text">2020-02-04</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2020-01"><span class="nav-text">2020-01</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-01-21"><span class="nav-text">2020-01-21</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-01-19"><span class="nav-text">2020-01-19</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-01-15"><span class="nav-text">2020-01-15</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-01-13"><span class="nav-text">2020-01-13</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-01-09"><span class="nav-text">2020-01-09</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-01-08"><span class="nav-text">2020-01-08</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-01-07"><span class="nav-text">2020-01-07</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-01-06"><span class="nav-text">2020-01-06</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-01-03"><span class="nav-text">2020-01-03</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2019"><span class="nav-text">2019</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2019-12"><span class="nav-text">2019-12</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-12-19"><span class="nav-text">2019-12-19</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-12-18"><span class="nav-text">2019-12-18</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2019-11"><span class="nav-text">2019-11</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-11-25"><span class="nav-text">2019-11-25</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-11-21"><span class="nav-text">2019-11-21</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-11-20"><span class="nav-text">2019-11-20</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-11-19"><span class="nav-text">2019-11-19</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-11-13"><span class="nav-text">2019-11-13</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-11-12"><span class="nav-text">2019-11-12</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-11-11"><span class="nav-text">2019-11-11</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2019-10"><span class="nav-text">2019-10</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-10-31"><span class="nav-text">2019-10-31</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-10-27"><span class="nav-text">2019-10-27</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-10-17"><span class="nav-text">2019-10-17</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-10-10"><span class="nav-text">2019-10-10</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2019-09"><span class="nav-text">2019-09</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-09-29"><span class="nav-text">2019-09-29</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-09-27"><span class="nav-text">2019-09-27</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-09-26"><span class="nav-text">2019-09-26</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-09-25"><span class="nav-text">2019-09-25</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-09-24"><span class="nav-text">2019-09-24</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-09-23"><span class="nav-text">2019-09-23</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-09-10"><span class="nav-text">2019-09-10</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-09-09"><span class="nav-text">2019-09-09</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2019-08"><span class="nav-text">2019-08</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-08-06"><span class="nav-text">2019-08-06</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-08-02"><span class="nav-text">2019-08-02</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2019-07"><span class="nav-text">2019-07</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-07-30"><span class="nav-text">2019-07-30</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-07-28"><span class="nav-text">2019-07-28</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-07-24"><span class="nav-text">2019-07-24</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-07-18"><span class="nav-text">2019-07-18</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-07-12"><span class="nav-text">2019-07-12</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-07-07"><span class="nav-text">2019-07-07</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-07-05"><span class="nav-text">2019-07-05</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-07-04"><span class="nav-text">2019-07-04</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-07-03"><span class="nav-text">2019-07-03</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-07-02"><span class="nav-text">2019-07-02</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2019-06"><span class="nav-text">2019-06</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-06-28"><span class="nav-text">2019-06-28</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-06-27"><span class="nav-text">2019-06-27</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-06-24"><span class="nav-text">2019-06-24</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-06-18"><span class="nav-text">2019-06-18</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-06-13"><span class="nav-text">2019-06-13</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-06-11"><span class="nav-text">2019-06-11</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-06-10"><span class="nav-text">2019-06-10</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-06-04"><span class="nav-text">2019-06-04</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2019-05"><span class="nav-text">2019-05</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-05-31"><span class="nav-text">2019-05-31</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-05-29"><span class="nav-text">2019-05-29</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-05-29-1"><span class="nav-text">2019-05-29</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-05-21"><span class="nav-text">2019-05-21</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-05-15"><span class="nav-text">2019-05-15</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-05-14"><span class="nav-text">2019-05-14</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-05-09"><span class="nav-text">2019-05-09</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-05-05"><span class="nav-text">2019-05-05</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2019-04"><span class="nav-text">2019-04</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-04-25"><span class="nav-text">2019-04-25</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-04-19"><span class="nav-text">2019-04-19</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-04-17"><span class="nav-text">2019-04-17</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-04-15"><span class="nav-text">2019-04-15</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-04-11"><span class="nav-text">2019-04-11</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-04-09"><span class="nav-text">2019-04-09</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-04-04"><span class="nav-text">2019-04-04</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-04-03"><span class="nav-text">2019-04-03</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-04-02"><span class="nav-text">2019-04-02</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2019-03"><span class="nav-text">2019-03</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-03-30"><span class="nav-text">2019-03-30</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-03-28"><span class="nav-text">2019-03-28</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-03-26"><span class="nav-text">2019-03-26</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-03-21"><span class="nav-text">2019-03-21</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-03-19"><span class="nav-text">2019-03-19</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-03-06"><span class="nav-text">2019-03-06</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-03-05"><span class="nav-text">2019-03-05</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-03-04"><span class="nav-text">2019-03-04</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2019-02"><span class="nav-text">2019-02</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-02-28"><span class="nav-text">2019-02-28</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-02-19"><span class="nav-text">2019-02-19</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-02-17"><span class="nav-text">2019-02-17</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-02-15"><span class="nav-text">2019-02-15</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-02-14"><span class="nav-text">2019-02-14</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-02-13"><span class="nav-text">2019-02-13</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#2020"><span class="nav-text">2020</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2020-04"><span class="nav-text">2020-04</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-04-22"><span class="nav-text">2020-04-22</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-04-16"><span class="nav-text">2020-04-16</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-04-15"><span class="nav-text">2020-04-15</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-04-09"><span class="nav-text">2020-04-09</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-04-08"><span class="nav-text">2020-04-08</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-04-07"><span class="nav-text">2020-04-07</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-04-03"><span class="nav-text">2020-04-03</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2020-04-1"><span class="nav-text">2020-04</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-03-25"><span class="nav-text">2020-03-25</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-03-24"><span class="nav-text">2020-03-24</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-03-23"><span class="nav-text">2020-03-23</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-03-18"><span class="nav-text">2020-03-18</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-03-17"><span class="nav-text">2020-03-17</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-03-11"><span class="nav-text">2020-03-11</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-03-10"><span class="nav-text">2020-03-10</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-03-04"><span class="nav-text">2020-03-04</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2020-02"><span class="nav-text">2020-02</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-02-26"><span class="nav-text">2020-02-26</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-02-25"><span class="nav-text">2020-02-25</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-02-23"><span class="nav-text">2020-02-23</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-02-22"><span class="nav-text">2020-02-22</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-02-21"><span class="nav-text">2020-02-21</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-02-20"><span class="nav-text">2020-02-20</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-02-15"><span class="nav-text">2020-02-15</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-02-11"><span class="nav-text">2020-02-11</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-02-10"><span class="nav-text">2020-02-10</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-02-07"><span class="nav-text">2020-02-07</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-02-06"><span class="nav-text">2020-02-06</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-02-04"><span class="nav-text">2020-02-04</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2020-01"><span class="nav-text">2020-01</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-01-21"><span class="nav-text">2020-01-21</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-01-19"><span class="nav-text">2020-01-19</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-01-15"><span class="nav-text">2020-01-15</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-01-13"><span class="nav-text">2020-01-13</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-01-09"><span class="nav-text">2020-01-09</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-01-08"><span class="nav-text">2020-01-08</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-01-07"><span class="nav-text">2020-01-07</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-01-06"><span class="nav-text">2020-01-06</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-01-03"><span class="nav-text">2020-01-03</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2019"><span class="nav-text">2019</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2019-12"><span class="nav-text">2019-12</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-12-19"><span class="nav-text">2019-12-19</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-12-18"><span class="nav-text">2019-12-18</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2019-11"><span class="nav-text">2019-11</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-11-25"><span class="nav-text">2019-11-25</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-11-21"><span class="nav-text">2019-11-21</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-11-20"><span class="nav-text">2019-11-20</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-11-19"><span class="nav-text">2019-11-19</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-11-13"><span class="nav-text">2019-11-13</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-11-12"><span class="nav-text">2019-11-12</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-11-11"><span class="nav-text">2019-11-11</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2019-10"><span class="nav-text">2019-10</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-10-31"><span class="nav-text">2019-10-31</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-10-27"><span class="nav-text">2019-10-27</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-10-17"><span class="nav-text">2019-10-17</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-10-10"><span class="nav-text">2019-10-10</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2019-09"><span class="nav-text">2019-09</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-09-29"><span class="nav-text">2019-09-29</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-09-27"><span class="nav-text">2019-09-27</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-09-26"><span class="nav-text">2019-09-26</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-09-25"><span class="nav-text">2019-09-25</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-09-24"><span class="nav-text">2019-09-24</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-09-23"><span class="nav-text">2019-09-23</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-09-10"><span class="nav-text">2019-09-10</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-09-09"><span class="nav-text">2019-09-09</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2019-08"><span class="nav-text">2019-08</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-08-06"><span class="nav-text">2019-08-06</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-08-02"><span class="nav-text">2019-08-02</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2019-07"><span class="nav-text">2019-07</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-07-30"><span class="nav-text">2019-07-30</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-07-28"><span class="nav-text">2019-07-28</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-07-24"><span class="nav-text">2019-07-24</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-07-18"><span class="nav-text">2019-07-18</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-07-12"><span class="nav-text">2019-07-12</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-07-07"><span class="nav-text">2019-07-07</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-07-05"><span class="nav-text">2019-07-05</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-07-04"><span class="nav-text">2019-07-04</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-07-03"><span class="nav-text">2019-07-03</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-07-02"><span class="nav-text">2019-07-02</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2019-06"><span class="nav-text">2019-06</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-06-28"><span class="nav-text">2019-06-28</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-06-27"><span class="nav-text">2019-06-27</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-06-24"><span class="nav-text">2019-06-24</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-06-18"><span class="nav-text">2019-06-18</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-06-13"><span class="nav-text">2019-06-13</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-06-11"><span class="nav-text">2019-06-11</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-06-10"><span class="nav-text">2019-06-10</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-06-04"><span class="nav-text">2019-06-04</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2019-05"><span class="nav-text">2019-05</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-05-31"><span class="nav-text">2019-05-31</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-05-29"><span class="nav-text">2019-05-29</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-05-29-1"><span class="nav-text">2019-05-29</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-05-21"><span class="nav-text">2019-05-21</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-05-15"><span class="nav-text">2019-05-15</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-05-14"><span class="nav-text">2019-05-14</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-05-09"><span class="nav-text">2019-05-09</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-05-05"><span class="nav-text">2019-05-05</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2019-04"><span class="nav-text">2019-04</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-04-25"><span class="nav-text">2019-04-25</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-04-19"><span class="nav-text">2019-04-19</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-04-17"><span class="nav-text">2019-04-17</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-04-15"><span class="nav-text">2019-04-15</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-04-11"><span class="nav-text">2019-04-11</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-04-09"><span class="nav-text">2019-04-09</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-04-04"><span class="nav-text">2019-04-04</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-04-03"><span class="nav-text">2019-04-03</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-04-02"><span class="nav-text">2019-04-02</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2019-03"><span class="nav-text">2019-03</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-03-30"><span class="nav-text">2019-03-30</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-03-28"><span class="nav-text">2019-03-28</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-03-26"><span class="nav-text">2019-03-26</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-03-21"><span class="nav-text">2019-03-21</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-03-19"><span class="nav-text">2019-03-19</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-03-06"><span class="nav-text">2019-03-06</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-03-05"><span class="nav-text">2019-03-05</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-03-04"><span class="nav-text">2019-03-04</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2019-02"><span class="nav-text">2019-02</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-02-28"><span class="nav-text">2019-02-28</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-02-19"><span class="nav-text">2019-02-19</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-02-17"><span class="nav-text">2019-02-17</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-02-15"><span class="nav-text">2019-02-15</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-02-14"><span class="nav-text">2019-02-14</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-02-13"><span class="nav-text">2019-02-13</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -2449,7 +2695,7 @@ f^\prime (x,y) &= [f(x,y) + \lambda(A-g(x,y))]^\prime\\
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">68k</span>
+    <span title="站点总字数">71k</span>
   
 
   
