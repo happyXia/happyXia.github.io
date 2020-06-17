@@ -160,7 +160,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/02/13/everyday-note/unlinear.JPG">
 <meta property="og:image" content="http://yoursite.com/2019/02/13/everyday-note/unlinear1.JPG">
 <meta property="og:image" content="http://yoursite.com/2019/02/13/everyday-note/Composition.JPG">
-<meta property="og:updated_time" content="2020-04-22T03:57:57.000Z">
+<meta property="og:updated_time" content="2020-06-16T10:05:37.537Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="笔记本">
 <meta name="twitter:description" content="每天记点小笔记我也可以拿第一">
@@ -466,7 +466,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-04-22 11:57:57" itemprop="dateModified" datetime="2020-04-22T11:57:57+08:00">2020-04-22</time>
+                <time title="修改时间：2020-06-16 18:05:37" itemprop="dateModified" datetime="2020-06-16T18:05:37+08:00">2020-06-16</time>
               
             
           </span>
@@ -519,7 +519,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">37k</span>
+                <span title="本文字数">44k</span>
               
 
               
@@ -547,8 +547,374 @@
 <p>每天记点小笔记<br>我也可以拿第一</p>
 <hr>
 <a id="more"></a>
-<h1 id="2020"><a href="#2020" class="headerlink" title="2020"></a>2020</h1><h2 id="2020-04"><a href="#2020-04" class="headerlink" title="2020-04"></a>2020-04</h2><h3 id="2020-04-22"><a href="#2020-04-22" class="headerlink" title="2020-04-22"></a>2020-04-22</h3><ul>
-<li>c/c++ 目标文件里有什么 （自我修养）：<ol>
+<h1 id="2020"><a href="#2020" class="headerlink" title="2020"></a>2020</h1><h2 id="2020-06"><a href="#2020-06" class="headerlink" title="2020-06"></a>2020-06</h2><h3 id="2020-06-16"><a href="#2020-06-16" class="headerlink" title="2020-06-16"></a>2020-06-16</h3><ul>
+<li><p>C++：</p>
+<ul>
+<li>形参初始化的机理与变量初始化一致</li>
+<li>形参会忽略顶层 const，所以 <code>void fcn(const int i)</code> 和 <code>void fcn(int i)</code> 一起用的话算重复定义。但是底层 const 可以实现函数重载，比如 <code>void fcn(int &amp;i)</code> 和 <code>void fcn(const int &amp;i)</code>，把引用换成指针也可以。</li>
+<li><p>形参的初始化和变量的初始化方式是一样的，所以先看如下的初始化过程，</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">42</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> *cp = &amp;i;  <span class="comment">// 正确</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> &amp;r = i;    <span class="comment">// 正确</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> &amp;r2 = <span class="number">42</span>;  <span class="comment">// 正确</span></span><br><span class="line"><span class="keyword">int</span> *p = cp;         <span class="comment">// 错误：p 和 cp 的类型不匹配</span></span><br><span class="line"><span class="keyword">int</span> &amp;r3 = r;         <span class="comment">// 错误：r3 和 r 的类型不匹配</span></span><br><span class="line"><span class="keyword">int</span> &amp;r4 = <span class="number">42</span>         <span class="comment">// 错误：不能用字面值初始化一个非常量引用</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>然后再思考下面的这些形参调用是否正确，其中 reset 函数的声明是 <code>void reset(int &amp;i)</code></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> ci = i;</span><br><span class="line"><span class="built_in">string</span>::size_type ctr = <span class="number">0</span>;</span><br><span class="line">reset(&amp;i);     <span class="comment">// ...</span></span><br><span class="line">reset(&amp;ci);    <span class="comment">// ...</span></span><br><span class="line">reset(i);      <span class="comment">// ...</span></span><br><span class="line">reset(ci);     <span class="comment">// ...</span></span><br><span class="line">reset(<span class="number">42</span>);     <span class="comment">// ...</span></span><br><span class="line">reset(ctr);    <span class="comment">// ...</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>int &amp;arr[10]</code> 引用的数组；<code>int (&amp;arr)[10]</code> 具有10个整数的数组的引用。其中的引用符号改成指针符号也是同理。</p>
+</li>
+<li>函数不要返回局部对象的引用或者指针，因为在函数完成后，它所占用的存储空间就被释放掉了。</li>
+<li>返回引用的函数得到左值，其他返回类型得到右值。所以可以像使用其他左值那样来使用返回引用的函数。 </li>
+<li><code>typedef int arrT[10]</code> 等价于 <code>using arrT = int[10]</code></li>
+<li>函数重载不允许只有返回类型不同。</li>
+<li>在不同的作用域中无法重载函数名</li>
+<li>函数匹配，3步。从 <strong>候选函数</strong>（根据函数名和作用域） → <strong>可行函数</strong> → <strong>最佳匹配</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="2020-06-15"><a href="#2020-06-15" class="headerlink" title="2020-06-15"></a>2020-06-15</h3><ul>
+<li>Python:<ul>
+<li>subprocess.run 和 subprocess.Popen 的区别：前者等执行完了返回结果，后者需要自己调用方法拿结果。</li>
+<li><code>if __name__ == &quot;__main__&quot;</code> 的作用</li>
+</ul>
+</li>
+</ul>
+<h3 id="2020-06-11"><a href="#2020-06-11" class="headerlink" title="2020-06-11"></a>2020-06-11</h3><ul>
+<li>C++<ul>
+<li>delete — new ; malloc — free</li>
+<li>后面带 const 的函数：<ul>
+<li>不能修改成员变量</li>
+<li>const关键字是该函数签名的一部分，因此同一个类里可以有同名的非 const 方法。</li>
+</ul>
+</li>
+<li>关于类型转换和各种 *_cast:<ul>
+<li>隐式转换（implicit conversion）:<ul>
+<li>有些情况会有精度损失而且编译器会报 warning</li>
+<li>如果类 B 有构造函数是以类 A 为参数的话，由于存在隐式转换，可以把 A 的实例赋值给以 B 为类型的变量。</li>
+</ul>
+</li>
+<li>显示转换（explicit conversion）：<ul>
+<li>最常用的基础数据类型之间的类型转换有两种写法：<code>b = (int)a // c-like cast notation</code> or <code>b = int(a) // functional notation</code></li>
+<li>上述方法可以应付大多数情况，但是如果用这种方法强行转换复杂类型（比如自定义类和指向类的指针）的话会出现一些不可预知的运行时错误（这样做一般能通过编译，因为编译器不会去确认能不能强转）。因此，C++ 提供了如下几个显示强转的方法：<ul>
+<li>dynamic_cast:<ul>
+<li>只能作用于指针或者引用，只能从派生类转到基类，目的是确保类型转化的结果是合法的。runtime 阶段检查合法性，对于不合法的类型转换，指针会返回 Null pointer，引用会抛出异常。</li>
+</ul>
+</li>
+<li>static_cast:<ul>
+<li>不仅可以从派生类到基类也可以从基类到派生类，也就是说 runtime 阶段没有了安全性检测，这部分工作要有程序员自己确认。</li>
+<li>可以用于别的、非指针类型的对象</li>
+</ul>
+</li>
+<li>reinterpret_cast:<ul>
+<li>可以在任意类的指针之间转换，这个操作就是简单地拷贝一个指针对象中的二进制值给另一个指针变量。</li>
+<li>甚至可以指针和整数之间相互转化，指针和整数之间的对应关系因系统而异，但是可以确定的是，在同一个系统中这个过程是可逆的，即由指针转换过来的整数一样可以转回原来的指针。</li>
+</ul>
+</li>
+<li>const_cast:<ul>
+<li>这个用来修改对象的 constness。</li>
+<li>当一个函数要求的不是 const 型的参数，但是我们又想传入的参数是 const 型的话，可以在调用函数的时候用这个转换一下。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>查看表达式的类型：typeid(expression)<ul>
+<li>包含在头文件 <typeinfo> 中。</typeinfo></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="2020-06-10"><a href="#2020-06-10" class="headerlink" title="2020-06-10"></a>2020-06-10</h3><ul>
+<li><p>C++</p>
+<ul>
+<li>默认情况下，const 对象仅在文件内有效。<ul>
+<li>因为 const 对象必须在声明时初始化，但是又要避免多个文件对同一个变量的重复定义。</li>
+<li>解决的办法是，对于 const 对象不管是声明还是定义都添加 exern 关键字，这样只需在一个文件中定义一次就可以了。</li>
+</ul>
+</li>
+<li>指向常量的指针或引用，只是它们自己觉得他们指向了常量，所以自觉地不去改变所指向的对象的值</li>
+<li>指针是一个常量（<code>int *const name</code>） vs. 指向常量的指针（<code>const int *name</code>）</li>
+<li>求值顺序：<code>a = f(x) * g(x) + h(x)</code>，f、g、h、三个函数不确定哪个先运行。</li>
+</ul>
+</li>
+<li><p>单词常见前缀、词根、后缀</p>
+<ul>
+<li>fort - strong - effor，fortress</li>
+<li>al - relating to - historical, rehearsal</li>
+</ul>
+</li>
+</ul>
+<h3 id="2020-06-09"><a href="#2020-06-09" class="headerlink" title="2020-06-09"></a>2020-06-09</h3><ul>
+<li>ssh “Permission denied” 可能的原因：<ul>
+<li>密钥没有 add ，<code>ssh-add</code></li>
+<li>权限不对， 私钥要用 <code>chmod 600</code></li>
+<li>gnome-keyring 的问题<ul>
+<li>确诊： ssh 命令前加 <code>SSH_AUTH_SOCK=0</code> 后症状消失</li>
+<li>解决： 1. 开机启动吧 “SSH Key Agent” 关了，之后重启；2. <code>killall gnome-keyring-daemon</code>, 关了应该就能用。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="2020-06-03"><a href="#2020-06-03" class="headerlink" title="2020-06-03"></a>2020-06-03</h3><ul>
+<li>Peter Frankopan (牛津大学国际历史学教授): 如果我们不关注历史（包括东西方历史），我们就失去了看向正确方向的能力。人们喜欢改变、革命、改革、战争，往往低估了和平（或者平和）的重要性。</li>
+</ul>
+<h3 id="2020-06-02"><a href="#2020-06-02" class="headerlink" title="2020-06-02"></a>2020-06-02</h3><ul>
+<li>感知机 ($f(x)=\textbf{w}^T\textbf{x}-t$) 更新参数<ul>
+<li>$w_j=w_j-\alpha\times(\hat{y}-y)\times x_j$</li>
+<li>$t=t+\alpha \times(\hat{y}-y)$</li>
+</ul>
+</li>
+<li>模型容量</li>
+<li>没有免费午餐定理</li>
+<li>奥卡姆剃刀：选用 “最简单” 假设</li>
+<li>平衡偏差和方差以最小化均方误差<ul>
+<li>偏差和方差度量着估计量的两个不同误差来源，<ul>
+<li>偏差度量着偏离真实函数或参数的误差期望</li>
+<li>方差度量着数据上任意特定采样可能导致的估计期望的偏差</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="2020-06-01"><a href="#2020-06-01" class="headerlink" title="2020-06-01"></a>2020-06-01</h3><ul>
+<li>数值计算<ul>
+<li>上溢和下溢</li>
+</ul>
+</li>
+</ul>
+<h2 id="2020-05"><a href="#2020-05" class="headerlink" title="2020-05"></a>2020-05</h2><h3 id="2020-05-29"><a href="#2020-05-29" class="headerlink" title="2020-05-29"></a>2020-05-29</h3><blockquote>
+<div title="缰绳，驾驭；勒住（马）"> rein </div>
+<div title="皱眉"> furrow brows </div>
+
+
+
+</blockquote>
+<h3 id="2020-05-28"><a href="#2020-05-28" class="headerlink" title="2020-05-28"></a>2020-05-28</h3><ul>
+<li><p>协方差</p>
+</li>
+<li><p>sigmoid 函数 $\sigma(x)=\frac{1}{1+e^{-x}}=\frac{e^x}{e^x+1}$; softplus 函数 $\zeta(x)=\log(1+e^x)$</p>
+<ul>
+<li>$\frac{d}{dx}\sigma(x)=\sigma(x)(1-\sigma(x))$</li>
+<li>$1-\sigma(x)=\sigma(-x)$</li>
+<li>$\log\sigma(x)=-\zeta(-x)$</li>
+<li>$\frac{d}{dx}\zeta(x)=\sigma(x)$</li>
+<li>$\zeta(x)-\zeta(-x)=x$</li>
+</ul>
+</li>
+</ul>
+<h3 id="2020-05-27"><a href="#2020-05-27" class="headerlink" title="2020-05-27"></a>2020-05-27</h3><ul>
+<li><p>C:</p>
+<ul>
+<li>char* 转int 用 atoi() ；反过来用 sprintf()</li>
+<li>线程有自己的 stack，但是没有单独的 heap，也没有单独的 address space。只有进程有自己的 address space，而这个 space 中经过合法申请的部分叫做 process space。Process space 之外的地址都是非法地址。当一个线程向非法地址读取或者写入，无法确认这个操作是否会影响同一进程中的其它线程，所以只能是整个进程一起崩溃。   </li>
+</ul>
+</li>
+<li><p>概率密度函数（PDF）和概率质量函数（PMF）</p>
+</li>
+</ul>
+<h3 id="2020-05-25"><a href="#2020-05-25" class="headerlink" title="2020-05-25"></a>2020-05-25</h3><h4 id="线性代数（花书）："><a href="#线性代数（花书）：" class="headerlink" title="线性代数（花书）："></a>线性代数（花书）：</h4><ul>
+<li><p>单位矩阵 (identity matrix)：任意向量和单位矩阵相乘，都不会改变。记为 $I_n \in \mathbb{R}^{n \times n}$</p>
+</li>
+<li><p>矩阵的逆 (matrix inversion)：矩阵的逆和本身相乘得到单位矩阵（分左逆和右逆）, $A^{-1}A=I_n$</p>
+</li>
+<li><p>生成子空间 (span) : 一组向量的生成子空间是原始向量线性组合后所能抵达的点的集合</p>
+</li>
+<li><p>线性相关性 (linear dependence)：如果一组向量中的任意一个向量都不能表示成其他向量的线性组合，那么这组向量就是线性无关的。</p>
+</li>
+<li><p>范数 (norm)：衡量一个向量的大小。 直观上来说，向量 $x$ 的范数是用来衡量从原点到 $x$ 的距离。但是更一般的说，范数是满足某些（3个）性质的任意函数（花书 $P_{24}$）。 当 $p=2$ 时，$L^2$ 范数就是欧几里得范数。</p>
+</li>
+</ul>
+<script type="math/tex; mode=display">||x||_p = (\sum_i|x_i|^p)^{\frac{1}{p}}</script><ul>
+<li><p>当机器学习问题中零和非零元素之间的差异非常重要时，通常会使用 $L^1$ 范数。这样每当 $x$ 中某个元素从 $0$ 增加 $\epsilon$ ，对应的 $L^1$ 范数也会增加 $\epsilon$。除此之外，机器学习中常用的范数还有 <strong>最大范数</strong> 和 <strong>Frobenius 范数</strong>，前者就是绝对值最大的元素，后者是用来衡量矩阵的大小。另外两个向量的点积可以用范数来表示。</p>
+</li>
+<li><p>特殊矩阵和向量</p>
+<ul>
+<li>对角矩阵 (diagonal matrix)：只有主对角线上含有非零元素，其他位置都是零。非方阵的对角矩阵没有逆矩阵，当且仅当对角元素都是非零值的时候存在对角方阵的逆矩阵。</li>
+<li>对称矩阵：转置和自己相等的矩阵，即 $A=A^T$ 。举例，$A_{i,j}$ 表示点 $i$ 到点 $j$ 的距离，距离有对称性，所以矩阵 $A$ 是对称矩阵。</li>
+<li>单位向量：具有单位范数的向量。</li>
+<li>正交 (orghogonal)：$x^Ty=0$。如果两个向量都有非零范数，那么两个向量之间的夹角是 $90^\circ$。如果范数都为 $1$ ，那么我们称它们为标准正交 (orthonormal)。</li>
+<li>正交矩阵：$A^TA=AA^T=I$，这意味着$A^{-1}=A^T$。正交矩阵收到关注的原因是求逆计算代价小。</li>
+</ul>
+</li>
+<li><p>特征分解</p>
+<ul>
+<li>特征值和特征向量：$Av=\lambda v$，当且仅当含有零特征值的时候矩阵是奇异的。</li>
+</ul>
+</li>
+<li><p>奇异值分解：目前理解不了</p>
+</li>
+<li><p>Moore-Penrose 伪逆：理解不了</p>
+</li>
+<li><p>逆运算：就是对角线元素相加，<script type="math/tex">Tr(A)=\sum_i{A_{i,i}}</script>。还有很多有趣的性质（花书 $P{29}$）。</p>
+</li>
+<li><p>行列式：行列式等于矩阵特征值的乘积，记作 $det(A)$。行列式的绝对值可以用来衡量矩阵参与矩阵乘法后空间扩大或者收缩了多少，如果行列式是 $0$，那么空间至少沿着某一维完全收缩了。</p>
+</li>
+</ul>
+<h3 id="2020-05-19"><a href="#2020-05-19" class="headerlink" title="2020-05-19"></a>2020-05-19</h3><ul>
+<li>经典声学建模技术 (kaldi 实战)<ul>
+<li>先用 对齐 ，然后使用带标注的训练数据更新各状态对应的 GMM 的参数</li>
+<li>Transition 模型<ul>
+<li>transition state (音素索引，HMM状态索引，PDF索引)</li>
+<li>transition id (transition-state, transition-index)</li>
+</ul>
+</li>
+<li>音素的聚类裁剪<ul>
+<li>{L}-{C}+{R}.{S}</li>
+</ul>
+</li>
+<li>特征变换技术<ul>
+<li>无监督<ul>
+<li>差分（微分、Delta）</li>
+<li>拼帧（Splicing）</li>
+<li>归一化（Normalize / CMVN）</li>
+</ul>
+</li>
+<li>有监督<ul>
+<li>线性判别分析</li>
+<li>最大似然线性变换</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>区分性训练<ul>
+<li>核心思想：不仅要使正确路径的分数尽可能高（传统的最大似然思想），还要使错误路径，尤其是易混淆路径的分数尽可能低。比值的最大似然。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="2020-05-12"><a href="#2020-05-12" class="headerlink" title="2020-05-12"></a>2020-05-12</h3><ul>
+<li>地址无关代码<ul>
+<li>fpic 和 fPIC 区别，前者限制更多，但是代码相对较小</li>
+<li>如何区分一个 .so 是否为 PIC，<code>readelf -d foo.so | grep TEXTREL</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="2020-05-08"><a href="#2020-05-08" class="headerlink" title="2020-05-08"></a>2020-05-08</h3><ul>
+<li>链接选项 -Wl,—whole-archive 和 -Wl,—no-whole-archive</li>
+</ul>
+<h3 id="2020-05-07"><a href="#2020-05-07" class="headerlink" title="2020-05-07"></a>2020-05-07</h3><ul>
+<li>可执行文件的装载方式<ul>
+<li>覆盖装载</li>
+<li>页映射</li>
+</ul>
+</li>
+<li>进程的建立<ul>
+<li>创建一个独立的虚拟地址空间</li>
+<li>读取可执行文件头，并且建立虚拟空间与可执行文件的映射关系</li>
+<li>将CPU的指令寄存器设置成可执行文件的入口地址，启动运行</li>
+</ul>
+</li>
+<li>页错误（页缺失）<ul>
+<li>先找到空页所在的 VMA</li>
+<li>然后得到所在可执行文件中的偏移</li>
+<li>最后在物理内存中分配一个物理页，建立该物理页和虚拟页之间的映射关系。</li>
+</ul>
+</li>
+<li>链接视图和执行试图<ul>
+<li>section VS. segment</li>
+</ul>
+</li>
+<li>堆和栈有自己的 匿名虚拟内存区域</li>
+<li>段地址对齐</li>
+<li>进程栈的初始化<ul>
+<li>进程初始化的时候会在栈空间自动加入当前的 环境变量 和 运行参数</li>
+</ul>
+</li>
+</ul>
+<h3 id="2020-05-04"><a href="#2020-05-04" class="headerlink" title="2020-05-04"></a>2020-05-04</h3><ul>
+<li>区别：make install DESTDIR=… | make install prefix=… </li>
+</ul>
+<h2 id="2020-04"><a href="#2020-04" class="headerlink" title="2020-04"></a>2020-04</h2><h3 id="2020-04-29"><a href="#2020-04-29" class="headerlink" title="2020-04-29"></a>2020-04-29</h3><ul>
+<li>C++： <ul>
+<li>左值 右值 的根本区别在于能否获取内存地址。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2020-04-26"><a href="#2020-04-26" class="headerlink" title="2020-04-26"></a>2020-04-26</h3><ul>
+<li>静态链接（自我修养第四章）：<ul>
+<li>空间和地址分配：<ul>
+<li>顺序叠加 vs. 相似段合并</li>
+<li>相似段合并：<ul>
+<li>第一步 扫描所有的输入目标文件，计算合并后各段长度和位置，建立映射关系</li>
+<li>第二步 根据输入文件中段的数据、重定位信息，进行符号解析与重定位、调整代码中的地址</li>
+</ul>
+</li>
+<li>链接后的程序中使用的地址已经是虚拟地址。</li>
+</ul>
+</li>
+<li>符号解析与重定位<ul>
+<li>链接器用重定位表中保存的信息对需要调整的指令做出调整</li>
+<li>指令修正方式（32位x86平台下的ELF只有两种）：<ul>
+<li>绝对近址32位选址（R_386_32）</li>
+<li>相对近址32位选址（R_386_PC32）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>COMMON 块与弱符号处理<ul>
+<li>编译器为什么不直接把未初始化的全局变量也当作未初始化的局部静态变量？</li>
+</ul>
+</li>
+<li>C++ 相关<ul>
+<li>重复代码消除，例如模板、外部内联函数和虚函数表<ul>
+<li>解决办法：将每个模板的实力代码都单独存在一个段里，采用相同的命名策略，这样链接器在最终链接的时候可以合并这些相同的模板实例段。</li>
+<li>可能的问题：可能不同的编译单元使用不同的编译器版本或者编译优化选项，导致同一个函数编译出来的实际代码有所不同。</li>
+<li>函数级别链接：把所有函数都像模板函数一样，单独保存到一个段里，只有当链接器要用到某个函数的时候才把它合并到最终文件，这样做的好处是不需要一次性合并整个代码块。这样做有好处也有坏处。</li>
+</ul>
+</li>
+<li>全局构造和析构<ul>
+<li>程序的一些特定的操作需要在 main 函数之前或者之后被执行，比如 C++ 的全局构造和析构函数。</li>
+<li>ELF 文件为这两个函数定义了两个特殊的段<ul>
+<li>.init</li>
+<li>.fini</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>C++ 与 ABI (Application Binary Interface)<ul>
+<li>ABI 包括那些跟可执行代码二进制兼容性有关的内容</li>
+<li>ABI vs. API：前者更严格，关注二进制层面的接口，后者只关注源代码层面的接口。以 printf 这个方法为例，不同操作系统和平台上都提供了 printf 这个函数（API 相同），但是他们的二进制实现方式却不尽相同（ABI 不同）。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>为什么很多静态库里面一个目标文件只包含一个函数？比如 libc.a 里面 printf.o 只有 printf() 函数、strlen.o 只有 strlen() 函数。<ul>
+<li>这些函数会经常被用到，就是经常会被链接，如果很多函数都放在同一个目标文件中，很可能很多没用的函数被一起链接到输出文件中。（其实可以用前面提到的函数级别链接解决，但是也有代价）</li>
+</ul>
+</li>
+<li>我们可以用自己写的链接控制脚本来控制链接过程（比如输出特定名字的段，而不是默认的 ELF 文件段结构）</li>
+<li>BFD 库 (Binary File Descriptor library)<ul>
+<li>把编译器/链接器和具体的目标文件格式隔离开，实现跨平台的效果。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="2020-04-23"><a href="#2020-04-23" class="headerlink" title="2020-04-23"></a>2020-04-23</h3><ul>
+<li>线性代数——李弘毅：<ul>
+<li>Linear System:<ul>
+<li>Two properties:<ol>
+<li>Persevering  Multiplication</li>
+<li>Persevering Addition<div style="width: 300px; margin-left:25%"> 
+![linear system](https://hepsia.db.files.1drv.com/y4mx_T6o_-ZGHXj-IHnxItAQkNOSYQd7fkiu0oOAqejCTzMjO3AwIp4eE21yE8SKEJKYxfZQuQ3mmzVTRurPuXhp024cQNepuU2uXqFqh4qcOWrPj_d8dEuyjSvKp23yjMBX6MUCwKhJEy-kPghFS97LnPsztAZUCej0u_sN2iJrBOSyU2e8eBaD-D17PCl56Su1bQRI27aYpQHiYAPVRriRw?width=660&height=448&cropmode=none) 
+</div></li>
+</ol>
+</li>
+</ul>
+</li>
+<li>Application<ul>
+<li>Page Rank </li>
+<li>computer graphic</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="2020-04-22"><a href="#2020-04-22" class="headerlink" title="2020-04-22"></a>2020-04-22</h3><ul>
+<li>c/c++ 目标文件里有什么 （自我修养第三章）：<ol>
 <li>目标文件的格式: PE / ELF, 他们都是 COFF 格式的变种</li>
 <li>目标文件是什么样的：各种段（segment）或叫做节（section）<ol>
 <li>代码段</li>
@@ -565,14 +931,14 @@
 </ol>
 </li>
 <li>链接的接口——符号<ol>
-<li>符号表的结。包括符号名，符号值，符号大小，符号类型和绑定信息，所在的段。</li>
+<li>符号表的结构。包括符号名，符号值，符号大小，符号类型和绑定信息，所在的段。</li>
 <li>特殊符号：当使用 ld 作为连接器来链接出可执行文件时，它自己会定义很多特殊符号，这些符号虽然没有在程序里面定义，但是我们可以直接在代码中声明并使用他们。都是一些程序起始或者结束的地址信息，一般用不到。</li>
 </ol>
 </li>
 <li>符号修饰和函数签名<ol>
 <li>函数签名和修饰后符号之间的对应关系</li>
 <li>extern “C”<ol>
-<li>代码中可以直接用 extern “C” 声明一个变量的修时候名称，并用这个变量名来直接操作。</li>
+<li>代码中可以直接用 extern “C” 声明一个变量的修饰后名称，并用这个变量名来直接操作。</li>
 <li>extern “C” 还用于 C 和 C++ 的混编。</li>
 </ol>
 </li>
@@ -637,7 +1003,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="2020-04-1"><a href="#2020-04-1" class="headerlink" title="2020-04"></a>2020-04</h2><h3 id="2020-03-25"><a href="#2020-03-25" class="headerlink" title="2020-03-25"></a>2020-03-25</h3><ul>
+<h2 id="2020-03"><a href="#2020-03" class="headerlink" title="2020-03"></a>2020-03</h2><h3 id="2020-03-25"><a href="#2020-03-25" class="headerlink" title="2020-03-25"></a>2020-03-25</h3><ul>
 <li>linux 交叉编译 openfst（1.6.7）:<ul>
 <li><code>./configure CXX=aarch64-linux-gnu-g++ --host=armv8 --prefix=</code></li>
 </ul>
@@ -760,7 +1126,7 @@
 <li>:%!xxd</li>
 </ul>
 </li>
-<li><p>从源代码到可执行文件的4个步骤：</p>
+<li><p>从源代码到可执行文件的4个步骤（p38）：</p>
 <ul>
 <li>Prepressing</li>
 <li>Compilation</li>
@@ -2554,6 +2920,8 @@ f^\prime (x,y) &= [f(x,y) + \lambda(A-g(x,y))]^\prime\\
                     
                       
                     
+                      
+                    
                     <span class="site-state-item-count">5</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
@@ -2570,6 +2938,12 @@ f^\prime (x,y) &= [f(x,y) + \lambda(A-g(x,y))]^\prime\\
                     
                   
                     
+                    
+                      
+                    
+                      
+                    
+                      
                     
                       
                     
@@ -2655,7 +3029,7 @@ f^\prime (x,y) &= [f(x,y) + \lambda(A-g(x,y))]^\prime\\
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#2020"><span class="nav-text">2020</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2020-04"><span class="nav-text">2020-04</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-04-22"><span class="nav-text">2020-04-22</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-04-16"><span class="nav-text">2020-04-16</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-04-15"><span class="nav-text">2020-04-15</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-04-09"><span class="nav-text">2020-04-09</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-04-08"><span class="nav-text">2020-04-08</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-04-07"><span class="nav-text">2020-04-07</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-04-03"><span class="nav-text">2020-04-03</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2020-04-1"><span class="nav-text">2020-04</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-03-25"><span class="nav-text">2020-03-25</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-03-24"><span class="nav-text">2020-03-24</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-03-23"><span class="nav-text">2020-03-23</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-03-18"><span class="nav-text">2020-03-18</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-03-17"><span class="nav-text">2020-03-17</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-03-11"><span class="nav-text">2020-03-11</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-03-10"><span class="nav-text">2020-03-10</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-03-04"><span class="nav-text">2020-03-04</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2020-02"><span class="nav-text">2020-02</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-02-26"><span class="nav-text">2020-02-26</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-02-25"><span class="nav-text">2020-02-25</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-02-23"><span class="nav-text">2020-02-23</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-02-22"><span class="nav-text">2020-02-22</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-02-21"><span class="nav-text">2020-02-21</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-02-20"><span class="nav-text">2020-02-20</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-02-15"><span class="nav-text">2020-02-15</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-02-11"><span class="nav-text">2020-02-11</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-02-10"><span class="nav-text">2020-02-10</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-02-07"><span class="nav-text">2020-02-07</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-02-06"><span class="nav-text">2020-02-06</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-02-04"><span class="nav-text">2020-02-04</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2020-01"><span class="nav-text">2020-01</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-01-21"><span class="nav-text">2020-01-21</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-01-19"><span class="nav-text">2020-01-19</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-01-15"><span class="nav-text">2020-01-15</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-01-13"><span class="nav-text">2020-01-13</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-01-09"><span class="nav-text">2020-01-09</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-01-08"><span class="nav-text">2020-01-08</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-01-07"><span class="nav-text">2020-01-07</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-01-06"><span class="nav-text">2020-01-06</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-01-03"><span class="nav-text">2020-01-03</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2019"><span class="nav-text">2019</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2019-12"><span class="nav-text">2019-12</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-12-19"><span class="nav-text">2019-12-19</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-12-18"><span class="nav-text">2019-12-18</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2019-11"><span class="nav-text">2019-11</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-11-25"><span class="nav-text">2019-11-25</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-11-21"><span class="nav-text">2019-11-21</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-11-20"><span class="nav-text">2019-11-20</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-11-19"><span class="nav-text">2019-11-19</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-11-13"><span class="nav-text">2019-11-13</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-11-12"><span class="nav-text">2019-11-12</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-11-11"><span class="nav-text">2019-11-11</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2019-10"><span class="nav-text">2019-10</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-10-31"><span class="nav-text">2019-10-31</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-10-27"><span class="nav-text">2019-10-27</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-10-17"><span class="nav-text">2019-10-17</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-10-10"><span class="nav-text">2019-10-10</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2019-09"><span class="nav-text">2019-09</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-09-29"><span class="nav-text">2019-09-29</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-09-27"><span class="nav-text">2019-09-27</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-09-26"><span class="nav-text">2019-09-26</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-09-25"><span class="nav-text">2019-09-25</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-09-24"><span class="nav-text">2019-09-24</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-09-23"><span class="nav-text">2019-09-23</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-09-10"><span class="nav-text">2019-09-10</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-09-09"><span class="nav-text">2019-09-09</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2019-08"><span class="nav-text">2019-08</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-08-06"><span class="nav-text">2019-08-06</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-08-02"><span class="nav-text">2019-08-02</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2019-07"><span class="nav-text">2019-07</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-07-30"><span class="nav-text">2019-07-30</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-07-28"><span class="nav-text">2019-07-28</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-07-24"><span class="nav-text">2019-07-24</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-07-18"><span class="nav-text">2019-07-18</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-07-12"><span class="nav-text">2019-07-12</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-07-07"><span class="nav-text">2019-07-07</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-07-05"><span class="nav-text">2019-07-05</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-07-04"><span class="nav-text">2019-07-04</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-07-03"><span class="nav-text">2019-07-03</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-07-02"><span class="nav-text">2019-07-02</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2019-06"><span class="nav-text">2019-06</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-06-28"><span class="nav-text">2019-06-28</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-06-27"><span class="nav-text">2019-06-27</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-06-24"><span class="nav-text">2019-06-24</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-06-18"><span class="nav-text">2019-06-18</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-06-13"><span class="nav-text">2019-06-13</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-06-11"><span class="nav-text">2019-06-11</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-06-10"><span class="nav-text">2019-06-10</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-06-04"><span class="nav-text">2019-06-04</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2019-05"><span class="nav-text">2019-05</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-05-31"><span class="nav-text">2019-05-31</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-05-29"><span class="nav-text">2019-05-29</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-05-29-1"><span class="nav-text">2019-05-29</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-05-21"><span class="nav-text">2019-05-21</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-05-15"><span class="nav-text">2019-05-15</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-05-14"><span class="nav-text">2019-05-14</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-05-09"><span class="nav-text">2019-05-09</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-05-05"><span class="nav-text">2019-05-05</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2019-04"><span class="nav-text">2019-04</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-04-25"><span class="nav-text">2019-04-25</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-04-19"><span class="nav-text">2019-04-19</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-04-17"><span class="nav-text">2019-04-17</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-04-15"><span class="nav-text">2019-04-15</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-04-11"><span class="nav-text">2019-04-11</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-04-09"><span class="nav-text">2019-04-09</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-04-04"><span class="nav-text">2019-04-04</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-04-03"><span class="nav-text">2019-04-03</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-04-02"><span class="nav-text">2019-04-02</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2019-03"><span class="nav-text">2019-03</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-03-30"><span class="nav-text">2019-03-30</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-03-28"><span class="nav-text">2019-03-28</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-03-26"><span class="nav-text">2019-03-26</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-03-21"><span class="nav-text">2019-03-21</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-03-19"><span class="nav-text">2019-03-19</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-03-06"><span class="nav-text">2019-03-06</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-03-05"><span class="nav-text">2019-03-05</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-03-04"><span class="nav-text">2019-03-04</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2019-02"><span class="nav-text">2019-02</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-02-28"><span class="nav-text">2019-02-28</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-02-19"><span class="nav-text">2019-02-19</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-02-17"><span class="nav-text">2019-02-17</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-02-15"><span class="nav-text">2019-02-15</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-02-14"><span class="nav-text">2019-02-14</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-02-13"><span class="nav-text">2019-02-13</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#2020"><span class="nav-text">2020</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2020-06"><span class="nav-text">2020-06</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-06-16"><span class="nav-text">2020-06-16</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-06-15"><span class="nav-text">2020-06-15</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-06-11"><span class="nav-text">2020-06-11</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-06-10"><span class="nav-text">2020-06-10</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-06-09"><span class="nav-text">2020-06-09</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-06-03"><span class="nav-text">2020-06-03</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-06-02"><span class="nav-text">2020-06-02</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-06-01"><span class="nav-text">2020-06-01</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2020-05"><span class="nav-text">2020-05</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-05-29"><span class="nav-text">2020-05-29</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-05-28"><span class="nav-text">2020-05-28</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-05-27"><span class="nav-text">2020-05-27</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-05-25"><span class="nav-text">2020-05-25</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#线性代数（花书）："><span class="nav-text">线性代数（花书）：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-05-19"><span class="nav-text">2020-05-19</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-05-12"><span class="nav-text">2020-05-12</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-05-08"><span class="nav-text">2020-05-08</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-05-07"><span class="nav-text">2020-05-07</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-05-04"><span class="nav-text">2020-05-04</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2020-04"><span class="nav-text">2020-04</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-04-29"><span class="nav-text">2020-04-29</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-04-26"><span class="nav-text">2020-04-26</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-04-23"><span class="nav-text">2020-04-23</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-04-22"><span class="nav-text">2020-04-22</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-04-16"><span class="nav-text">2020-04-16</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-04-15"><span class="nav-text">2020-04-15</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-04-09"><span class="nav-text">2020-04-09</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-04-08"><span class="nav-text">2020-04-08</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-04-07"><span class="nav-text">2020-04-07</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-04-03"><span class="nav-text">2020-04-03</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2020-03"><span class="nav-text">2020-03</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-03-25"><span class="nav-text">2020-03-25</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-03-24"><span class="nav-text">2020-03-24</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-03-23"><span class="nav-text">2020-03-23</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-03-18"><span class="nav-text">2020-03-18</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-03-17"><span class="nav-text">2020-03-17</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-03-11"><span class="nav-text">2020-03-11</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-03-10"><span class="nav-text">2020-03-10</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-03-04"><span class="nav-text">2020-03-04</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2020-02"><span class="nav-text">2020-02</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-02-26"><span class="nav-text">2020-02-26</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-02-25"><span class="nav-text">2020-02-25</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-02-23"><span class="nav-text">2020-02-23</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-02-22"><span class="nav-text">2020-02-22</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-02-21"><span class="nav-text">2020-02-21</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-02-20"><span class="nav-text">2020-02-20</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-02-15"><span class="nav-text">2020-02-15</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-02-11"><span class="nav-text">2020-02-11</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-02-10"><span class="nav-text">2020-02-10</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-02-07"><span class="nav-text">2020-02-07</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-02-06"><span class="nav-text">2020-02-06</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-02-04"><span class="nav-text">2020-02-04</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2020-01"><span class="nav-text">2020-01</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-01-21"><span class="nav-text">2020-01-21</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-01-19"><span class="nav-text">2020-01-19</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-01-15"><span class="nav-text">2020-01-15</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-01-13"><span class="nav-text">2020-01-13</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-01-09"><span class="nav-text">2020-01-09</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-01-08"><span class="nav-text">2020-01-08</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-01-07"><span class="nav-text">2020-01-07</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-01-06"><span class="nav-text">2020-01-06</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-01-03"><span class="nav-text">2020-01-03</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2019"><span class="nav-text">2019</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2019-12"><span class="nav-text">2019-12</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-12-19"><span class="nav-text">2019-12-19</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-12-18"><span class="nav-text">2019-12-18</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2019-11"><span class="nav-text">2019-11</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-11-25"><span class="nav-text">2019-11-25</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-11-21"><span class="nav-text">2019-11-21</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-11-20"><span class="nav-text">2019-11-20</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-11-19"><span class="nav-text">2019-11-19</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-11-13"><span class="nav-text">2019-11-13</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-11-12"><span class="nav-text">2019-11-12</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-11-11"><span class="nav-text">2019-11-11</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2019-10"><span class="nav-text">2019-10</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-10-31"><span class="nav-text">2019-10-31</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-10-27"><span class="nav-text">2019-10-27</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-10-17"><span class="nav-text">2019-10-17</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-10-10"><span class="nav-text">2019-10-10</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2019-09"><span class="nav-text">2019-09</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-09-29"><span class="nav-text">2019-09-29</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-09-27"><span class="nav-text">2019-09-27</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-09-26"><span class="nav-text">2019-09-26</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-09-25"><span class="nav-text">2019-09-25</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-09-24"><span class="nav-text">2019-09-24</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-09-23"><span class="nav-text">2019-09-23</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-09-10"><span class="nav-text">2019-09-10</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-09-09"><span class="nav-text">2019-09-09</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2019-08"><span class="nav-text">2019-08</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-08-06"><span class="nav-text">2019-08-06</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-08-02"><span class="nav-text">2019-08-02</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2019-07"><span class="nav-text">2019-07</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-07-30"><span class="nav-text">2019-07-30</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-07-28"><span class="nav-text">2019-07-28</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-07-24"><span class="nav-text">2019-07-24</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-07-18"><span class="nav-text">2019-07-18</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-07-12"><span class="nav-text">2019-07-12</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-07-07"><span class="nav-text">2019-07-07</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-07-05"><span class="nav-text">2019-07-05</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-07-04"><span class="nav-text">2019-07-04</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-07-03"><span class="nav-text">2019-07-03</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-07-02"><span class="nav-text">2019-07-02</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2019-06"><span class="nav-text">2019-06</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-06-28"><span class="nav-text">2019-06-28</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-06-27"><span class="nav-text">2019-06-27</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-06-24"><span class="nav-text">2019-06-24</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-06-18"><span class="nav-text">2019-06-18</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-06-13"><span class="nav-text">2019-06-13</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-06-11"><span class="nav-text">2019-06-11</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-06-10"><span class="nav-text">2019-06-10</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-06-04"><span class="nav-text">2019-06-04</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2019-05"><span class="nav-text">2019-05</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-05-31"><span class="nav-text">2019-05-31</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-05-29"><span class="nav-text">2019-05-29</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-05-29-1"><span class="nav-text">2019-05-29</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-05-21"><span class="nav-text">2019-05-21</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-05-15"><span class="nav-text">2019-05-15</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-05-14"><span class="nav-text">2019-05-14</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-05-09"><span class="nav-text">2019-05-09</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-05-05"><span class="nav-text">2019-05-05</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2019-04"><span class="nav-text">2019-04</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-04-25"><span class="nav-text">2019-04-25</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-04-19"><span class="nav-text">2019-04-19</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-04-17"><span class="nav-text">2019-04-17</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-04-15"><span class="nav-text">2019-04-15</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-04-11"><span class="nav-text">2019-04-11</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-04-09"><span class="nav-text">2019-04-09</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-04-04"><span class="nav-text">2019-04-04</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-04-03"><span class="nav-text">2019-04-03</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-04-02"><span class="nav-text">2019-04-02</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2019-03"><span class="nav-text">2019-03</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-03-30"><span class="nav-text">2019-03-30</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-03-28"><span class="nav-text">2019-03-28</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-03-26"><span class="nav-text">2019-03-26</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-03-21"><span class="nav-text">2019-03-21</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-03-19"><span class="nav-text">2019-03-19</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-03-06"><span class="nav-text">2019-03-06</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-03-05"><span class="nav-text">2019-03-05</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-03-04"><span class="nav-text">2019-03-04</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2019-02"><span class="nav-text">2019-02</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-02-28"><span class="nav-text">2019-02-28</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-02-19"><span class="nav-text">2019-02-19</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-02-17"><span class="nav-text">2019-02-17</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-02-15"><span class="nav-text">2019-02-15</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-02-14"><span class="nav-text">2019-02-14</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019-02-13"><span class="nav-text">2019-02-13</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -2695,7 +3069,7 @@ f^\prime (x,y) &= [f(x,y) + \lambda(A-g(x,y))]^\prime\\
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">71k</span>
+    <span title="站点总字数">79k</span>
   
 
   
