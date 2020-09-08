@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2018/07/08/AlgorithmNotes/</loc>
+    
+    <lastmod>2020-09-08T03:40:14.989Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/about/index.html</loc>
+    
+    <lastmod>2020-09-08T03:30:22.152Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2019/12/02/Travel-plans/</loc>
+    
+    <lastmod>2020-09-08T03:20:29.773Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2019/02/13/everyday-note/</loc>
     
     <lastmod>2020-09-07T09:40:09.699Z</lastmod>
@@ -9,23 +30,9 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/about/index.html</loc>
-    
-    <lastmod>2020-06-17T03:36:46.304Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://yoursite.com/2020/02/09/travels/</loc>
     
     <lastmod>2020-02-11T09:26:05.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2019/12/02/Travel-plans/</loc>
-    
-    <lastmod>2020-02-09T10:05:23.000Z</lastmod>
     
   </url>
   
@@ -47,20 +54,6 @@
     <loc>http://yoursite.com/2019/06/23/visual-information-theory/</loc>
     
     <lastmod>2019-08-05T08:50:00.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2018/07/08/MachineLearning-ZZH/</loc>
-    
-    <lastmod>2019-07-24T11:22:25.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2018/07/08/AlgorithmNotes/</loc>
-    
-    <lastmod>2019-07-24T11:22:05.000Z</lastmod>
     
   </url>
   
