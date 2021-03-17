@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="UfhqWeMiz6">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/fancybox/source/jquery.fancybox.css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+    
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Mina:300,300italic,400,400italic,700,700italic|Lato:300,300italic,400,400italic,700,700italic|Indie Flower:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext">
+  
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/favicon-32x32-xia.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/favicon-16x16-xia.png?v=7.1.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.2" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: true,
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="粗略探究一下正则表达式的实现原理">
+<meta name="keywords" content="正则表达式,有限状态机,FST,FSA">
+<meta property="og:type" content="article">
+<meta property="og:title" content="正则表达式原理粗探">
+<meta property="og:url" content="http://yoursite.com/2021/03/17/regular-expression/index.html">
+<meta property="og:site_name" content="Xia&#39;s Blog">
+<meta property="og:description" content="粗略探究一下正则表达式的实现原理">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://db3pap006files.storage.live.com/y4maolW7UOZToRO6P5bER5MGqJ2bUgFhVbAGhPy__Fe2A19j7ZzjMJIMTIfjheWLhuJXyLvslLy0hU_uoApjIN7PUUIHpTwmg4hkbSvMoWh_6BbS1nhE6HhkTSJHmR2VIZtoFmnTpTWnkQGIFiTyUBi483WMsAMYFyLuzdZSpGlKMlNcrKt3eG1X1lsABwPOQCw?width=422&height=205&cropmode=none">
+<meta property="og:image" content="https://db3pap006files.storage.live.com/y4mbpx8DAKtMM7UveO5xMd3UaVf0Mt_N8oJ48hcAj85zhU4bDQR4aDy5FsGPmeFUcCVnB9nYLKAhAAKlZX67itzgXS5wgoraARygocko_emMOMadZuXHg95wGzuGb2NUa2MBRvZQaXltvPl6cjmsG50qESf8B7DcM2_AMlzra9eIX7b0tKfz3L4gXne25BrXOWr?width=341&height=66&cropmode=none">
+<meta property="og:image" content="https://db3pap006files.storage.live.com/y4mYE4d7tFGyZfHmsblYLQK2Dd1PABczMc5IcO1Ik_mqsQHBCUjjNA1VYw8u77nIZH_B4y9x3EsFOF8KKPoLB9emxgydXOaBwXgoepEfKbFcPBa7NSukJHd-bv_SxLqBIQuFq0HZYdqERKcHOn0wSrtHj4uAZRnjr53457UBaNZ9ueBpyV4s_BQ3FgUdqg9aQoD?width=627&height=279&cropmode=none">
+<meta property="og:image" content="https://db3pap006files.storage.live.com/y4mBytkbjDtAqUKudLPISWt6bev4-1PueYxM2ZOP9QRvr3HBDAamgA3JT5bnr5UYJ5ZlOogcVRgOMciB8twye4267SjWRYDkoOKCsM6O3B9doS5adjJIdvPvCkSOt4wur73jFEmitfKK42xMqdx_Wv14iP-a5tIzRr278MgrPdekagk9WzyH984YxFxHHUiyQ_g?width=349&height=93&cropmode=none">
+<meta property="og:image" content="https://db3pap006files.storage.live.com/y4moMwXDWUQ8IuNihoF1uSuDlLSx_G9PgJ1t_JheLl5Aq5Pwm_6oGG7ce1lTUrj0psraEaOEmmZpaliLn5huquKnSzLUXxO7v_iJ5dgvFXk7Tx_0QKWycPH2_yUdXQFuuAwTEqTIhTLq2_5YiNZ8awzMseSWKPIcmdSS28AW6gq_fefLf9Gk8Gr-Bo6GveTqpOr?width=375&height=220&cropmode=none">
+<meta property="og:image" content="https://db3pap006files.storage.live.com/y4mAPDGkU5dK00trwmjF4WTfv-UnIg3GsvLbAcbP_hwFWeSUqpsGot9nKaV2GGtAHYGVgGTtILppZp9lPpHsRpPpTX971aTOpj9hAWaa5liLDhwrGn_1Bh5HeU0x6N04CLnDu36iv9W0dmUD1N-pCNbKAD_737mBmbeBuUD-FFqtsNovj8UbH6RYRXhYOg5bIUK?width=417&height=187&cropmode=none">
+<meta property="og:image" content="https://db3pap006files.storage.live.com/y4mCbwFwXNtAKeWTH1CIb2HW9i4L8SS5Ldpj6n5zucgohgzfZ72h3_IzArx8vDBxHW2ZnarIxxeAnQVFVCdHObYgwU0Hzp-dfjPRTF0XwdPaWqqD4vu8QF3ubwN74CzjbY-5ObISuzToNqPLe8VXPy33xgoom13LQuAHUYK6ATblabElCC86RZRd6T_gtzsVZxU?width=417&height=187&cropmode=none">
+<meta property="og:image" content="https://db3pap006files.storage.live.com/y4mazTMyQ_GeDvlJ3v7fkSokXCh__bN8Ol0qfaBa7Sb1oBFs5nqAJJAQ2p_56PRpG9ns1TKSWRjCAfFVuzTTCHJkZpA_dChkegaPuj4Jeh5ATKDbmc5UsqGg4hDZ0cfbKKAwGz9eBqGT-KXg3Uw07DHNO3egipzfKHR-elhTL1tdMPv-17b1tge2zavTa5cS1Yl?width=416&height=93&cropmode=none">
+<meta property="og:image" content="https://db3pap006files.storage.live.com/y4myyrMTC_Vr9TWP3qrDapfaJTCCNkM6dbLYQZpyH-pNt0M76dwzKfhYoHF44vdBqtVVABwCAY_xeTvYmFljSBXPYB9YaR40fL6M5lu8AvUSNx6-A1bFXWTVn9z7nFFdHwnQdWiCysACIxWCKzIx5s_bUZXGbGmQgnN9ofaPGyaEOgeLoZB_lhLI1t0C4efLiGr?width=375&height=221&cropmode=none">
+<meta property="og:image" content="https://db3pap006files.storage.live.com/y4mQUslOuko_H8jWjl3goawc1R0E-qlkAMp0iBWyBe_688GzA4nN4tRs1BY1Ez0qkMsYQwHRtvJX0GIam5Amx6uRbD5aMz4miFNEKohV0TO-vvhK9YQ0kv9k7COJTeW7E-FBAUsph9jOSq8oaJqEfBo0BeOCtFZD1Y93TUhXPav69_KGbmaC9iZQiE6WrypVIN-?width=568&height=378&cropmode=none">
+<meta property="og:image" content="https://db3pap006files.storage.live.com/y4m9GeG_kFeP1kUHgksfJSTJIPcgwhB2Hz-Dt4N51A-DY-YN_2R-HAFCXiXISXBdQeWLSqxiOoDr50iIWwP1t-aweFqbarnZ_-16OEGy6djv-P9X6fEccYo4pns4ymcXPLY_NJXvarJLQE4BMbz2abiWNgfBExHTpaAfWyejvfj8-b52z3xO2lWgtK88_Uhxcd6?width=872&height=378&cropmode=none">
+<meta property="og:image" content="https://db3pap006files.storage.live.com/y4mb9TphQcfvLq-KssOG1OEWuAJPYOXFyrMkDm54eHEKMdZOQZJplUatMxkIz6C28BGCvgEGIHVHvAJCymyS70tHZds7xyltnhj58JjrC9A_CanPRm5KlCgnmTee3IlTSEKXspGVB5bOc1T_hdP6QPFW3LCvruBN3N80G-FHvC6PYG14z2Sak-aIi5TPRlgK5ye?width=563&height=280&cropmode=none">
+<meta property="og:image" content="https://db3pap006files.storage.live.com/y4morQoYcQW0yoCqr8buMesP6YuY0nskAomNPAOxgtUF50-U6g6G8nYE1Sm-uzQ_p68Zyh4Dw6mL9ahJ5aIpqnF-HOKU96wdr2WNqkdMzHY_u39rAC-FMbK-m8h3wtu8mOnAkcrPXfpwVQ6fiyj1ENDHlqzSGfcsvui0C-apwm0_pCNZLl8Iilg-GLvqJA_cS76?width=767&height=412&cropmode=none">
+<meta property="og:image" content="https://db3pap006files.storage.live.com/y4mlJDaHxBK9CuTAJ-ZSJAQHFmJOrEbskPQOraNmdVUIScOhPyuBq0AfoY3V45kE5z66bJBHYbXufL2sOm5GVy1Yr9SvB_8IRdUScHILroI1hjwlWXFgIYBO97IroIhvVSE8EYCevlWu6bA2fZOj-qgn6bznfc-bc1XeUHwjk0ne3EgUa13suddT9D4xi-GBjbp?width=767&height=412&cropmode=none">
+<meta property="og:image" content="https://db3pap006files.storage.live.com/y4maxtr_AXHVpoW1CZi-ITcOPcdh9MQv8jGTCCDO8xCmJ2zMUEfxCQv0f4nRfPD76j-hJM7hKkvIfLg823nZqntMz4fmLATsDfZ3Qp4YCyiPlw6xeX9NB2-Kaor6Td4XYMUJm7pGzEpNXCCufmbx2LdxUgPHA4wUSIFQtWGlUiFZHydkSgoZ33sck75nW7YuF__?width=767&height=417&cropmode=none">
+<meta property="og:image" content="https://db3pap006files.storage.live.com/y4mI34_EurSB6eh5CimYkjPTcT21aliaN72oacxK3bHgCKXtxRrt44u1HLScSLSlIA92aYjDkpZc6u_B784Ivwiu0FSAst0xBB5C0JmFzBBc89E156ZsATYN7hhxBiIHTHJelmcjE2ds2N-5XwEFFOaqVFbzonVfAjtkQM_TV2PqYhgyy9OFKRk1bbkPxDXuJDw?width=408&height=277&cropmode=none">
+<meta property="og:image" content="https://db3pap006files.storage.live.com/y4muktm-pMEon35RrDf-bbTTyAfd3kQy2sbyIUy5pqPQNvzYOx0BYNfaXN0rVlANgpFA828QALcsgGU5wxx7oBUSBWXOhfr7f7rZ1tEfUFR8DyQj03mWDnVmA5P4UsLoDcH6kGUpaBO7nRenquj7szIrX8AVXNE_2iCfmsBEmAuXUH5DeFetahMQiFhhX9dqn7T?width=441&height=287&cropmode=none">
+<meta property="og:image" content="https://db3pap006files.storage.live.com/y4m_hNRQtc5kSeVhe4-iX3gWJ7uixWxq090pa_ROR_sjNQMBA0P2MGQv0bqUFfwaXb2BA_WYYkUlWCAxR6sePk0cGkZOlN2FWHNcI3t3soDT_tzo-8nXvxQdERA9hFeRS6G0qwF3QKah5bDUVgpD3w45_mdLq4JdxbXMSAJQp0skRbsPTi-irU2vuyaTsArNIob?width=243&height=122&cropmode=none">
+<meta property="og:updated_time" content="2021-03-17T09:34:44.572Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="正则表达式原理粗探">
+<meta name="twitter:description" content="粗略探究一下正则表达式的实现原理">
+<meta name="twitter:image" content="https://db3pap006files.storage.live.com/y4maolW7UOZToRO6P5bER5MGqJ2bUgFhVbAGhPy__Fe2A19j7ZzjMJIMTIfjheWLhuJXyLvslLy0hU_uoApjIN7PUUIHpTwmg4hkbSvMoWh_6BbS1nhE6HhkTSJHmR2VIZtoFmnTpTWnkQGIFiTyUBi483WMsAMYFyLuzdZSpGlKMlNcrKt3eG1X1lsABwPOQCw?width=422&height=205&cropmode=none">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2021/03/17/regular-expression/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>正则表达式原理粗探 | Xia's Blog</title>
+  
+
+
+
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-142746162-1"></script>
+  <script>
+    var host = window.location.hostname;
+    if (host !== "localhost" || !true) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-142746162-1');
+    }
+  </script>
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Xia's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于我</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+    <div class="reading-progress-bar"></div>
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/03/17/regular-expression/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="欢乐一只虾">
+      <meta itemprop="description" content="xia写的">
+      <meta itemprop="image" content="https://ewa2xg.dm.files.1drv.com/y4mFMxhQ1DM81Jvak_RBJiGQ3w8LsLmDqb0ohVKkPYwEEraNIEfIiKXMg02UaLGvQErnG1rYTAIQeDIMzSmXnHjZ2UcGrK8wApxrjNxElJCL9BJOKRc9f-ciWgJJiML6e0UOtwWbNmlDOMjYq11-KUhdY9xXgnUqT2RcyElJoRIo0yuNmHDChUPkEcYBG_7BzrxyZIGr6pO2roys0Cg4n609w?width=1280&height=718&cropmode=none">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xia's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">正则表达式原理粗探
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2021-03-17 17:34:44" itemprop="dateCreated datePublished" datetime="2021-03-17T17:34:44+08:00">2021-03-17</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/总结分享/" itemprop="url" rel="index"><span itemprop="name">总结分享</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">4.4k</span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <hr>
+<p>粗略探究一下正则表达式的实现原理</p>
+<hr>
+<a id="more"></a>
+<p>会进来看这篇分享的同学，应该已经大概知道正则表达式是什么了（以下简称 RE），而且应该多多少少有使用过，感受过 RE 的用途。所以我就直接进入正题，从 RE 的三大基本操作开始介绍。</p>
+<h1 id="RE-三个基本操作：选择，连接和闭包"><a href="#RE-三个基本操作：选择，连接和闭包" class="headerlink" title="RE 三个基本操作：选择，连接和闭包"></a>RE 三个基本操作：选择，连接和闭包</h1><p>RE 对于大部分程序员来说并不陌生，但当提到 RE 的三个基本操作的时候就没什么概念了。所谓基本操作，就是构成 RE 的基石，只要实现了这几个基本操作，理论上就可以通过这几个操作的拼接和嵌套来应付（几乎）所有的表达式。他们就是下面这三个操作：</p>
+<ul>
+<li>选择：即取并集。符号为 <code>|</code> ，即我们常在 RE 中看到的 <code>A|B</code>，意为匹配 <code>A</code> 或者 <code>B</code> 中的一个</li>
+<li>连接：表达式之间的连接。即我们常在 RE 中看到的 <code>AB</code>，意为匹配一个 <code>B</code> 出现在一个 <code>A</code> 之后的模式</li>
+<li>闭包：自身连接0次或者多次。符号为 <code>*</code> ,即我们常在 RE 中看到的 <code>A*</code>。可能有人会疑惑为什么只有 <code>*</code> 而没有 <code>?</code> 和 <code>+</code>，这部分同学可以带着这个问题看下去就懂了。</li>
+</ul>
+<p>上述三个就是 RE 的三个基本操作，同学们可以想象一下是否“所有”的表达式都可以看成是上述三个操作的拼接和嵌套。这里“所有”打上引号是因为并非真的是所有，因为正则表达式发展至今已经不是最初的样子，技术人员为了方便不断给 RE 添加新功能，所以现在有好几个不同版本的正则表达式标准，有些新功能的实现方式并不能通过上述三个操作来实现，但是我们今天不讨论这些或巧妙或复杂的新技术排除在外，只讨论原始朴素的正则表达式。</p>
+<h1 id="用有限状态自动机实现-RE"><a href="#用有限状态自动机实现-RE" class="headerlink" title="用有限状态自动机实现 RE"></a>用有限状态自动机实现 RE</h1><p>现在我们知道了 RE 的三大基本操作，所以目标就是想办法实现这三种基本操作。这时候就需要用到有限状态自动机（Finite Status Automaton，FSA）这个工具了。有 ASR 或者 NLP 经验的同学应该比较熟悉自动机的概念。简单来说，FSA 就是一个规定了事物在不同状态之间达到什么条件才会转换的机制。下面我画了一个 H$_2$O 在两个不同状态之间转换的简易 FSA 示意图（不是很严谨，仅供理解）：<br><img src="https://db3pap006files.storage.live.com/y4maolW7UOZToRO6P5bER5MGqJ2bUgFhVbAGhPy__Fe2A19j7ZzjMJIMTIfjheWLhuJXyLvslLy0hU_uoApjIN7PUUIHpTwmg4hkbSvMoWh_6BbS1nhE6HhkTSJHmR2VIZtoFmnTpTWnkQGIFiTyUBi483WMsAMYFyLuzdZSpGlKMlNcrKt3eG1X1lsABwPOQCw?width=422&height=205&cropmode=none" width="400" height="200"></p>
+<p>我们可以看到，把上述这种 FSA 写成代码流程也是比较自然的过程，只要用条件判断控制（<code>if()</code>）状态转换就行。那么， 怎么用 FSA 来表示 RE 的匹配过程呢？</p>
+<h2 id="用-FSA-表示-RE-基本操作"><a href="#用-FSA-表示-RE-基本操作" class="headerlink" title="用 FSA 表示 RE 基本操作"></a>用 FSA 表示 RE 基本操作</h2><p>先从连接操作开始说起。假设我们就想匹配字符串“ab”，对应的正则表达式就是 <code>ab</code>。相当于用 FSA 表示如下：<br><img src="https://db3pap006files.storage.live.com/y4mbpx8DAKtMM7UveO5xMd3UaVf0Mt_N8oJ48hcAj85zhU4bDQR4aDy5FsGPmeFUcCVnB9nYLKAhAAKlZX67itzgXS5wgoraARygocko_emMOMadZuXHg95wGzuGb2NUa2MBRvZQaXltvPl6cjmsG50qESf8B7DcM2_AMlzra9eIX7b0tKfz3L4gXne25BrXOWr?width=341&height=66&cropmode=none" width="300" height="100"></p>
+<p>如果输入字符串能从状态 0 转换到状态 2，就返回匹配成功，反之就是匹配失败，该字符串和正则表达式不匹配。</p>
+<p>上述正则表达式 <code>ab</code> 相当于是 [匹配字符串 “a”] 和 [匹配字符串 “b”] 这两个子表达式进行连接操作。所以更一般的，如果我们想连接两个子表达式 A 和 B（而不是单纯的连接字符串 “a” 和 “b”），我们可以像这样表示：<br><img src="https://db3pap006files.storage.live.com/y4mYE4d7tFGyZfHmsblYLQK2Dd1PABczMc5IcO1Ik_mqsQHBCUjjNA1VYw8u77nIZH_B4y9x3EsFOF8KKPoLB9emxgydXOaBwXgoepEfKbFcPBa7NSukJHd-bv_SxLqBIQuFq0HZYdqERKcHOn0wSrtHj4uAZRnjr53457UBaNZ9ueBpyV4s_BQ3FgUdqg9aQoD?width=627&height=279&cropmode=none" width="400" height="200"></p>
+<p>其中的 $\varepsilon$ 表示不需要任何条件就能跳转。上面那幅图简化一下就是这样：</p>
+<img src="https://db3pap006files.storage.live.com/y4mBytkbjDtAqUKudLPISWt6bev4-1PueYxM2ZOP9QRvr3HBDAamgA3JT5bnr5UYJ5ZlOogcVRgOMciB8twye4267SjWRYDkoOKCsM6O3B9doS5adjJIdvPvCkSOt4wur73jFEmitfKK42xMqdx_Wv14iP-a5tIzRr278MgrPdekagk9WzyH984YxFxHHUiyQ_g?width=349&height=93&cropmode=none" width="300" height="100" title="两个子表达式的连接，其中 A 和 B 可以表示任意正则表达式">
+<p>以此类推，两个子表达式的选择操作（<code>A|B</code>）就可以表示成这样：</p>
+<img src="https://db3pap006files.storage.live.com/y4moMwXDWUQ8IuNihoF1uSuDlLSx_G9PgJ1t_JheLl5Aq5Pwm_6oGG7ce1lTUrj0psraEaOEmmZpaliLn5huquKnSzLUXxO7v_iJ5dgvFXk7Tx_0QKWycPH2_yUdXQFuuAwTEqTIhTLq2_5YiNZ8awzMseSWKPIcmdSS28AW6gq_fefLf9Gk8Gr-Bo6GveTqpOr?width=375&height=220&cropmode=none" width="300" height="100" title="两个子表达式之间选择，A|B">
+<p>上面这个 FSA 表示，输入的表达式只需要有一条路（通过子表达式 A 或者通过表达式 B）能从状态 0 转换到状态 1 就算匹配成功。</p>
+<p>然后到闭包。可能还有一些同学在像为啥闭包只要讨论 <code>*</code> 而不管 <code>?</code> 和 <code>+</code>，毕竟每次要用到这三个操作的时候我们一般都是一起考虑然后在这三个里面挑一个最合适的。那么我们就先从 <code>?</code> 开始讨论。</p>
+<p><code>A?</code> 表示表达式 A 匹配 1 次或者 0 次。用 FSA 可以这样表示：</p>
+<img src="https://db3pap006files.storage.live.com/y4mAPDGkU5dK00trwmjF4WTfv-UnIg3GsvLbAcbP_hwFWeSUqpsGot9nKaV2GGtAHYGVgGTtILppZp9lPpHsRpPpTX971aTOpj9hAWaa5liLDhwrGn_1Bh5HeU0x6N04CLnDu36iv9W0dmUD1N-pCNbKAD_737mBmbeBuUD-FFqtsNovj8UbH6RYRXhYOg5bIUK?width=417&height=187&cropmode=none" width="300" height="100" title="A 匹配 0 次或 1 次">
+<p><code>A+</code> 表示表达式 A 匹配 1 次或一次以上：</p>
+<img src="https://db3pap006files.storage.live.com/y4mCbwFwXNtAKeWTH1CIb2HW9i4L8SS5Ldpj6n5zucgohgzfZ72h3_IzArx8vDBxHW2ZnarIxxeAnQVFVCdHObYgwU0Hzp-dfjPRTF0XwdPaWqqD4vu8QF3ubwN74CzjbY-5ObISuzToNqPLe8VXPy33xgoom13LQuAHUYK6ATblabElCC86RZRd6T_gtzsVZxU?width=417&height=187&cropmode=none" width="300" height="100" title="A 匹配 1 次或 1 次以上">
+<p>最后， <code>A*</code> 表示表达式 A 匹配 0 次 或 0 次以上，它的 FSA 我就不画了，可能想象力比较好的同学已经自己脑海里有图像了，一时想象不出来的同学可以自己动手画一下看看。其实就算上述两个 FSA 的结合。</p>
+<p>至此我们已经能用 FSA 表示出正则表达式的三个基本操作，接下来我们实际应用一把，感受一下如何用 FSA 来解决实际的正则表达式。</p>
+<h2 id="用-FSA-实现表达式-A-B-C"><a href="#用-FSA-实现表达式-A-B-C" class="headerlink" title="用 FSA 实现表达式 A(B|C)*"></a>用 FSA 实现表达式 <code>A(B|C)*</code></h2><p>首先，最开始的 <code>A</code> 用 FSA 画出来就是：</p>
+<img src="https://db3pap006files.storage.live.com/y4mazTMyQ_GeDvlJ3v7fkSokXCh__bN8Ol0qfaBa7Sb1oBFs5nqAJJAQ2p_56PRpG9ns1TKSWRjCAfFVuzTTCHJkZpA_dChkegaPuj4Jeh5ATKDbmc5UsqGg4hDZ0cfbKKAwGz9eBqGT-KXg3Uw07DHNO3egipzfKHR-elhTL1tdMPv-17b1tge2zavTa5cS1Yl?width=416&height=93&cropmode=none" width="300" height="100">
+<p>然后，回忆一下 <code>B|C</code> 应该长什么样:</p>
+<img src="https://db3pap006files.storage.live.com/y4myyrMTC_Vr9TWP3qrDapfaJTCCNkM6dbLYQZpyH-pNt0M76dwzKfhYoHF44vdBqtVVABwCAY_xeTvYmFljSBXPYB9YaR40fL6M5lu8AvUSNx6-A1bFXWTVn9z7nFFdHwnQdWiCysACIxWCKzIx5s_bUZXGbGmQgnN9ofaPGyaEOgeLoZB_lhLI1t0C4efLiGr?width=375&height=221&cropmode=none" width="300" height="100">
+<p>接下来就用到了我们上面推出来的闭包 <code>(B|C)*</code>，这里把 <code>(B|C)</code> 看成一个整体就跟上一节讨论的 <code>A*</code> 一样，来看看跟你想的（画的）是不是一样:</p>
+<img src="https://db3pap006files.storage.live.com/y4mQUslOuko_H8jWjl3goawc1R0E-qlkAMp0iBWyBe_688GzA4nN4tRs1BY1Ez0qkMsYQwHRtvJX0GIam5Amx6uRbD5aMz4miFNEKohV0TO-vvhK9YQ0kv9k7COJTeW7E-FBAUsph9jOSq8oaJqEfBo0BeOCtFZD1Y93TUhXPav69_KGbmaC9iZQiE6WrypVIN-?width=568&height=378&cropmode=none" width="300" height="100">
+<p>最后，就只要把 <code>A</code> 和 <code>(B|C)*</code> 做一个连接操作就行：</p>
+<img src="https://db3pap006files.storage.live.com/y4m9GeG_kFeP1kUHgksfJSTJIPcgwhB2Hz-Dt4N51A-DY-YN_2R-HAFCXiXISXBdQeWLSqxiOoDr50iIWwP1t-aweFqbarnZ_-16OEGy6djv-P9X6fEccYo4pns4ymcXPLY_NJXvarJLQE4BMbz2abiWNgfBExHTpaAfWyejvfj8-b52z3xO2lWgtK88_Uhxcd6?width=872&height=378&cropmode=none" width="400" height="200">
+<p>至此，正则表达式 <code>A(B|C)*</code> 的有限状态机就构造完成了。不过可能大部分同学都会觉得这个图看着很别扭，好像有哪里不对，但是看上去又完全符合要求。是的，上图确实找不到任何“错误”，但是又有很多不合理的地方。眼尖的同学可能一眼就已经看出，上述状态图中的状态 1 和状态 2 完全就是等价的嘛，3，4也是。确实如此，上述设计虽然不回导致字符串的异常匹配，但是匹配效率上还有很大的可提升空间。</p>
+<p>接下来我们就讨论 FSA 的优化过程。</p>
+<h2 id="从-NFA-到-DFA"><a href="#从-NFA-到-DFA" class="headerlink" title="从 NFA 到 DFA"></a>从 NFA 到 DFA</h2><p>我们还是从表达式 <code>a(b|c)*</code> 开始讨论，注意我这里没有用大写的字母 ABC 来表示子表达式，因为子表示会把表达式内部的状态给隐藏掉，所以我这里举的例子就是直接用小写得字母 abc 来表示他们的原始含义，即单纯的匹配“字母 a 后面接0个或多个 b 再接0个或多个 c ”的字符串。对应的 FSA 如下所示，跟上一节最后的图很像，只是这个图里没有子表达式，都是一个个的状态加转换条件。还有下图中我加了个长得不一样的状态 5，像这种样式的状态我们称之为接受态或终止态，一旦达到这种状态意味着匹配成功，前面我都没有加是因为对前面讲的内容没有影响，但是接受态在后面 FSA 的优化过程中很关键，请大家留个心眼。</p>
+<img src="https://db3pap006files.storage.live.com/y4mb9TphQcfvLq-KssOG1OEWuAJPYOXFyrMkDm54eHEKMdZOQZJplUatMxkIz6C28BGCvgEGIHVHvAJCymyS70tHZds7xyltnhj58JjrC9A_CanPRm5KlCgnmTee3IlTSEKXspGVB5bOc1T_hdP6QPFW3LCvruBN3N80G-FHvC6PYG14z2Sak-aIi5TPRlgK5ye?width=563&height=280&cropmode=none" width="400" height="200">
+<p>注意观察上述示意图，我们可以看到两个特征：</p>
+<ol>
+<li>图中有很多可任意跳转的边，即 epsilon 边</li>
+<li>给一个跳转条件，可以跳转到的状态是不确定的。</li>
+</ol>
+<p>上述第一点显而易见。第二点稍微解释一下，我举个例子，假设现在状态 0，且满足条件 a，然后它能跳转到状态 1、4、5 中的一个，就是说它最终跳转到哪个状态是不能确定的。对于这种自动状态机，我们就叫它“非确定性有限状态自动机（Non-deterministic Finite Automaton, NFA）”。</p>
+<p>想要优化它需要用到“子集构造算法”。 该算法的专业定义如下，不过不结合实例看这个定义基本是看不懂的，所以后面我直接用上述例子（<code>a(b|c)*</code>）演示一遍。</p>
+<blockquote>
+<p><strong>子集构造算法</strong>：从将初始状态划分为一个初始状态子集开始,构造状态子集(经过零个或多个空字符串ε转移到的状态和已在子集中的状态都是构造的新的状态子集),存在c属于字母表Σ,经过一个c的转移(必须有c的转移),能够使得从状态子集 i转移到状态子集 j, 则在DFA中有在c的输入下从状态子集 i 转移到状态子集 j 的转移.直到最后不再有新的状态子集出现.根据状态子集的转移依次构造DFA.</p>
+</blockquote>
+<p>先构建初始状态子集（定义见上），说白了就是从初始状态 0 出发，可以通过 0 条或多条 $\varepsilon$ 边能到达的所有状态的集合（这就是子集的概念，后面每一步都会用到）。上述例子中我们看到，状态 0 通过 $\varepsilon$ 边哪里都去不了，所以初始状态子集只有状态 0 一个元素。我们构造这么一个表格，来方便看出各个状态子集通过不同的边能到达的状态集合。</p>
+<img src="https://db3pap006files.storage.live.com/y4morQoYcQW0yoCqr8buMesP6YuY0nskAomNPAOxgtUF50-U6g6G8nYE1Sm-uzQ_p68Zyh4Dw6mL9ahJ5aIpqnF-HOKU96wdr2WNqkdMzHY_u39rAC-FMbK-m8h3wtu8mOnAkcrPXfpwVQ6fiyj1ENDHlqzSGfcsvui0C-apwm0_pCNZLl8Iilg-GLvqJA_cS76?width=767&height=412&cropmode=none">
+<p>可以看到，通过初始状态“零”通过边 <code>a</code>，能够到达的状态有状态 1、4、5，而通过边 <code>b</code> 和 <code>c</code> 都不能到达任何状态。所以我们又得到了一个状态子集 {1, 4, 5}。</p>
+<img src="https://db3pap006files.storage.live.com/y4mlJDaHxBK9CuTAJ-ZSJAQHFmJOrEbskPQOraNmdVUIScOhPyuBq0AfoY3V45kE5z66bJBHYbXufL2sOm5GVy1Yr9SvB_8IRdUScHILroI1hjwlWXFgIYBO97IroIhvVSE8EYCevlWu6bA2fZOj-qgn6bznfc-bc1XeUHwjk0ne3EgUa13suddT9D4xi-GBjbp?width=767&height=412&cropmode=none">
+<p>重复上述过程，知道没有新的状态产生。最后我们得到这样的表格。</p>
+<img src="https://db3pap006files.storage.live.com/y4maxtr_AXHVpoW1CZi-ITcOPcdh9MQv8jGTCCDO8xCmJ2zMUEfxCQv0f4nRfPD76j-hJM7hKkvIfLg823nZqntMz4fmLATsDfZ3Qp4YCyiPlw6xeX9NB2-Kaor6Td4XYMUJm7pGzEpNXCCufmbx2LdxUgPHA4wUSIFQtWGlUiFZHydkSgoZ33sck75nW7YuF__?width=767&height=417&cropmode=none">
+<p>如此，我们得到了 4 种新状态以及他们之间的转换关系。因此我们可以构建新的 FSA。</p>
+<img src="https://db3pap006files.storage.live.com/y4mI34_EurSB6eh5CimYkjPTcT21aliaN72oacxK3bHgCKXtxRrt44u1HLScSLSlIA92aYjDkpZc6u_B784Ivwiu0FSAst0xBB5C0JmFzBBc89E156ZsATYN7hhxBiIHTHJelmcjE2ds2N-5XwEFFOaqVFbzonVfAjtkQM_TV2PqYhgyy9OFKRk1bbkPxDXuJDw?width=408&height=277&cropmode=none" width="400" height="200">
+<p>再看 NFA 的两个特征：</p>
+<ol>
+<li>图中有很多可任意跳转的边，即 epsilon 边</li>
+<li>给一个跳转条件，可以跳转到的状态是不确定的。</li>
+</ol>
+<p>对比上述这个新的 FSA，是不是上述两条都已经不满足了。我们称这种新的 FSA 为 “确定性有限状态自动机（Deterministic Finite Automaton, DFA）” 。我们可以自己拿例子过一遍这个自动机，验证它是否满足 <code>a(b|c)*</code>。这里可能令人不解的点是：这个图怎么有三个接受态。。。？没错，FSA 并没有规定接受态只能有一个，只要能转移到任何一个接受态，此次匹配就算成功。“那。。。凭什么状态一、二、三可以是接受态呢？”。这就要看上面那个表格了，原来的 NFA 中的接受态是状态 5，因此只要包含了原状态 5的状态子集在 DFA 中也是接受态。</p>
+<h2 id="从-DFA-到-DFA-o"><a href="#从-DFA-到-DFA-o" class="headerlink" title="从 DFA 到 DFA$^o$"></a>从 DFA 到 DFA$^o$</h2><p>可能有人觉得上述优化后的 DFA 已经足够简洁，没有优化的空间了。事实是它还能优化的跟简洁，达到更快的匹配效率。这种优化方法被称为等价状态集合划分。照例，先给定义。</p>
+<blockquote>
+<p><strong>等价状态集合划分</strong>：一开始只有两个状态集,一个接受（终止）状态集合,一个非接受（非终止）状态集合.对于每一个状态集合Sp,如果存在c属于字母表Σ,使得Sp中的状态转移到不同的状态集合(包括没有转移的空状态集合),则拆分Sp,使得拆分后的状态集合中的每一个状态不可能转移到不同的状态集合.其中状态集合之间的转移构成最小化DFA中的转移.</p>
+</blockquote>
+<p>我们继续还是已上述的例子来演示（虽然这不是个好例子）。</p>
+<p>第一步就是分两个状态集，判断标准是该状态是否为接受态。因此我们把状态零（只有它不是接受态）单独分为一个状态集 Sp$_1$，而状态一、二、三分为另一个状态集 Sp$_2$。</p>
+<img src="https://db3pap006files.storage.live.com/y4muktm-pMEon35RrDf-bbTTyAfd3kQy2sbyIUy5pqPQNvzYOx0BYNfaXN0rVlANgpFA828QALcsgGU5wxx7oBUSBWXOhfr7f7rZ1tEfUFR8DyQj03mWDnVmA5P4UsLoDcH6kGUpaBO7nRenquj7szIrX8AVXNE_2iCfmsBEmAuXUH5DeFetahMQiFhhX9dqn7T?width=441&height=287&cropmode=none" width="400" height="200">
+<p>然后，判断是否存在边 c 连接了不同的状态集，如果有的话，把相关的状态单独分出来。但是我们这个例子中没有这种边（所以我说这不是个很好的例子，同学们感兴趣的话可以自己找别的例子试一试），因此不需要任何迭代。所以我们最终得到的 FSA 示意图长这样。</p>
+<img src="https://db3pap006files.storage.live.com/y4m_hNRQtc5kSeVhe4-iX3gWJ7uixWxq090pa_ROR_sjNQMBA0P2MGQv0bqUFfwaXb2BA_WYYkUlWCAxR6sePk0cGkZOlN2FWHNcI3t3soDT_tzo-8nXvxQdERA9hFeRS6G0qwF3QKah5bDUVgpD3w45_mdLq4JdxbXMSAJQp0skRbsPTi-irU2vuyaTsArNIob?width=243&height=122&cropmode=none" width="200" height="100">
+<p>是不是出乎意料的简洁，但是带入例子验证之后确实是逻辑合理的。</p>
+<p>这个最终优化出来的 FSA 我们称之为 “最小确定性有限状态自动机（Minimal deterministic Finite Automaton, DFA°）”。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>至此，我们的正则表达式探索之旅也接近尾声了。我们可以看到，NFA 构造起来最简单，但是也是构造出来的状态机冗余操作很多，匹配的时候甚至需要用到回溯（因为它的不确定性）；而 DFA° 构造过程很长，需要一步一步推出来，但是构造好之后，推理过程也是前面两种 FSA 难以比拟的。目前常用的 RE 引擎基本都是 DFA 和 DFA° 两种混用的解决方案，根据具体的使用场景来定具体的实现方式。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/正则表达式/" rel="tag"># 正则表达式</a>
+          
+            <a href="/tags/有限状态机/" rel="tag"># 有限状态机</a>
+          
+            <a href="/tags/FST/" rel="tag"># FST</a>
+          
+            <a href="/tags/FSA/" rel="tag"># FSA</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/02/09/travels/" rel="next" title="游记">
+                <i class="fa fa-chevron-left"></i> 游记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="https://ewa2xg.dm.files.1drv.com/y4mFMxhQ1DM81Jvak_RBJiGQ3w8LsLmDqb0ohVKkPYwEEraNIEfIiKXMg02UaLGvQErnG1rYTAIQeDIMzSmXnHjZ2UcGrK8wApxrjNxElJCL9BJOKRc9f-ciWgJJiML6e0UOtwWbNmlDOMjYq11-KUhdY9xXgnUqT2RcyElJoRIo0yuNmHDChUPkEcYBG_7BzrxyZIGr6pO2roys0Cg4n609w?width=1280&height=718&cropmode=none" alt="欢乐一只虾">
+            
+              <p class="site-author-name" itemprop="name">欢乐一只虾</p>
+              <div class="site-description motion-element" itemprop="description">xia写的</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">24</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#RE-三个基本操作：选择，连接和闭包"><span class="nav-text">RE 三个基本操作：选择，连接和闭包</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#用有限状态自动机实现-RE"><span class="nav-text">用有限状态自动机实现 RE</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#用-FSA-表示-RE-基本操作"><span class="nav-text">用 FSA 表示 RE 基本操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用-FSA-实现表达式-A-B-C"><span class="nav-text">用 FSA 实现表达式 A(B|C)*</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#从-NFA-到-DFA"><span class="nav-text">从 NFA 到 DFA</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#从-DFA-到-DFA-o"><span class="nav-text">从 DFA 到 DFA$^o$</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">欢乐一只虾</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">102k</span>
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a></div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/fancybox/source/jquery.fancybox.pack.js"></script>
+
+  
+  <script src="/lib/reading_progress/reading_progress.js"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.2"></script>
+
+  <script src="/js/motion.js?v=7.1.2"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.2"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.2"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.2"></script>
+<script src="/js/post-details.js?v=7.1.2"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.2"></script>
+
+
+  
+  <script src="/js/js.cookie.js?v=7.1.2"></script>
+  <script src="/js/scroll-cookie.js?v=7.1.2"></script>
+
+
+  
+
+  
+  
+  
+
+  
+
+  
+  
+  
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+  
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

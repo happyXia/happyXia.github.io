@@ -2,16 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2021/03/17/regular-expression/</loc>
+    
+    <lastmod>2021-03-17T09:34:44.572Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2019/02/13/everyday-note/</loc>
     
-    <lastmod>2021-03-04T10:13:40.514Z</lastmod>
+    <lastmod>2021-03-17T02:46:42.865Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://yoursite.com/2018/07/08/AlgorithmNotes/</loc>
     
-    <lastmod>2020-09-08T03:40:14.989Z</lastmod>
+    <lastmod>2021-03-17T02:26:21.955Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2020/02/09/linux-commands/</loc>
+    
+    <lastmod>2021-03-16T09:22:54.621Z</lastmod>
     
   </url>
   
@@ -33,13 +47,6 @@
     <loc>http://yoursite.com/2020/02/09/travels/</loc>
     
     <lastmod>2020-02-11T09:26:05.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2020/02/09/linux-commands/</loc>
-    
-    <lastmod>2020-02-09T10:00:33.000Z</lastmod>
     
   </url>
   
