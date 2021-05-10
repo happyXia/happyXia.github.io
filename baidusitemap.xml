@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://yoursite.com/2021/03/17/regular-expression/</loc>
-    <lastmod>2021-03-17</lastmod>
+    <loc>http://yoursite.com/2019/02/13/everyday-note/</loc>
+    <lastmod>2021-05-10</lastmod>
   </url>
   <url>
-    <loc>http://yoursite.com/2019/02/13/everyday-note/</loc>
+    <loc>http://yoursite.com/2020/02/09/linux-commands/</loc>
+    <lastmod>2021-03-29</lastmod>
+  </url>
+  <url>
+    <loc>http://yoursite.com/2021/03/17/regular-expression/</loc>
     <lastmod>2021-03-17</lastmod>
   </url>
   <url>
     <loc>http://yoursite.com/2018/07/08/AlgorithmNotes/</loc>
     <lastmod>2021-03-17</lastmod>
-  </url>
-  <url>
-    <loc>http://yoursite.com/2020/02/09/linux-commands/</loc>
-    <lastmod>2021-03-16</lastmod>
   </url>
   <url>
     <loc>http://yoursite.com/2019/12/02/Travel-plans/</loc>
