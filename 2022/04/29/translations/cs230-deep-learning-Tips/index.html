@@ -1,0 +1,1372 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="UfhqWeMiz6">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/fancybox/source/jquery.fancybox.css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+    
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Mina:300,300italic,400,400italic,700,700italic|Lato:300,300italic,400,400italic,700,700italic|Indie Flower:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext">
+  
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/favicon-32x32-xia.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/favicon-16x16-xia.png?v=7.1.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.2" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: true,
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="本篇为外文翻译，英语原文地址：https://stanford.edu/~shervine/teaching/cs-230/cheatsheet-deep-learning-tips-and-tricks 不是逐句直译，根据个人理解意译。理解可能有误，如果发现错误希望读者能通过邮件告知，谢谢。">
+<meta name="keywords" content="翻译,深度学习,cheatsheet">
+<meta property="og:type" content="article">
+<meta property="og:title" content="斯坦福 cs230 小抄： 深度学习的一些实用技巧">
+<meta property="og:url" content="http://yoursite.com/2022/04/29/translations/cs230-deep-learning-Tips/index.html">
+<meta property="og:site_name" content="Xia&#39;s Blog">
+<meta property="og:description" content="本篇为外文翻译，英语原文地址：https://stanford.edu/~shervine/teaching/cs-230/cheatsheet-deep-learning-tips-and-tricks 不是逐句直译，根据个人理解意译。理解可能有误，如果发现错误希望读者能通过邮件告知，谢谢。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://stanford.edu/~shervine/teaching/cs-230/illustrations/augmentation-original.jpg?fa9abcd4dce13c776d7d10b3a1ec8fad">
+<meta property="og:image" content="https://stanford.edu/~shervine/teaching/cs-230/illustrations/augmentation-flip.jpg?da4ff42b5d8fc1f2759675e0c6323f8e">
+<meta property="og:image" content="https://stanford.edu/~shervine/teaching/cs-230/illustrations/augmentation-rotation.jpg?ab180edcbeb006bfbad4fd57aa6433bf">
+<meta property="og:image" content="https://stanford.edu/~shervine/teaching/cs-230/illustrations/augmentation-crop.jpg?811ab0236837a5eb3106e761b6046424">
+<meta property="og:image" content="https://stanford.edu/~shervine/teaching/cs-230/illustrations/augmentation-shift.jpg?fca805477d241c88166819240ab65ba4">
+<meta property="og:image" content="https://stanford.edu/~shervine/teaching/cs-230/illustrations/augmentation-noise.jpg?f56920da7d2d08d1041f1b01b92df1f8">
+<meta property="og:image" content="https://stanford.edu/~shervine/teaching/cs-230/illustrations/augmentation-information-loss.jpg?8563bbe135ffcbe57b9b8529dd80fcb9">
+<meta property="og:image" content="https://stanford.edu/~shervine/teaching/cs-230/illustrations/augmentation-contrast.jpg?776cd26f62f336949ee237817f6af3a5">
+<meta property="og:image" content="https://db5pap001files.storage.live.com/y4mlg5WIiBK0Nc00MoR2F_F6mboqjjK2rhcjq1sCQvLhVTEwW0WEOOT6eFMYJ2ZANvLUGqPLBHwZWxQzyhfjr1a8fps6LnjFbbFcEYFXjD2LNBPue15I6qMS8es_Bf60QwF41mcxvctxjOnzqQoS4gr01y2G3cSx205RbGg7LD0s_tRdIjLIuxZ-WWeFweiNqPZ?width=800&height=250&cropmode=none">
+<meta property="og:image" content="https://db5pap001files.storage.live.com/y4mKxNH6b_KYcfVq-QHLWc1O7xtgZTLKT3mT7CCN0ibnqVLcFcvodle15g0eedzegHTmk--ihMB2Cx6sA2UEwFesPyxpCsySUBKiV9CxStQx5xcvDfqrQvJiTHein1884qEFwu2VEWBW1tjwXoP939TVHEn9jo0phRPrhaCdeLmVTHqOK9lVZOrlqbtlgX3pdVS?width=2000&height=400&cropmode=none">
+<meta property="og:image" content="https://db5pap001files.storage.live.com/y4mLnbxctsEQLEMzwBaZZjbRtc6DN0xiM-Ck_7tCShJdFhot4z6oaf17N403yCDKJjdR65IMvih7oT2VDknkyR4Q_w7mLyopwvoMKaatULGQ_OJ_9OQjWYBd9FBTSzMTWR4w0_3dEHiXaFhUVpqSyomysbcIpvw3iZyy0s206arEa8ImZSArVu3rTs3gCuFUXgM?width=1024&height=708&cropmode=none">
+<meta property="og:image" content="https://db5pap001files.storage.live.com/y4mCO2_Ngd-CQD5gfC_5tvayRRljeD6iyNHE-bXV16bnraIr0nJp2l6jyEzZMrQmndmzZYb9WL0uFAHxry_mYVLrPXHf9q9krMdLQks4yj11ehC4JhNzIjLrf_vAuVIpWXLmXyi8sBmosDY0n1krezglfpyNX3xeQCWST_ZtjOadeDtXVEL0Ftz-Jb2SA8w7wDc?width=1000&height=300&cropmode=none">
+<meta property="og:image" content="https://db5pap001files.storage.live.com/y4mbIY6oV3XSGlgU5058L_PaJKG6dXBTJEqmEaoeZL2C7CG6X2n8J6PYYQ5rj7jC2m8hc4SB3TpHUgYQuENpM1sF2WC_BwhUhVzy8ysthwFwbKgMyKOgcfacl5LN45ZsvWlB7_lzl3V1Dmqc-4V3ccSNgWZYKVKcf6KwdpTcrMwXhAADrtLpkQNWz5HmI7a7-Tf?width=1000&height=300&cropmode=none">
+<meta property="og:image" content="https://db5pap001files.storage.live.com/y4mnYoLusmz-OqWKbEqQY5yEPTXqvgFQTAlKR-AkD8oHMT4D01Fb5LvdjOt2MXaWou0K6twhVdLe8Mdv8GT7vK-lStPIYkfUInxi5ENHb3yXG4zHyReFVFWfjqG5H7Wk3CrOrhpwvql8Lys2Zps9dCXI4doii0dzj79nXCHJLau1mUfNXsBbzGpsVwqv-vM-XeX?width=1000&height=300&cropmode=none">
+<meta property="og:image" content="https://db5pap001files.storage.live.com/y4mUh1sVeO_4gKz9Gyqb8FFo60VEM4i9CZfJC8lU7U5Vl4Y_1VUdRhFBbuTguNaASZAfFR9LFfyHqiPYIGrJLsYSMjlasrD31GMpp2AvJFMwjfpo_wsFFbJnXHaM8TzT7ufOOH6Jzuv6Ze0SiFBa1O0fVFCKBclrEMDWjA-fhrLauVLR3D3Qf-KUq1HmsMSvSRN?width=660&height=264&cropmode=none">
+<meta property="og:updated_time" content="2022-05-07T14:20:58.436Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="斯坦福 cs230 小抄： 深度学习的一些实用技巧">
+<meta name="twitter:description" content="本篇为外文翻译，英语原文地址：https://stanford.edu/~shervine/teaching/cs-230/cheatsheet-deep-learning-tips-and-tricks 不是逐句直译，根据个人理解意译。理解可能有误，如果发现错误希望读者能通过邮件告知，谢谢。">
+<meta name="twitter:image" content="https://stanford.edu/~shervine/teaching/cs-230/illustrations/augmentation-original.jpg?fa9abcd4dce13c776d7d10b3a1ec8fad">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2022/04/29/translations/cs230-deep-learning-Tips/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>斯坦福 cs230 小抄： 深度学习的一些实用技巧 | Xia's Blog</title>
+  
+
+
+
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-142746162-1"></script>
+  <script>
+    var host = window.location.hostname;
+    if (host !== "localhost" || !true) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-142746162-1');
+    }
+  </script>
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Xia's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于我</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+    <div class="reading-progress-bar"></div>
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/29/translations/cs230-deep-learning-Tips/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="欢乐一只虾">
+      <meta itemprop="description" content="xia写的">
+      <meta itemprop="image" content="https://ewa2xg.dm.files.1drv.com/y4mFMxhQ1DM81Jvak_RBJiGQ3w8LsLmDqb0ohVKkPYwEEraNIEfIiKXMg02UaLGvQErnG1rYTAIQeDIMzSmXnHjZ2UcGrK8wApxrjNxElJCL9BJOKRc9f-ciWgJJiML6e0UOtwWbNmlDOMjYq11-KUhdY9xXgnUqT2RcyElJoRIo0yuNmHDChUPkEcYBG_7BzrxyZIGr6pO2roys0Cg4n609w?width=1280&height=718&cropmode=none">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xia's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">斯坦福 cs230 小抄： 深度学习的一些实用技巧
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2022-04-29 15:55:33" itemprop="dateCreated datePublished" datetime="2022-04-29T15:55:33+08:00">2022-04-29</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2022-05-07 22:20:58" itemprop="dateModified" datetime="2022-05-07T22:20:58+08:00">2022-05-07</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/翻译/" itemprop="url" rel="index"><span itemprop="name">翻译</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">3.3k</span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <hr>
+<ul>
+<li>本篇为外文翻译，英语原文地址：<a href="https://stanford.edu/~shervine/teaching/cs-230/cheatsheet-deep-learning-tips-and-tricks" target="_blank" rel="noopener">https://stanford.edu/~shervine/teaching/cs-230/cheatsheet-deep-learning-tips-and-tricks</a></li>
+<li>不是逐句直译，根据个人理解意译。理解可能有误，如果发现错误希望读者能通过邮件告知，谢谢。</li>
+</ul>
+<hr>
+<a id="more"></a>
+<h2 id="数据处理"><a href="#数据处理" class="headerlink" title="数据处理"></a>数据处理</h2><ul>
+<li>数据增强（Data augmentation） — 深度学习模型通常需要大量的数据。数据增强就是通过各种手段（如下图所示），基于我们已有的数据来获取更多训练数据。</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>原始图片</th>
+<th>翻转</th>
+<th>旋转</th>
+<th>随机剪裁</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="https://stanford.edu/~shervine/teaching/cs-230/illustrations/augmentation-original.jpg?fa9abcd4dce13c776d7d10b3a1ec8fad"></td>
+<td><img src="https://stanford.edu/~shervine/teaching/cs-230/illustrations/augmentation-flip.jpg?da4ff42b5d8fc1f2759675e0c6323f8e"></td>
+<td><img src="https://stanford.edu/~shervine/teaching/cs-230/illustrations/augmentation-rotation.jpg?ab180edcbeb006bfbad4fd57aa6433bf"></td>
+<td><img src="https://stanford.edu/~shervine/teaching/cs-230/illustrations/augmentation-crop.jpg?811ab0236837a5eb3106e761b6046424"></td>
+</tr>
+<tr>
+<td>- 没有任何修改的图片</td>
+<td>-左右或者上下翻转，但是要保持图片的语义</td>
+<td>- 旋转一丢丢角度 <br> - 模拟不正确的水平校准</td>
+<td>- 随机聚焦于图片的某一部分</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>颜色变换</th>
+<th>添加噪点</th>
+<th>信息丢失</th>
+<th>调对比度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="https://stanford.edu/~shervine/teaching/cs-230/illustrations/augmentation-shift.jpg?fca805477d241c88166819240ab65ba4"></td>
+<td><img src="https://stanford.edu/~shervine/teaching/cs-230/illustrations/augmentation-noise.jpg?f56920da7d2d08d1041f1b01b92df1f8"></td>
+<td><img src="https://stanford.edu/~shervine/teaching/cs-230/illustrations/augmentation-information-loss.jpg?8563bbe135ffcbe57b9b8529dd80fcb9"></td>
+<td><img src="https://stanford.edu/~shervine/teaching/cs-230/illustrations/augmentation-contrast.jpg?776cd26f62f336949ee237817f6af3a5"></td>
+</tr>
+<tr>
+<td>- 稍微改变一点 RGB 数值 <br> - 模拟不同曝光产生的噪音</td>
+<td>- 添加一些噪点 <br> - 提高模型对输入图片质量地容忍度</td>
+<td>- 无视（遮住）输入图片地一部分 <br> - 模拟输入图片地部分信息丢失或模糊</td>
+<td>- 模拟不同光源 <br> - 模拟一天内不同时间段拍出来的照片</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><em>注意：通常我们不会先把数据扩充好保存下来再训练，一般是在训练过程中实时生成扩充数据</em></p>
+<ul>
+<li>批归一（Batch normalization） — 对一个小批量（batch）做归一化（减均值除方差），然后用两个参数 $\gamma, \beta$ 来控制归一化的程度。下列式子中的 $\mu_B, \sigma_B$ 就是对应每个小批量（batch）的均值和方差：<script type="math/tex; mode=display">
+x_i \leftarrow \gamma  \frac{x_i - \mu_B}{\sqrt{\sigma^{2}_B + \epsilon}} + \beta</script>批归一通常跟在全连接/卷积层之后，激活层之前。目的是可以使用更高的学习率，因为它可以让训练过程变得更加稳定，然后也能降低不同的权重初始化方法对模型的影响。</li>
+</ul>
+<h2 id="训练一个网络模型"><a href="#训练一个网络模型" class="headerlink" title="训练一个网络模型"></a>训练一个网络模型</h2><h3 id="一些定义"><a href="#一些定义" class="headerlink" title="一些定义"></a>一些定义</h3><ul>
+<li><p>Epoch — 指一次迭代，就是过一整遍训练数据。</p>
+</li>
+<li><p>小批量梯度下降 — 一般来说，每次过一整遍训练数据，取平均梯度，再更新梯度的方法不可行。一个原因是（训练数据很多的情况下）计算量太大，另一个原因是容易过拟合。所以我们一般用小批量，批量大小是个超参数。</p>
+</li>
+<li><p>损失函数 — 用来衡量模型当前的准确性的计算函数。</p>
+</li>
+<li><p>交叉熵 — 大部分分类模型所采用的损失函数。对于二分类问题，交叉熵如下：</p>
+<script type="math/tex; mode=display">L(z,y) = -[ylog(z) + (1-y)log(1-z)]</script></li>
+</ul>
+<h3 id="找到最好的权重"><a href="#找到最好的权重" class="headerlink" title="找到最好的权重"></a>找到最好的权重</h3><ul>
+<li>反向传播 — 通过对损失函数的求导，可以一层一层的算出神经网络中每一层的参数的梯度，然后用这些梯度来更新这些权重，这个过程就叫做反向传播。</li>
+</ul>
+<img src="https://db5pap001files.storage.live.com/y4mlg5WIiBK0Nc00MoR2F_F6mboqjjK2rhcjq1sCQvLhVTEwW0WEOOT6eFMYJ2ZANvLUGqPLBHwZWxQzyhfjr1a8fps6LnjFbbFcEYFXjD2LNBPue15I6qMS8es_Bf60QwF41mcxvctxjOnzqQoS4gr01y2G3cSx205RbGg7LD0s_tRdIjLIuxZ-WWeFweiNqPZ?width=800&height=250&cropmode=none">
+<p>梯度下降的公式如下：</p>
+<script type="math/tex; mode=display">w \leftarrow w - \alpha \frac{\partial L(z, y)}{\partial w}</script><ul>
+<li>更新权重 — 权重的更新步骤：<ul>
+<li>Step 1：取一个批量的数据，前向传播，得到损失函数的结果。</li>
+<li>Step 2：反向传播算出各个权重对应的梯度。</li>
+<li>Step 3：工具对应的梯度，使用梯度下降更新每个权重。</li>
+</ul>
+</li>
+</ul>
+<img src="https://db5pap001files.storage.live.com/y4mKxNH6b_KYcfVq-QHLWc1O7xtgZTLKT3mT7CCN0ibnqVLcFcvodle15g0eedzegHTmk--ihMB2Cx6sA2UEwFesPyxpCsySUBKiV9CxStQx5xcvDfqrQvJiTHein1884qEFwu2VEWBW1tjwXoP939TVHEn9jo0phRPrhaCdeLmVTHqOK9lVZOrlqbtlgX3pdVS?width=2000&height=400&cropmode=none">
+<h2 id="参数（权重）调整"><a href="#参数（权重）调整" class="headerlink" title="参数（权重）调整"></a>参数（权重）调整</h2><h3 id="权重初始化"><a href="#权重初始化" class="headerlink" title="权重初始化"></a>权重初始化</h3><ul>
+<li><p>Xavier 初始化 — Xavier 初始化的目的是让每一层激活函数（tanh）输出值的方差都差不多。稳定的方差可以有效防止梯度爆炸和梯度消失。</p>
+<script type="math/tex; mode=display">W^{[l]}_{i,j} = \mathcal{N}(0, \frac{1}{n^{l-1}})</script><p>推理过程：</p>
+<img src="https://db5pap001files.storage.live.com/y4mLnbxctsEQLEMzwBaZZjbRtc6DN0xiM-Ck_7tCShJdFhot4z6oaf17N403yCDKJjdR65IMvih7oT2VDknkyR4Q_w7mLyopwvoMKaatULGQ_OJ_9OQjWYBd9FBTSzMTWR4w0_3dEHiXaFhUVpqSyomysbcIpvw3iZyy0s206arEa8ImZSArVu3rTs3gCuFUXgM?width=1024&height=708&cropmode=none">
+<p>可以看到 Xavier 初始化推理的前提是我们用了 $tanh$ 激活函数。对于使用 $ReLU$ 激活函数的网络层，现在通常的做法是用<a href="https://arxiv.org/abs/1502.01852" target="_blank" rel="noopener">何凯明</a>提出的这个初始化方法（现在好像都叫 He initialization）：</p>
+<script type="math/tex; mode=display">W^{[l]}_{i,j} = \mathcal{N}(0, \sqrt{2/n})</script><p>具体推导过程类似，这里不展开了。</p>
+</li>
+<li><p>迁移学习 — 训练一个神经网络通常需要大量的数据和时间。所以人们就想着先用大量的通用数据和很长的时间去预训练一个通用模型，然后想办法把它用在一些特定的下游任务上，一般做法是用特定任务对应的专用数据来微调预训练好的模型。根据某一特定任务的数据的多少，我们有以下三种不同的做法：</p>
+</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>数据量大小</th>
+<th>图示</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据很少</td>
+<td><img src="https://db5pap001files.storage.live.com/y4mCO2_Ngd-CQD5gfC_5tvayRRljeD6iyNHE-bXV16bnraIr0nJp2l6jyEzZMrQmndmzZYb9WL0uFAHxry_mYVLrPXHf9q9krMdLQks4yj11ehC4JhNzIjLrf_vAuVIpWXLmXyi8sBmosDY0n1krezglfpyNX3xeQCWST_ZtjOadeDtXVEL0Ftz-Jb2SA8w7wDc?width=1000&height=300&cropmode=none" width="300" height="600"></td>
+<td>冻结所有网络层，只微调最后的输出层</td>
+</tr>
+<tr>
+<td>不多不少</td>
+<td><img src="https://db5pap001files.storage.live.com/y4mbIY6oV3XSGlgU5058L_PaJKG6dXBTJEqmEaoeZL2C7CG6X2n8J6PYYQ5rj7jC2m8hc4SB3TpHUgYQuENpM1sF2WC_BwhUhVzy8ysthwFwbKgMyKOgcfacl5LN45ZsvWlB7_lzl3V1Dmqc-4V3ccSNgWZYKVKcf6KwdpTcrMwXhAADrtLpkQNWz5HmI7a7-Tf?width=1000&height=300&cropmode=none" width="300" height="600"></td>
+<td>冻结大部分网络层，微调最后几层加输出层</td>
+</tr>
+<tr>
+<td>数据贼多</td>
+<td><img src="https://db5pap001files.storage.live.com/y4mnYoLusmz-OqWKbEqQY5yEPTXqvgFQTAlKR-AkD8oHMT4D01Fb5LvdjOt2MXaWou0K6twhVdLe8Mdv8GT7vK-lStPIYkfUInxi5ENHb3yXG4zHyReFVFWfjqG5H7Wk3CrOrhpwvql8Lys2Zps9dCXI4doii0dzj79nXCHJLau1mUfNXsBbzGpsVwqv-vM-XeX?width=1000&height=300&cropmode=none" width="300" height="600"></td>
+<td>所有参数都进行微调</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="如何更好地收敛"><a href="#如何更好地收敛" class="headerlink" title="如何更好地收敛"></a>如何更好地收敛</h3><ul>
+<li><p>学习率 — 决定权重更新的速度。可以是固定的，也可以是自适应调整的。比较流行的做法是让它可以自适应调整。</p>
+</li>
+<li><p>自适应学习率 — 让学习率能在训练期间调整不仅能缩短训练时间还能得到更好的最终模型。虽然目前大家基本都用 Adam，但是另外几个其实也挺有用的。下面的表格简述了典型的三种方法：</p>
+</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">方法</th>
+<th style="text-align:left"><center>解释</center></th>
+<th style="text-align:center">更新权重 $w$</th>
+<th style="text-align:center">更新偏置 $b$</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Momentum</td>
+<td style="text-align:left"><ul> <li> 抑制梯度的不稳定跳动</li> <li>  是对 SGD 的改进 </li><li>  有2个超参数要调 </li></ul></td>
+<td style="text-align:center">$w - \alpha v_{dw}$</td>
+<td style="text-align:center">$b - \alpha v_{db}$</td>
+</tr>
+<tr>
+<td style="text-align:center">RMSprop</td>
+<td style="text-align:left"><ul> <li> 全称 Root Mean Square propagation </li> <li> 目的和 Moemtum 类似，都是为了稳定小批量可能会导致的梯度不稳定 </li></ul></td>
+<td style="text-align:center">$w - \alpha \frac{dw}{\sqrt{s_{dw}}}$</td>
+<td style="text-align:center">$b \leftarrow b - \alpha \frac{db}{\sqrt{s_{db}}}$</td>
+</tr>
+<tr>
+<td style="text-align:center">Adam</td>
+<td style="text-align:left"><ul> <li>前两种方法的结合</li><li>最常用的方法</li><li>4个超参数可调</li></ul></td>
+<td style="text-align:center">$w - \alpha\frac{dw}{s_{dw}}$</td>
+<td style="text-align:center"><script type="math/tex">b \leftarrow b - \alpha \frac{v_{db}}{\sqrt{s_{db}}+\epsilon}</script></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><em>注意：还有一些别的衍生方法，可以自行搜索优化器相关内容</em></p>
+<h2 id="正则化"><a href="#正则化" class="headerlink" title="正则化"></a>正则化</h2><ul>
+<li>丢弃法 — 丢弃法是用来防止过拟合的常用手段。做法是设置一个概率 $p$， 训练的时候每个神经元有 $p$ 的概率会被丢弃。这么做能强制要求模型不去过度依赖某一两个神经元（表现在训练数据上就是不过度依赖于某一两种特定的特征）。</li>
+</ul>
+<p><em>注意：大多数训练框架（如 pytorch）设置的不是丢弃神经元的概率而是保留的概率，也就是说实际我们设置的是 $1-p$</em></p>
+<ul>
+<li><p>权重正则化 — 正则化（regularization）也是用来防止过拟合常用的方法。常用的有 $L1$ 和 $L2$ 正则化，做法是分别在损失函数后面加 $… + \lambda ||\theta||_1$ 和 $… + \lambda ||\theta||^2_2$</p>
+</li>
+<li><p>提前停止（early stopping） — 当验证集上的错误率不降反升，但是训练集上的 loss 还没收敛的时候，可以提前停止训练。</p>
+</li>
+</ul>
+<img src="https://db5pap001files.storage.live.com/y4mUh1sVeO_4gKz9Gyqb8FFo60VEM4i9CZfJC8lU7U5Vl4Y_1VUdRhFBbuTguNaASZAfFR9LFfyHqiPYIGrJLsYSMjlasrD31GMpp2AvJFMwjfpo_wsFFbJnXHaM8TzT7ufOOH6Jzuv6Ze0SiFBa1O0fVFCKBclrEMDWjA-fhrLauVLR3D3Qf-KUq1HmsMSvSRN?width=660&height=264&cropmode=none">
+<h1 id="两个实践技巧"><a href="#两个实践技巧" class="headerlink" title="两个实践技巧"></a>两个实践技巧</h1><ul>
+<li><p>在小批量上过拟合 — 需要 debug 一个模型的时候，我们会先看看这个模型能不能在一个很小的数据集上过拟合。就是让模型一直循环在同一个小批量上做训练，然后看它是否会过拟合。如果不能过拟合，说明这个模型设计有问题，这时候就需要换个结构试试看，而不是在原结构上继续改进。</p>
+</li>
+<li><p>梯度检查 — 梯度检查是用在实现一个神经网络的反向传播的时候。对比解析解和数值解能很快且很直观的验证目前的实现是否正确。</p>
+</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">类型</th>
+<th style="text-align:center">数值解</th>
+<th style="text-align:center">解析解</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">公式</td>
+<td style="text-align:center">$\frac{df}{dx}(x) \approx \frac{f(x+h)-f(x-h)}{2h}$</td>
+<td style="text-align:center">$\frac{df}{dx}(x) = f^\prime(x)$</td>
+</tr>
+<tr>
+<td style="text-align:center">注解</td>
+<td style="text-align:center"><ul align="left"><li>计算昂贵；每个维度的 loss 需要算两遍</li><li>用来验证解析解的正确性</li><li> h 太大会算不准，太小会很难算，所以要有取舍</li> </ul></td>
+<td style="text-align:center"><ul align="left"> <li> 精确解 </li> <li> 直接计算</li><li> 最终实现的方法 </li> </ul></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/翻译/" rel="tag"># 翻译</a>
+          
+            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
+          
+            <a href="/tags/cheatsheet/" rel="tag"># cheatsheet</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/03/17/regular-expression/" rel="next" title="正则表达式原理粗探">
+                <i class="fa fa-chevron-left"></i> 正则表达式原理粗探
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="https://ewa2xg.dm.files.1drv.com/y4mFMxhQ1DM81Jvak_RBJiGQ3w8LsLmDqb0ohVKkPYwEEraNIEfIiKXMg02UaLGvQErnG1rYTAIQeDIMzSmXnHjZ2UcGrK8wApxrjNxElJCL9BJOKRc9f-ciWgJJiML6e0UOtwWbNmlDOMjYq11-KUhdY9xXgnUqT2RcyElJoRIo0yuNmHDChUPkEcYBG_7BzrxyZIGr6pO2roys0Cg4n609w?width=1280&height=718&cropmode=none" alt="欢乐一只虾">
+            
+              <p class="site-author-name" itemprop="name">欢乐一只虾</p>
+              <div class="site-description motion-element" itemprop="description">xia写的</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">26</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据处理"><span class="nav-text">数据处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#训练一个网络模型"><span class="nav-text">训练一个网络模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一些定义"><span class="nav-text">一些定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#找到最好的权重"><span class="nav-text">找到最好的权重</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参数（权重）调整"><span class="nav-text">参数（权重）调整</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#权重初始化"><span class="nav-text">权重初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何更好地收敛"><span class="nav-text">如何更好地收敛</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正则化"><span class="nav-text">正则化</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#两个实践技巧"><span class="nav-text">两个实践技巧</span></a></li></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">欢乐一只虾</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">110k</span>
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a></div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/fancybox/source/jquery.fancybox.pack.js"></script>
+
+  
+  <script src="/lib/reading_progress/reading_progress.js"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.2"></script>
+
+  <script src="/js/motion.js?v=7.1.2"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.2"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.2"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.2"></script>
+<script src="/js/post-details.js?v=7.1.2"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.2"></script>
+
+
+  
+  <script src="/js/js.cookie.js?v=7.1.2"></script>
+  <script src="/js/scroll-cookie.js?v=7.1.2"></script>
+
+
+  
+
+  
+  
+  
+
+  
+
+  
+  
+  
+    <script src="/lib/quicklink/quicklink.umd.js"></script>
+    <script>
+      
+        window.addEventListener('load', () => {
+      
+        quicklink({
+          timeout: 3000,
+          priority: true,
+          ignores: [uri => uri.includes('#'),uri => uri == 'http://yoursite.com/2022/04/29/translations/cs230-deep-learning-Tips/',]
+        });
+      
+        });
+      
+    </script>
+  
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+  
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

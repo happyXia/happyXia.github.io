@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://yoursite.com/2022/04/29/translations/cs230-deep-learning-Tips/</loc>
+    <lastmod>2022-05-07</lastmod>
+  </url>
+  <url>
+    <loc>http://yoursite.com/2019/06/23/visual-information-theory/</loc>
+    <lastmod>2022-04-29</lastmod>
+  </url>
+  <url>
     <loc>http://yoursite.com/2020/02/09/linux-commands/</loc>
     <lastmod>2022-04-29</lastmod>
   </url>
@@ -27,10 +35,6 @@
   <url>
     <loc>http://yoursite.com/2020/02/09/travels/</loc>
     <lastmod>2020-02-11</lastmod>
-  </url>
-  <url>
-    <loc>http://yoursite.com/2019/06/23/visual-information-theory/</loc>
-    <lastmod>2019-08-05</lastmod>
   </url>
   <url>
     <loc>http://yoursite.com/2018/07/08/MarkdownIntroduction/</loc>
