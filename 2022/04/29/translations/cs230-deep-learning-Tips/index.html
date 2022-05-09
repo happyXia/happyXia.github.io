@@ -164,7 +164,7 @@
 <meta property="og:image" content="https://db5pap001files.storage.live.com/y4mbIY6oV3XSGlgU5058L_PaJKG6dXBTJEqmEaoeZL2C7CG6X2n8J6PYYQ5rj7jC2m8hc4SB3TpHUgYQuENpM1sF2WC_BwhUhVzy8ysthwFwbKgMyKOgcfacl5LN45ZsvWlB7_lzl3V1Dmqc-4V3ccSNgWZYKVKcf6KwdpTcrMwXhAADrtLpkQNWz5HmI7a7-Tf?width=1000&height=300&cropmode=none">
 <meta property="og:image" content="https://db5pap001files.storage.live.com/y4mnYoLusmz-OqWKbEqQY5yEPTXqvgFQTAlKR-AkD8oHMT4D01Fb5LvdjOt2MXaWou0K6twhVdLe8Mdv8GT7vK-lStPIYkfUInxi5ENHb3yXG4zHyReFVFWfjqG5H7Wk3CrOrhpwvql8Lys2Zps9dCXI4doii0dzj79nXCHJLau1mUfNXsBbzGpsVwqv-vM-XeX?width=1000&height=300&cropmode=none">
 <meta property="og:image" content="https://db5pap001files.storage.live.com/y4mUh1sVeO_4gKz9Gyqb8FFo60VEM4i9CZfJC8lU7U5Vl4Y_1VUdRhFBbuTguNaASZAfFR9LFfyHqiPYIGrJLsYSMjlasrD31GMpp2AvJFMwjfpo_wsFFbJnXHaM8TzT7ufOOH6Jzuv6Ze0SiFBa1O0fVFCKBclrEMDWjA-fhrLauVLR3D3Qf-KUq1HmsMSvSRN?width=660&height=264&cropmode=none">
-<meta property="og:updated_time" content="2022-05-07T14:20:58.436Z">
+<meta property="og:updated_time" content="2022-05-09T03:37:30.451Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="斯坦福 cs230 小抄： 深度学习的一些实用技巧">
 <meta name="twitter:description" content="本篇为外文翻译，英语原文地址：https://stanford.edu/~shervine/teaching/cs-230/cheatsheet-deep-learning-tips-and-tricks 不是逐句直译，根据个人理解意译。理解可能有误，如果发现错误希望读者能通过邮件告知，谢谢。">
@@ -470,7 +470,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2022-05-07 22:20:58" itemprop="dateModified" datetime="2022-05-07T22:20:58+08:00">2022-05-07</time>
+                <time title="修改时间：2022-05-09 11:37:30" itemprop="dateModified" datetime="2022-05-09T11:37:30+08:00">2022-05-09</time>
               
             
           </span>
@@ -726,7 +726,7 @@ x_i \leftarrow \gamma  \frac{x_i - \mu_B}{\sqrt{\sigma^{2}_B + \epsilon}} + \bet
 </li>
 </ul>
 <img src="https://db5pap001files.storage.live.com/y4mUh1sVeO_4gKz9Gyqb8FFo60VEM4i9CZfJC8lU7U5Vl4Y_1VUdRhFBbuTguNaASZAfFR9LFfyHqiPYIGrJLsYSMjlasrD31GMpp2AvJFMwjfpo_wsFFbJnXHaM8TzT7ufOOH6Jzuv6Ze0SiFBa1O0fVFCKBclrEMDWjA-fhrLauVLR3D3Qf-KUq1HmsMSvSRN?width=660&height=264&cropmode=none">
-<h1 id="两个实践技巧"><a href="#两个实践技巧" class="headerlink" title="两个实践技巧"></a>两个实践技巧</h1><ul>
+<h2 id="两个实践技巧"><a href="#两个实践技巧" class="headerlink" title="两个实践技巧"></a>两个实践技巧</h2><ul>
 <li><p>在小批量上过拟合 — 需要 debug 一个模型的时候，我们会先看看这个模型能不能在一个很小的数据集上过拟合。就是让模型一直循环在同一个小批量上做训练，然后看它是否会过拟合。如果不能过拟合，说明这个模型设计有问题，这时候就需要换个结构试试看，而不是在原结构上继续改进。</p>
 </li>
 <li><p>梯度检查 — 梯度检查是用在实现一个神经网络的反向传播的时候。对比解析解和数值解能很快且很直观的验证目前的实现是否正确。</p>
@@ -1029,7 +1029,7 @@ x_i \leftarrow \gamma  \frac{x_i - \mu_B}{\sqrt{\sigma^{2}_B + \epsilon}} + \bet
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据处理"><span class="nav-text">数据处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#训练一个网络模型"><span class="nav-text">训练一个网络模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一些定义"><span class="nav-text">一些定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#找到最好的权重"><span class="nav-text">找到最好的权重</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参数（权重）调整"><span class="nav-text">参数（权重）调整</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#权重初始化"><span class="nav-text">权重初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何更好地收敛"><span class="nav-text">如何更好地收敛</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正则化"><span class="nav-text">正则化</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#两个实践技巧"><span class="nav-text">两个实践技巧</span></a></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据处理"><span class="nav-text">数据处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#训练一个网络模型"><span class="nav-text">训练一个网络模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一些定义"><span class="nav-text">一些定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#找到最好的权重"><span class="nav-text">找到最好的权重</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参数（权重）调整"><span class="nav-text">参数（权重）调整</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#权重初始化"><span class="nav-text">权重初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何更好地收敛"><span class="nav-text">如何更好地收敛</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正则化"><span class="nav-text">正则化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#两个实践技巧"><span class="nav-text">两个实践技巧</span></a></li></ol></div>
             
 
           </div>
