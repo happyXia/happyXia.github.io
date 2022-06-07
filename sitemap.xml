@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2022/06/07/essay/one-year-at-Qualcomm/</loc>
+    
+    <lastmod>2022-06-07T09:22:12.728Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2019/02/13/everyday-note/</loc>
+    
+    <lastmod>2022-05-10T12:54:35.170Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2022/04/29/translations/cs230-deep-learning-Tips/</loc>
     
     <lastmod>2022-05-09T03:37:30.451Z</lastmod>
@@ -33,13 +47,6 @@
     <loc>http://yoursite.com/2020/02/09/xias-recipe/</loc>
     
     <lastmod>2022-04-29T05:30:04.289Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2019/02/13/everyday-note/</loc>
-    
-    <lastmod>2022-04-29T04:39:04.558Z</lastmod>
     
   </url>
   
